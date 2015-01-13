@@ -1,5 +1,11 @@
+from RPIO import PWM
 import socket
 import sys
+
+# Initialize PWM
+
+PWM.setup()
+PWM.init_channel(0)
 
 # Create a TCP/IP socket
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -26,10 +32,11 @@ while True:
             print ('received "%s"' % data, file=sys.stderr)
             if data:
                 print ('sending data back to the client', file=sys.stderr)
-                connection.sendall(data)
-            else:
-                print ('no more data from', client_address, file=sys.stderr)
-                break
+                #connection.sendall(data)
+		PWM.add_channel_pulse(2, 1200)
+            #else:
+            #   print ('no more data from', client_address, file=sys.stderr)
+            #   break
             
     finally:
         # Clean up the connection
