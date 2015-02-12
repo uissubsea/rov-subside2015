@@ -148,10 +148,10 @@
 							</tool>
 							<tool id="ilg.gnuarmeclipse.managedbuild.cross.tool.c.compiler.1201940973" name="Cross ARM C Compiler" superClass="ilg.gnuarmeclipse.managedbuild.cross.tool.c.compiler">
 								<option id="ilg.gnuarmeclipse.managedbuild.cross.option.c.compiler.include.paths.2077000971" name="Include paths (-I)" superClass="ilg.gnuarmeclipse.managedbuild.cross.option.c.compiler.include.paths" useByScannerDiscovery="false" valueType="includePath">
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/STM32F4Template/CMSIS/STM32F4xx/Include}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/STM32F4Template/CMSIS/Include}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/STM32F4Template/stlib/inc}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/STM32F4Template/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/CMSIS/STM32F4xx/Include&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/include&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/stlib/inc&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/CMSIS/Include&quot;"/>
 								</option>
 								<option id="ilg.gnuarmeclipse.managedbuild.cross.option.c.compiler.defs.1312321383" name="Defined symbols (-D)" superClass="ilg.gnuarmeclipse.managedbuild.cross.option.c.compiler.defs" useByScannerDiscovery="false" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="HSE_VALUE=8000000"/>
@@ -177,7 +177,7 @@
 							</tool>
 							<tool id="ilg.gnuarmeclipse.managedbuild.cross.tool.archiver.712391193" name="Cross ARM GNU Archiver" superClass="ilg.gnuarmeclipse.managedbuild.cross.tool.archiver"/>
 							<tool id="ilg.gnuarmeclipse.managedbuild.cross.tool.createflash.1406078812" name="Cross ARM GNU Create Flash Image" superClass="ilg.gnuarmeclipse.managedbuild.cross.tool.createflash">
-								<option id="ilg.gnuarmeclipse.managedbuild.cross.option.createflash.choice.1043022147" superClass="ilg.gnuarmeclipse.managedbuild.cross.option.createflash.choice" value="ilg.gnuarmeclipse.managedbuild.cross.option.createflash.choice.binary" valueType="enumerated"/>
+								<option id="ilg.gnuarmeclipse.managedbuild.cross.option.createflash.choice.1043022147" name="Output file format (-O)" superClass="ilg.gnuarmeclipse.managedbuild.cross.option.createflash.choice" value="ilg.gnuarmeclipse.managedbuild.cross.option.createflash.choice.binary" valueType="enumerated"/>
 							</tool>
 							<tool id="ilg.gnuarmeclipse.managedbuild.cross.tool.createlisting.207449215" name="Cross ARM GNU Create Listing" superClass="ilg.gnuarmeclipse.managedbuild.cross.tool.createlisting">
 								<option id="ilg.gnuarmeclipse.managedbuild.cross.option.createlisting.source.252870328" name="Display source (--source|-S)" superClass="ilg.gnuarmeclipse.managedbuild.cross.option.createlisting.source" value="true" valueType="boolean"/>
