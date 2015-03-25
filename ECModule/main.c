@@ -16,70 +16,66 @@
 
 #include "ch.h"
 #include "hal.h"
-#include "test.h"
 
 #include "lwipthread.h"
 
-#include "web/web.h"
+#include "server/server.h"
 
-/* Function prototypes */
-static void adccb(ADCDriver *adcp, adcsample_t *buffer, size_t n);
+/*===========================================================================*/
+/* CAN Bus related.                                                          */
+/*===========================================================================*/
 
 /*
- * PWM configuration structure.
- * Cyclic callback enabled, channels 1 and 4 enabled without callbacks,
- * the active state is a logic one.
+ * Internal loopback mode, 500KBaud, automatic wakeup, automatic recover
+ * from abort mode.
+ * See section 22.7.7 on the STM32 reference manual.
  */
-static PWMConfig pwmcfg = {
-  10000,                                    /* 10kHz PWM clock frequency.   */
-  10,                                    /* PWM period 1S (in ticks).    */
-  NULL,
-  {
-    {PWM_OUTPUT_DISABLED, NULL},
-    {PWM_OUTPUT_DISABLED, NULL},
-    {PWM_OUTPUT_DISABLED, NULL},
-    {PWM_OUTPUT_ACTIVE_HIGH, NULL}
-  },
-  /* HW dependent part.*/
-  0,
-  0
-};
 
-static const ADCConversionGroup adcgrpcfg = {
-  FALSE,
-  ADC_GRP1_NUM_CHANNELS,
-  adccb,
-  NULL,
-  /* HW dependent part.*/
-  0,
-  ADC_CR2_SWSTART,
-  ADC_SMPR1_SMP_AN11(ADC_SAMPLE_56) | ADC_SMPR1_SMP_SENSOR(ADC_SAMPLE_144),
-  0,
-  ADC_SQR1_NUM_CH(ADC_GRP1_NUM_CHANNELS),
-  0,
-  ADC_SQR3_SQ2_N(ADC_CHANNEL_IN11) | ADC_SQR3_SQ1_N(ADC_CHANNEL_SENSOR)
+static const CANConfig cancfg = {
+  CAN_MCR_ABOM | CAN_MCR_AWUM | CAN_MCR_TXFP,
+  CAN_BTR_SJW(0) | CAN_BTR_TS2(1) |
+  CAN_BTR_TS1(8) | CAN_BTR_BRP(6)
 };
 
 /*
  * ADC Sample buffer
  */
-static adcsample_t samples[ADC_GRP1_NUM_CHANNELS * ADC_GRP1_BUF_DEPTH];
+//static adcsample_t samples[ADC_GRP1_NUM_CHANNELS * ADC_GRP1_BUF_DEPTH];
+
+
+static const SPIConfig spi1cfg = {
+  NULL,
+  /* HW dependent part.*/
+  GPIOE,
+  GPIOE_CS_SPI,
+  SPI_CR1_BR_0 | SPI_CR1_BR_1 | SPI_CR1_CPOL | SPI_CR1_CPHA
+};
+
 
 /*
- * Green LED blinker thread, times are in milliseconds.
+ * Transmitter thread.
  */
-static WORKING_AREA(waThread1, 128);
-static msg_t Thread1(void *arg) {
+static WORKING_AREA(can_tx_wa, 256);
+static msg_t can_tx(void * p) {
+  CANTxFrame txmsg;
 
-  (void)arg;
-  chRegSetThreadName("blinker");
-  while (TRUE) {
-    palClearPad(GPIOD, GPIOD_LED4);
-    chThdSleepMilliseconds(500);
-    palSetPad(GPIOD, GPIOD_LED4);
-    chThdSleepMilliseconds(500);
+  (void)p;
+  chRegSetThreadName("transmitter");
+  txmsg.IDE = CAN_IDE_STD;
+  txmsg.SID = 0x012;
+  txmsg.RTR = CAN_RTR_DATA;
+  txmsg.DLC = 1;
+  txmsg.data8[0] = 0x1;
+
+  while (!chThdShouldTerminate()) {
+    if(palReadPad(GPIOA, GPIOA_BUTTON)){
+      canTransmit(&CAND1, CAN_ANY_MAILBOX, &txmsg, MS2ST(100));
+      chThdSleepMilliseconds(1000);
+    }
   }
+  return 0;
 }
+
 
 /*
  * Application entry point.
@@ -96,15 +92,14 @@ int main(void) {
   halInit();
   chSysInit();
 
-  palSetPadMode(GPIOD, GPIOD_LED6, PAL_MODE_ALTERNATE(2));
+  palSetPadMode(GPIOB, GPIOB_CANRX, PAL_MODE_ALTERNATE(9));
+  palSetPadMode(GPIOB, GPIOB_CANTX, PAL_MODE_ALTERNATE(9));
 
-  pwmStart(&PWMD4, &pwmcfg);
-  pwmEnableChannel(&PWMD4, 3, PWM_PERCENTAGE_TO_WIDTH(&PWMD4, 8000));
-  /*
-   * Creates the blinker thread.
-   */
-  chThdCreateStatic(waThread1, sizeof(waThread1), NORMALPRIO, Thread1, NULL);
+  canStart(&CAND1, &cancfg);
 
+  spiStart(&SPID1, &spi1cfg);
+
+  chThdSleepMilliseconds(1000);
   /*
    * Creates the LWIP threads (it changes priority internally).
    */
@@ -117,12 +112,16 @@ int main(void) {
   chThdCreateStatic(wa_network_server, sizeof(wa_network_server), NORMALPRIO + 1,
                     network_server, NULL);
 
+  
+  chThdCreateStatic(can_tx_wa, sizeof(can_tx_wa), NORMALPRIO + 1,
+                    can_tx, NULL);
+
+
   /*
    * Normal main() thread activity, in this demo it does nothing except
    * sleeping in a loop and check the button state.
    */
   while (TRUE) {
-    adcStartConversionI(&ADCD1, &adcgrpcfg, samples, ADC_GRP1_BUF_DEPTH);
     chThdSleepMilliseconds(1000);
   }
 }

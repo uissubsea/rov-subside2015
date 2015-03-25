@@ -41,23 +41,25 @@ build/obj/main.o: main.c chibios/os/kernel/include/ch.h chconf.h \
  chibios/os/hal/include/mmcsd.h chibios/os/hal/include/tm.h \
  chibios/os/hal/include/pal.h \
  chibios/os/hal/platforms/STM32/GPIOv2/pal_lld.h \
- chibios/os/hal/include/adc.h chibios/os/hal/include/can.h \
- chibios/os/hal/platforms/STM32/can_lld.h chibios/os/hal/include/ext.h \
- chibios/os/hal/include/gpt.h chibios/os/hal/include/i2c.h \
- chibios/os/hal/include/icu.h chibios/os/hal/include/mac.h \
- chibios/os/hal/platforms/STM32/mac_lld.h chibios/os/hal/include/pwm.h \
+ chibios/os/hal/include/adc.h \
+ chibios/os/hal/platforms/STM32F4xx/adc_lld.h \
+ chibios/os/hal/include/can.h chibios/os/hal/platforms/STM32/can_lld.h \
+ chibios/os/hal/include/ext.h chibios/os/hal/include/gpt.h \
+ chibios/os/hal/include/i2c.h chibios/os/hal/include/icu.h \
+ chibios/os/hal/include/mac.h chibios/os/hal/platforms/STM32/mac_lld.h \
+ chibios/os/hal/include/pwm.h \
  chibios/os/hal/platforms/STM32/TIMv1/pwm_lld.h \
  chibios/os/hal/platforms/STM32/TIMv1/stm32_tim.h \
  chibios/os/hal/include/rtc.h chibios/os/hal/include/serial.h \
- chibios/os/hal/platforms/STM32/USARTv1/serial_lld.h \
  chibios/os/hal/include/sdc.h chibios/os/hal/include/spi.h \
+ chibios/os/hal/platforms/STM32/SPIv1/spi_lld.h \
  chibios/os/hal/include/uart.h chibios/os/hal/include/usb.h \
  chibios/os/hal/include/mmc_spi.h chibios/os/hal/include/serial_usb.h \
- chibios/test/test.h chibios/os/various/lwip_bindings/lwipthread.h \
+ chibios/os/various/lwip_bindings/lwipthread.h \
  chibios/ext/lwip/src/include/lwip/opt.h lwipopts.h \
  chibios/ext/lwip/src/include/lwip/debug.h \
  chibios/ext/lwip/src/include/lwip/arch.h \
- chibios/os/various/lwip_bindings/arch/cc.h web/web.h
+ chibios/os/various/lwip_bindings/arch/cc.h server/server.h
 
 chibios/os/kernel/include/ch.h:
 
@@ -177,6 +179,8 @@ chibios/os/hal/platforms/STM32/GPIOv2/pal_lld.h:
 
 chibios/os/hal/include/adc.h:
 
+chibios/os/hal/platforms/STM32F4xx/adc_lld.h:
+
 chibios/os/hal/include/can.h:
 
 chibios/os/hal/platforms/STM32/can_lld.h:
@@ -203,11 +207,11 @@ chibios/os/hal/include/rtc.h:
 
 chibios/os/hal/include/serial.h:
 
-chibios/os/hal/platforms/STM32/USARTv1/serial_lld.h:
-
 chibios/os/hal/include/sdc.h:
 
 chibios/os/hal/include/spi.h:
+
+chibios/os/hal/platforms/STM32/SPIv1/spi_lld.h:
 
 chibios/os/hal/include/uart.h:
 
@@ -216,8 +220,6 @@ chibios/os/hal/include/usb.h:
 chibios/os/hal/include/mmc_spi.h:
 
 chibios/os/hal/include/serial_usb.h:
-
-chibios/test/test.h:
 
 chibios/os/various/lwip_bindings/lwipthread.h:
 
@@ -231,4 +233,4 @@ chibios/ext/lwip/src/include/lwip/arch.h:
 
 chibios/os/various/lwip_bindings/arch/cc.h:
 
-web/web.h:
+server/server.h:
