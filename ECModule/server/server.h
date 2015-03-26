@@ -36,6 +36,9 @@
 #define SERVER_THREAD_PRIORITY     (LOWPRIO + 2)
 #endif
 
+#define CAN_ID_THRUSTER 0x1
+#define CAN_ID_MANIP 0x11
+
 extern WORKING_AREA(wa_network_server, SERVER_THREAD_STACK_SIZE);
 
 #ifdef __cplusplus

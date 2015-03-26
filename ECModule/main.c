@@ -43,15 +43,6 @@ static const CANConfig cancfg = {
 //static adcsample_t samples[ADC_GRP1_NUM_CHANNELS * ADC_GRP1_BUF_DEPTH];
 
 
-static const SPIConfig spi1cfg = {
-  NULL,
-  /* HW dependent part.*/
-  GPIOE,
-  GPIOE_CS_SPI,
-  SPI_CR1_BR_0 | SPI_CR1_BR_1 | SPI_CR1_CPOL | SPI_CR1_CPHA
-};
-
-
 /*
  * Transmitter thread.
  */
@@ -92,14 +83,11 @@ int main(void) {
   halInit();
   chSysInit();
 
-  palSetPadMode(GPIOB, GPIOB_CANRX, PAL_MODE_ALTERNATE(9));
-  palSetPadMode(GPIOB, GPIOB_CANTX, PAL_MODE_ALTERNATE(9));
+  //palSetPadMode(GPIOB, GPIOB_CANRX, PAL_MODE_ALTERNATE(9));
+  //palSetPadMode(GPIOB, GPIOB_CANTX, PAL_MODE_ALTERNATE(9));
 
   canStart(&CAND1, &cancfg);
 
-  spiStart(&SPID1, &spi1cfg);
-
-  chThdSleepMilliseconds(1000);
   /*
    * Creates the LWIP threads (it changes priority internally).
    */
@@ -113,15 +101,17 @@ int main(void) {
                     network_server, NULL);
 
   
-  chThdCreateStatic(can_tx_wa, sizeof(can_tx_wa), NORMALPRIO + 1,
-                    can_tx, NULL);
+ // chThdCreateStatic(can_tx_wa, sizeof(can_tx_wa), NORMALPRIO + 1,
+ //                   can_tx, NULL);
 
+palSetPad(GPIOD, GPIOD_LED5);
 
   /*
    * Normal main() thread activity, in this demo it does nothing except
    * sleeping in a loop and check the button state.
    */
   while (TRUE) {
+    palTogglePad(GPIOD, GPIOD_LED4);
     chThdSleepMilliseconds(1000);
   }
 }

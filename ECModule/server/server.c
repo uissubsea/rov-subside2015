@@ -28,6 +28,8 @@
 #include "lwip/api.h"
 #include "hal.h"
 #include <stdlib.h>
+#include <string.h>
+#include <stdio.h>
 
 #include "server.h"
 
@@ -37,21 +39,54 @@
 
 WORKING_AREA(wa_network_server, SERVER_THREAD_STACK_SIZE);
 
+/**
+ * @brief Parse Rov data stream
+ * @details [long description]
+ * 
+ * @param string [description]
+ * @return [description]
+ */
+static uint8_t* parse_message(char *s){  
+  
+  uint8_t thValX = 0;
+  uint8_t thValY = 0;
+  uint8_t *array[2];
+  uint32_t i;
+  char *thX, *thY;  
+    for(i = 0; i < sizeof(s)/sizeof(int); i++ ){
+      
+      /* Look For Thurster Data */
+      if(s[i] == 'T'){
+        palTogglePad(GPIOD, GPIOD_LED6);
+        thX = s[i+3] + s[i+4];
+        thValX = (uint8_t)atoi(thX);
+        thY = s[i+6] + s[i+7];
+        thValY = (uint8_t)atoi(thY);
+      }
+    }
+  array[0] = thValX;
+  array[1] = thValY;
+  return array;
+}
 
-static void send_can_message(int value){
+static void send_can_message(int ID, uint8_t *data){
 
-  CANTxFrame txmsg;
+  CANTxFrame txframe;
+  uint8_t i;
 
-  txmsg.IDE = CAN_IDE_EXT;
-  txmsg.EID = 0x01234567;
-  txmsg.RTR = CAN_RTR_DATA;
-  txmsg.DLC = 8;
-  txmsg.data32[0] = value;
-  txmsg.data32[1] = 0x00FF00FF;
-
-  canTransmit(&CAND1, CAN_ANY_MAILBOX, &txmsg, MS2ST(100));
+  txframe.IDE = CAN_IDE_STD;
+  txframe.SID = ID;
+  txframe.RTR = CAN_RTR_DATA;
+  txframe.DLC = 1;
+  
+  for(i = 0; i < sizeof(data)/sizeof(uint8_t); i++){
+    txframe.data8[i] = data[i];
+  
+  canTransmit(&CAND1, CAN_ANY_MAILBOX, &txframe, MS2ST(100));
 
   palTogglePad(GPIOD, GPIOD_LED3);  /* Green.   */
+
+}
 
 }
 
@@ -60,7 +95,9 @@ static void server_serve(struct netconn *newconn) {
   char *data;
   u16_t len;
   err_t err;
-  u16_t value;
+  uint8_t *parsed;
+
+  //uint8_t dataArray[8];
 
   while((err = netconn_recv(newconn, &buf)) == ERR_OK) {
     
@@ -68,14 +105,14 @@ static void server_serve(struct netconn *newconn) {
 
       netbuf_data(buf, (void **)&data, &len);
 
-      value = atoi(data);
+      parsed = parse_message(data);
 
-      err = netconn_write(newconn, &value, sizeof(value), NETCONN_COPY);
+      err = netconn_write(newconn, &parsed, sizeof(&parsed), NETCONN_COPY);
 
       if (err != ERR_OK) {
         palSetPad(GPIOD, GPIOD_LED5);
       }
-      pwmEnableChannel(&PWMD4, 3, PWM_PERCENTAGE_TO_WIDTH(&PWMD4, value));
+      //pwmEnableChannel(&PWMD4, 3, PWM_PERCENTAGE_TO_WIDTH(&PWMD4, value));
       
     } while (netbuf_next(buf) >= 0);
     netbuf_delete(buf);
@@ -96,7 +133,7 @@ msg_t network_server(void *p) {
   conn = netconn_new(NETCONN_TCP);
   LWIP_ERROR("http_server: invalid conn", (conn != NULL), return RDY_RESET;);
 
-  /* Bind to port 80 (HTTP) with default IP address */
+  /* Bind to port 50000 with default IP address */
   netconn_bind(conn, NULL, SERVER_THREAD_PORT);
 
   /* Put the connection into LISTEN state */

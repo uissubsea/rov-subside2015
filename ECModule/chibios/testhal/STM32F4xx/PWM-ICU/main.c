@@ -20,7 +20,7 @@
 static void pwmpcb(PWMDriver *pwmp) {
 
   (void)pwmp;
-  palClearPad(GPIOD, GPIOD_LED5);
+  palTogglePad(GPIOD, GPIOD_LED6);
 }
 
 static void pwmc1cb(PWMDriver *pwmp) {
