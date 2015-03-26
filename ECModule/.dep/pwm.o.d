@@ -1,12 +1,12 @@
 build/obj/pwm.o: chibios/os/hal/src/pwm.c chibios/os/kernel/include/ch.h \
  chconf.h chibios/os/ports/GCC/ARMCMx/chtypes.h \
- /usr/lib/gcc/arm-none-eabi/4.9.2/include/stddef.h \
- /usr/lib/gcc/arm-none-eabi/4.9.2/include/stdint.h \
- /usr/arm-none-eabi/include/stdint.h \
- /usr/arm-none-eabi/include/machine/_default_types.h \
- /usr/arm-none-eabi/include/sys/features.h \
- /usr/arm-none-eabi/include/sys/_intsup.h \
- /usr/lib/gcc/arm-none-eabi/4.9.2/include/stdbool.h \
+ c:\github\rov-subside2015\ecmodule\arm\lib\gcc\arm-none-eabi\4.9.3\include\stddef.h \
+ c:\github\rov-subside2015\ecmodule\arm\lib\gcc\arm-none-eabi\4.9.3\include\stdint.h \
+ c:\github\rov-subside2015\ecmodule\arm\arm-none-eabi\include\stdint.h \
+ c:\github\rov-subside2015\ecmodule\arm\arm-none-eabi\include\machine\_default_types.h \
+ c:\github\rov-subside2015\ecmodule\arm\arm-none-eabi\include\sys\features.h \
+ c:\github\rov-subside2015\ecmodule\arm\arm-none-eabi\include\sys\_intsup.h \
+ c:\github\rov-subside2015\ecmodule\arm\lib\gcc\arm-none-eabi\4.9.3\include\stdbool.h \
  chibios/os/kernel/include/chlists.h chibios/os/ports/GCC/ARMCMx/chcore.h \
  chibios/os/ports/GCC/ARMCMx/STM32F4xx/cmparams.h \
  chibios/os/ports/GCC/ARMCMx/chcore_v7m.h \
@@ -45,8 +45,7 @@ build/obj/pwm.o: chibios/os/hal/src/pwm.c chibios/os/kernel/include/ch.h \
  chibios/os/hal/include/can.h chibios/os/hal/platforms/STM32/can_lld.h \
  chibios/os/hal/include/ext.h chibios/os/hal/include/gpt.h \
  chibios/os/hal/include/i2c.h chibios/os/hal/include/icu.h \
- chibios/os/hal/include/mac.h chibios/os/hal/platforms/STM32/mac_lld.h \
- chibios/os/hal/include/pwm.h \
+ chibios/os/hal/include/mac.h chibios/os/hal/include/pwm.h \
  chibios/os/hal/platforms/STM32/TIMv1/pwm_lld.h \
  chibios/os/hal/platforms/STM32/TIMv1/stm32_tim.h \
  chibios/os/hal/include/rtc.h chibios/os/hal/include/serial.h \
@@ -61,19 +60,19 @@ chconf.h:
 
 chibios/os/ports/GCC/ARMCMx/chtypes.h:
 
-/usr/lib/gcc/arm-none-eabi/4.9.2/include/stddef.h:
+c:\github\rov-subside2015\ecmodule\arm\lib\gcc\arm-none-eabi\4.9.3\include\stddef.h:
 
-/usr/lib/gcc/arm-none-eabi/4.9.2/include/stdint.h:
+c:\github\rov-subside2015\ecmodule\arm\lib\gcc\arm-none-eabi\4.9.3\include\stdint.h:
 
-/usr/arm-none-eabi/include/stdint.h:
+c:\github\rov-subside2015\ecmodule\arm\arm-none-eabi\include\stdint.h:
 
-/usr/arm-none-eabi/include/machine/_default_types.h:
+c:\github\rov-subside2015\ecmodule\arm\arm-none-eabi\include\machine\_default_types.h:
 
-/usr/arm-none-eabi/include/sys/features.h:
+c:\github\rov-subside2015\ecmodule\arm\arm-none-eabi\include\sys\features.h:
 
-/usr/arm-none-eabi/include/sys/_intsup.h:
+c:\github\rov-subside2015\ecmodule\arm\arm-none-eabi\include\sys\_intsup.h:
 
-/usr/lib/gcc/arm-none-eabi/4.9.2/include/stdbool.h:
+c:\github\rov-subside2015\ecmodule\arm\lib\gcc\arm-none-eabi\4.9.3\include\stdbool.h:
 
 chibios/os/kernel/include/chlists.h:
 
@@ -184,8 +183,6 @@ chibios/os/hal/include/i2c.h:
 chibios/os/hal/include/icu.h:
 
 chibios/os/hal/include/mac.h:
-
-chibios/os/hal/platforms/STM32/mac_lld.h:
 
 chibios/os/hal/include/pwm.h:
 

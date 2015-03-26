@@ -381,7 +381,7 @@
  * PB15 - PIN15                     (input pullup).
  */
 #define VAL_GPIOB_MODER             (PIN_MODE_INPUT(GPIOB_PIN0) |           \
-                                     PIN_MODE_ALTERNATE(GPIOB_PIN1) |           \
+                                     PIN_MODE_OUTPUT(GPIOB_PIN1) |           \
                                      PIN_MODE_INPUT(GPIOB_PIN2) |           \
                                      PIN_MODE_ALTERNATE(GPIOB_SWO) |        \
                                      PIN_MODE_INPUT(GPIOB_PIN4) |           \

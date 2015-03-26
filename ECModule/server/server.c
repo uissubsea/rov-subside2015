@@ -23,9 +23,9 @@
 
 #include "ch.h"
 
-#include "lwip/opt.h"
-#include "lwip/arch.h"
-#include "lwip/api.h"
+//#include "lwip/opt.h"
+//#include "lwip/arch.h"
+//#include "lwip/api.h"
 #include "hal.h"
 #include <stdlib.h>
 #include <string.h>
@@ -46,7 +46,7 @@ WORKING_AREA(wa_network_server, SERVER_THREAD_STACK_SIZE);
  * @param string [description]
  * @return [description]
  */
-static uint8_t* parse_message(char *s){  
+static uint8_t* pagitrse_message(char *s){  
   
   uint8_t thValX = 0;
   uint8_t thValY = 0;

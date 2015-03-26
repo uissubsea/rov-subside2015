@@ -1,23 +1,25 @@
 build/obj/usb_lld.o: chibios/os/hal/platforms/STM32/OTGv1/usb_lld.c \
- /usr/arm-none-eabi/include/string.h /usr/arm-none-eabi/include/_ansi.h \
- /usr/arm-none-eabi/include/newlib.h \
- /usr/arm-none-eabi/include/sys/config.h \
- /usr/arm-none-eabi/include/machine/ieeefp.h \
- /usr/arm-none-eabi/include/sys/features.h \
- /usr/arm-none-eabi/include/sys/reent.h \
- /usr/arm-none-eabi/include/_ansi.h \
- /usr/lib/gcc/arm-none-eabi/4.9.2/include/stddef.h \
- /usr/arm-none-eabi/include/sys/_types.h \
- /usr/arm-none-eabi/include/machine/_types.h \
- /usr/arm-none-eabi/include/machine/_default_types.h \
- /usr/arm-none-eabi/include/sys/lock.h \
- /usr/arm-none-eabi/include/sys/cdefs.h \
- /usr/arm-none-eabi/include/sys/string.h chibios/os/kernel/include/ch.h \
- chconf.h chibios/os/ports/GCC/ARMCMx/chtypes.h \
- /usr/lib/gcc/arm-none-eabi/4.9.2/include/stdint.h \
- /usr/arm-none-eabi/include/stdint.h \
- /usr/arm-none-eabi/include/sys/_intsup.h \
- /usr/lib/gcc/arm-none-eabi/4.9.2/include/stdbool.h \
+ c:\github\rov-subside2015\ecmodule\arm\arm-none-eabi\include\string.h \
+ c:\github\rov-subside2015\ecmodule\arm\arm-none-eabi\include\_ansi.h \
+ c:\github\rov-subside2015\ecmodule\arm\arm-none-eabi\include\newlib.h \
+ c:\github\rov-subside2015\ecmodule\arm\arm-none-eabi\include\sys\config.h \
+ c:\github\rov-subside2015\ecmodule\arm\arm-none-eabi\include\machine\ieeefp.h \
+ c:\github\rov-subside2015\ecmodule\arm\arm-none-eabi\include\sys\features.h \
+ c:\github\rov-subside2015\ecmodule\arm\arm-none-eabi\include\sys\reent.h \
+ c:\github\rov-subside2015\ecmodule\arm\arm-none-eabi\include\_ansi.h \
+ c:\github\rov-subside2015\ecmodule\arm\lib\gcc\arm-none-eabi\4.9.3\include\stddef.h \
+ c:\github\rov-subside2015\ecmodule\arm\arm-none-eabi\include\sys\_types.h \
+ c:\github\rov-subside2015\ecmodule\arm\arm-none-eabi\include\machine\_types.h \
+ c:\github\rov-subside2015\ecmodule\arm\arm-none-eabi\include\machine\_default_types.h \
+ c:\github\rov-subside2015\ecmodule\arm\arm-none-eabi\include\sys\lock.h \
+ c:\github\rov-subside2015\ecmodule\arm\arm-none-eabi\include\sys\cdefs.h \
+ c:\github\rov-subside2015\ecmodule\arm\arm-none-eabi\include\sys\string.h \
+ chibios/os/kernel/include/ch.h chconf.h \
+ chibios/os/ports/GCC/ARMCMx/chtypes.h \
+ c:\github\rov-subside2015\ecmodule\arm\lib\gcc\arm-none-eabi\4.9.3\include\stdint.h \
+ c:\github\rov-subside2015\ecmodule\arm\arm-none-eabi\include\stdint.h \
+ c:\github\rov-subside2015\ecmodule\arm\arm-none-eabi\include\sys\_intsup.h \
+ c:\github\rov-subside2015\ecmodule\arm\lib\gcc\arm-none-eabi\4.9.3\include\stdbool.h \
  chibios/os/kernel/include/chlists.h chibios/os/ports/GCC/ARMCMx/chcore.h \
  chibios/os/ports/GCC/ARMCMx/STM32F4xx/cmparams.h \
  chibios/os/ports/GCC/ARMCMx/chcore_v7m.h \
@@ -56,8 +58,7 @@ build/obj/usb_lld.o: chibios/os/hal/platforms/STM32/OTGv1/usb_lld.c \
  chibios/os/hal/include/can.h chibios/os/hal/platforms/STM32/can_lld.h \
  chibios/os/hal/include/ext.h chibios/os/hal/include/gpt.h \
  chibios/os/hal/include/i2c.h chibios/os/hal/include/icu.h \
- chibios/os/hal/include/mac.h chibios/os/hal/platforms/STM32/mac_lld.h \
- chibios/os/hal/include/pwm.h \
+ chibios/os/hal/include/mac.h chibios/os/hal/include/pwm.h \
  chibios/os/hal/platforms/STM32/TIMv1/pwm_lld.h \
  chibios/os/hal/platforms/STM32/TIMv1/stm32_tim.h \
  chibios/os/hal/include/rtc.h chibios/os/hal/include/serial.h \
@@ -66,35 +67,35 @@ build/obj/usb_lld.o: chibios/os/hal/platforms/STM32/OTGv1/usb_lld.c \
  chibios/os/hal/include/uart.h chibios/os/hal/include/usb.h \
  chibios/os/hal/include/mmc_spi.h chibios/os/hal/include/serial_usb.h
 
-/usr/arm-none-eabi/include/string.h:
+c:\github\rov-subside2015\ecmodule\arm\arm-none-eabi\include\string.h:
 
-/usr/arm-none-eabi/include/_ansi.h:
+c:\github\rov-subside2015\ecmodule\arm\arm-none-eabi\include\_ansi.h:
 
-/usr/arm-none-eabi/include/newlib.h:
+c:\github\rov-subside2015\ecmodule\arm\arm-none-eabi\include\newlib.h:
 
-/usr/arm-none-eabi/include/sys/config.h:
+c:\github\rov-subside2015\ecmodule\arm\arm-none-eabi\include\sys\config.h:
 
-/usr/arm-none-eabi/include/machine/ieeefp.h:
+c:\github\rov-subside2015\ecmodule\arm\arm-none-eabi\include\machine\ieeefp.h:
 
-/usr/arm-none-eabi/include/sys/features.h:
+c:\github\rov-subside2015\ecmodule\arm\arm-none-eabi\include\sys\features.h:
 
-/usr/arm-none-eabi/include/sys/reent.h:
+c:\github\rov-subside2015\ecmodule\arm\arm-none-eabi\include\sys\reent.h:
 
-/usr/arm-none-eabi/include/_ansi.h:
+c:\github\rov-subside2015\ecmodule\arm\arm-none-eabi\include\_ansi.h:
 
-/usr/lib/gcc/arm-none-eabi/4.9.2/include/stddef.h:
+c:\github\rov-subside2015\ecmodule\arm\lib\gcc\arm-none-eabi\4.9.3\include\stddef.h:
 
-/usr/arm-none-eabi/include/sys/_types.h:
+c:\github\rov-subside2015\ecmodule\arm\arm-none-eabi\include\sys\_types.h:
 
-/usr/arm-none-eabi/include/machine/_types.h:
+c:\github\rov-subside2015\ecmodule\arm\arm-none-eabi\include\machine\_types.h:
 
-/usr/arm-none-eabi/include/machine/_default_types.h:
+c:\github\rov-subside2015\ecmodule\arm\arm-none-eabi\include\machine\_default_types.h:
 
-/usr/arm-none-eabi/include/sys/lock.h:
+c:\github\rov-subside2015\ecmodule\arm\arm-none-eabi\include\sys\lock.h:
 
-/usr/arm-none-eabi/include/sys/cdefs.h:
+c:\github\rov-subside2015\ecmodule\arm\arm-none-eabi\include\sys\cdefs.h:
 
-/usr/arm-none-eabi/include/sys/string.h:
+c:\github\rov-subside2015\ecmodule\arm\arm-none-eabi\include\sys\string.h:
 
 chibios/os/kernel/include/ch.h:
 
@@ -102,13 +103,13 @@ chconf.h:
 
 chibios/os/ports/GCC/ARMCMx/chtypes.h:
 
-/usr/lib/gcc/arm-none-eabi/4.9.2/include/stdint.h:
+c:\github\rov-subside2015\ecmodule\arm\lib\gcc\arm-none-eabi\4.9.3\include\stdint.h:
 
-/usr/arm-none-eabi/include/stdint.h:
+c:\github\rov-subside2015\ecmodule\arm\arm-none-eabi\include\stdint.h:
 
-/usr/arm-none-eabi/include/sys/_intsup.h:
+c:\github\rov-subside2015\ecmodule\arm\arm-none-eabi\include\sys\_intsup.h:
 
-/usr/lib/gcc/arm-none-eabi/4.9.2/include/stdbool.h:
+c:\github\rov-subside2015\ecmodule\arm\lib\gcc\arm-none-eabi\4.9.3\include\stdbool.h:
 
 chibios/os/kernel/include/chlists.h:
 
@@ -219,8 +220,6 @@ chibios/os/hal/include/i2c.h:
 chibios/os/hal/include/icu.h:
 
 chibios/os/hal/include/mac.h:
-
-chibios/os/hal/platforms/STM32/mac_lld.h:
 
 chibios/os/hal/include/pwm.h:
 

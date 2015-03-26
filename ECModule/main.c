@@ -17,9 +17,10 @@
 #include "ch.h"
 #include "hal.h"
 
-#include "lwipthread.h"
+//#include "lwipthread.h"
 
 #include "server/server.h"
+#include "relestyring/relestyring.h"
 
 /*===========================================================================*/
 /* CAN Bus related.                                                          */
@@ -91,20 +92,18 @@ int main(void) {
   /*
    * Creates the LWIP threads (it changes priority internally).
    */
-  chThdCreateStatic(wa_lwip_thread, LWIP_THREAD_STACK_SIZE, NORMALPRIO + 1,
-                    lwip_thread, NULL);
+  //chThdCreateStatic(wa_lwip_thread, LWIP_THREAD_STACK_SIZE, NORMALPRIO + 1,
+  //                  lwip_thread, NULL);
 
   /*
    * Creates the HTTP thread (it changes priority internally).
    */
-  chThdCreateStatic(wa_network_server, sizeof(wa_network_server), NORMALPRIO + 1,
-                    network_server, NULL);
+  //chThdCreateStatic(wa_network_server, sizeof(wa_network_server), NORMALPRIO + 1,
+  //                  network_server, NULL);
 
   
- // chThdCreateStatic(can_tx_wa, sizeof(can_tx_wa), NORMALPRIO + 1,
- //                   can_tx, NULL);
-
-palSetPad(GPIOD, GPIOD_LED5);
+  chThdCreateStatic(waRelestyring, sizeof(waRelestyring), NORMALPRIO + 1,
+                    relestyring, NULL);
 
   /*
    * Normal main() thread activity, in this demo it does nothing except
