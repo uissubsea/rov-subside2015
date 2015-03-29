@@ -46,30 +46,38 @@ WORKING_AREA(wa_network_server, SERVER_THREAD_STACK_SIZE);
  * @param string [description]
  * @return [description]
  */
-static uint8_t* parse_message(char *s){  
-  
-  uint8_t thValX = 0;
-  uint8_t thValY = 0;
-  uint8_t *array[2];
-  uint32_t i;
-  char *thX, *thY;  
-    for(i = 0; i < sizeof(s)/sizeof(int); i++ ){
-      
-      /* Look For Thurster Data */
-      if(s[i] == 'T'){
-        palTogglePad(GPIOD, GPIOD_LED6);
-        thX = s[i+3] + s[i+4];
-        thValX = (uint8_t)atoi(thX);
-        thY = s[i+6] + s[i+7];
-        thValY = (uint8_t)atoi(thY);
-      }
-    }
-  array[0] = thValX;
-  array[1] = thValY;
-  return array;
-}
 
-static void send_can_message(int ID, uint8_t *data){
+ struct RovData
+ {
+   char ds[2][15];
+   int16_t th[4];
+ } rovdata;
+
+ static struct RovData parse_message(char *string){
+  char *token;
+  struct RovData rov_data;
+  uint8_t i = 0;
+
+  for (token = strtok(string, ";"); token != NULL; token = strtok(NULL, ";")){
+    strcpy(rov_data.ds[i], token);
+    i++;
+  }
+
+  /* Parse data String */
+  i = 0;
+
+  for (token = strtok(rov_data.ds[1], ","); token != NULL; token = strtok(NULL, ",")){
+    rov_data.th[i] = atoi(token);
+    i++;
+  }
+
+  
+  return rov_data;
+ }
+
+
+
+static void send_can_message(int ID, int16_t *data){
 
   CANTxFrame txframe;
   uint8_t i;
@@ -79,10 +87,10 @@ static void send_can_message(int ID, uint8_t *data){
   txframe.RTR = CAN_RTR_DATA;
   txframe.DLC = 1;
   
-  for(i = 0; i < sizeof(data)/sizeof(uint8_t); i++){
+  for(i = 0; i < 3; i++){
     txframe.data8[i] = data[i];
   
-  canTransmit(&CAND1, CAN_ANY_MAILBOX, &txframe, MS2ST(100));
+  canTransmit(&CAND1, CAN_ANY_MAILBOX, &txframe, TIME_IMMEDIATE);
 
   palTogglePad(GPIOD, GPIOD_LED3);  /* Green.   */
 
@@ -92,22 +100,24 @@ static void send_can_message(int ID, uint8_t *data){
 
 static void server_serve(struct netconn *newconn) {
   struct netbuf *buf;
-  char *data;
+  struct RovData rov_data;
+  void *data;
   u16_t len;
   err_t err;
-  uint8_t *parsed;
-
   //uint8_t dataArray[8];
 
   while((err = netconn_recv(newconn, &buf)) == ERR_OK) {
     
     do{
 
-      netbuf_data(buf, (void **)&data, &len);
+      netbuf_data(buf, &data, &len);
 
-      parsed = parse_message(data);
+      rov_data = parse_message(data);
+      
+      err = netconn_write(newconn, rov_data.ds[0], strlen(rov_data.ds[0]), NETCONN_COPY);
 
-      err = netconn_write(newconn, &parsed, sizeof(&parsed), NETCONN_COPY);
+      /* Send parsed data onto canbus */
+      send_can_message(0x1, rov_data.th);
 
       if (err != ERR_OK) {
         palSetPad(GPIOD, GPIOD_LED5);
@@ -147,7 +157,7 @@ msg_t network_server(void *p) {
     if (err != ERR_OK)
       continue;
     char message[] = "Status OK";
-    netconn_write(conn, &message, sizeof(message)-1, NETCONN_COPY);
+    netconn_write(conn, message, sizeof(message)-1, NETCONN_COPY);
     server_serve(newconn);
     netconn_delete(newconn);
   }

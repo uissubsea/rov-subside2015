@@ -118,6 +118,7 @@ static const PWMConfig pwmcfg = {
   },
   /* HW dependent part.*/
   0,
+  0,
   0
 };
 
