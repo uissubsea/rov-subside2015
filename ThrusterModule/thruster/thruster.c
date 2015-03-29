@@ -36,6 +36,9 @@ msg_t thruster_thread(void *p){
 	(void)p;
 	struct ThValues verdi;
 
+
+
+
 	/* Run Forever */
 	while(1){
 		/* Motta Verdier gjennom canbus */
@@ -44,6 +47,20 @@ msg_t thruster_thread(void *p){
 
 		/* Kode til truster program */
 		/* Skriv inn kode her ;) */
+
+		/* PROGRAM FOR VETRICAL THRUSTERS */
+		/* MOTOR 5 */
+		pwmEnableChannel(&PWMD8, 0, PWM_PERCENTAGE_TO_WIDTH(&PWMD8, verdi.Z*70))
+		
+		/* MOTOR 6 */
+		pwmEnableChannel(&PWMD8, 1, PWM_PERCENTAGE_TO_WIDTH(&PWMD8, verdi.Z*70))
+
+		/* MOTOR 7 */
+		pwmEnableChannel(&PWMD8, 2, PWM_PERCENTAGE_TO_WIDTH(&PWMD8, verdi.Z*70))
+		
+		/* MOTOR 8 */
+		pwmEnableChannel(&PWMD8, 3, PWM_PERCENTAGE_TO_WIDTH(&PWMD8, verdi.Z*70))
+		
 
 		/* Følgende funksjon kan benyttes te å sette pådrag til trustere
 	 	* 
