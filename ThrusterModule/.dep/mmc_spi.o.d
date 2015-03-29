@@ -6,17 +6,18 @@ build/obj/mmc_spi.o: chibios/os/hal/src/mmc_spi.c \
  /usr/arm-none-eabi/include/sys/features.h \
  /usr/arm-none-eabi/include/sys/reent.h \
  /usr/arm-none-eabi/include/_ansi.h \
+ /usr/lib/gcc/arm-none-eabi/4.9.2/include/stddef.h \
  /usr/arm-none-eabi/include/sys/_types.h \
  /usr/arm-none-eabi/include/machine/_types.h \
  /usr/arm-none-eabi/include/machine/_default_types.h \
  /usr/arm-none-eabi/include/sys/lock.h \
- /usr/lib/gcc/arm-none-eabi/4.8.1/include/stddef.h \
- /usr/lib/gcc/arm-none-eabi/4.8.1/include-fixed/sys/cdefs.h \
- /usr/lib/gcc/arm-none-eabi/4.8.1/include/stdint.h \
- /usr/arm-none-eabi/include/stdint.h \
+ /usr/arm-none-eabi/include/sys/cdefs.h \
  /usr/arm-none-eabi/include/sys/string.h chibios/os/kernel/include/ch.h \
  chconf.h chibios/os/ports/GCC/ARMCMx/chtypes.h \
- /usr/lib/gcc/arm-none-eabi/4.8.1/include/stdbool.h \
+ /usr/lib/gcc/arm-none-eabi/4.9.2/include/stdint.h \
+ /usr/arm-none-eabi/include/stdint.h \
+ /usr/arm-none-eabi/include/sys/_intsup.h \
+ /usr/lib/gcc/arm-none-eabi/4.9.2/include/stdbool.h \
  chibios/os/kernel/include/chlists.h chibios/os/ports/GCC/ARMCMx/chcore.h \
  chibios/os/ports/GCC/ARMCMx/STM32F4xx/cmparams.h \
  chibios/os/ports/GCC/ARMCMx/chcore_v7m.h \
@@ -81,6 +82,8 @@ build/obj/mmc_spi.o: chibios/os/hal/src/mmc_spi.c \
 
 /usr/arm-none-eabi/include/_ansi.h:
 
+/usr/lib/gcc/arm-none-eabi/4.9.2/include/stddef.h:
+
 /usr/arm-none-eabi/include/sys/_types.h:
 
 /usr/arm-none-eabi/include/machine/_types.h:
@@ -89,13 +92,7 @@ build/obj/mmc_spi.o: chibios/os/hal/src/mmc_spi.c \
 
 /usr/arm-none-eabi/include/sys/lock.h:
 
-/usr/lib/gcc/arm-none-eabi/4.8.1/include/stddef.h:
-
-/usr/lib/gcc/arm-none-eabi/4.8.1/include-fixed/sys/cdefs.h:
-
-/usr/lib/gcc/arm-none-eabi/4.8.1/include/stdint.h:
-
-/usr/arm-none-eabi/include/stdint.h:
+/usr/arm-none-eabi/include/sys/cdefs.h:
 
 /usr/arm-none-eabi/include/sys/string.h:
 
@@ -105,7 +102,13 @@ chconf.h:
 
 chibios/os/ports/GCC/ARMCMx/chtypes.h:
 
-/usr/lib/gcc/arm-none-eabi/4.8.1/include/stdbool.h:
+/usr/lib/gcc/arm-none-eabi/4.9.2/include/stdint.h:
+
+/usr/arm-none-eabi/include/stdint.h:
+
+/usr/arm-none-eabi/include/sys/_intsup.h:
+
+/usr/lib/gcc/arm-none-eabi/4.9.2/include/stdbool.h:
 
 chibios/os/kernel/include/chlists.h:
 

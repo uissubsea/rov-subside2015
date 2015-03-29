@@ -16,6 +16,7 @@
 
 #include "ch.h"
 #include "hal.h"
+#include "thruster/thruster.h"
 
 /*
  * No Loopback, 500KBaud, automatic wakeup, automatic recover
@@ -36,43 +37,19 @@ static const CANConfig cancfg = {
  */
 static PWMConfig pwmcfg = {
   10000,                                    /* 10kHz PWM clock frequency.   */
-  8,                                    /* PWM period 1S (in ticks).    */
-  NULL,
+  200,                                      /* PWM period (in ticks).    */
+  NULL,                                     /* No Callback */
   {
+    {PWM_OUTPUT_ACTIVE_HIGH, NULL},         /*TIMx Channel 1 */
+    {PWM_OUTPUT_ACTIVE_HIGH, NULL},         /*TIMx Channeø 2 */
     {PWM_OUTPUT_ACTIVE_HIGH, NULL},
-    {PWM_OUTPUT_DISABLED, NULL},
-    {PWM_OUTPUT_DISABLED, NULL},
     {PWM_OUTPUT_ACTIVE_HIGH, NULL}
   },
   /* HW dependent part.*/
   0,
+  0,
   0
 };
-
-/*
- *  CANBUS Receiver thread.
- */
-static WORKING_AREA(waCanThread, 128);
-
-static msg_t CanThread(void *arg) {
-  CANRxFrame rxmsg;
-
-  (void)arg;
-  while(!chThdShouldTerminate()){
-    /* Receive frame every second */
-    chThdSleepMilliseconds(10);
-    canReceive(&CAND1, CAN_ANY_MAILBOX, &rxmsg, TIME_IMMEDIATE);
-    palTogglePad(GPIOD, GPIOD_LED4);
-    if(rxmsg.data8[0] == 0x1){
-      palTogglePad(GPIOD, GPIOD_LED5);
-
-      pwmEnableChannel(&PWMD4, 3, PWM_PERCENTAGE_TO_WIDTH(&PWMD4, 2000));
-
-      rxmsg.data8[0] = 0x0;
-    }
-  }
-  return 0;
-}
 
 
 /*
@@ -96,18 +73,21 @@ int main(void) {
   canStart(&CAND1, &cancfg);
 
   chThdSleepMilliseconds(1000);
+  
   /*
-   * Initializes the PWM driver 4, routes the TIM4 outputs to the board LEDs.
+   * Initialize PWM Timers 1, 2 and 8 with same config
    */
-  pwmStart(&PWMD4, &pwmcfg);
+  pwmStart(&PWMD1, &pwmcfg);
+  pwmStart(&PWMD2, &pwmcfg);
+  pwmStart(&PWMD8, &pwmcfg);
+
+
   palSetPadMode(GPIOD, GPIOD_LED4, PAL_MODE_ALTERNATE(2));  /* Green.   */
   palSetPadMode(GPIOD, GPIOD_LED6, PAL_MODE_ALTERNATE(2));  /* Blue.    */
   
+  /* Create Thruster thread */
 
-  chThdCreateStatic(waCanThread, sizeof(waCanThread), NORMALPRIO + 1, CanThread, NULL);
-
-  //pwmEnableChannel(&PWMD4, 3, PWM_PERCENTAGE_TO_WIDTH(&PWMD4, 2000));
-
+  chThdCreateStatic(wa_thruster, sizeof(wa_thruster), NORMALPRIO + 1, thruster_thread, NULL);
 
   /*
    * Normal main() thread activity, in this demo it does nothing except
@@ -116,6 +96,6 @@ int main(void) {
    * driver 2.
    */
   while (TRUE) {
-    chThdSleepMilliseconds(500);
+    chThdSleepMilliseconds(10000);
   }
 }
