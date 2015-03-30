@@ -21,6 +21,9 @@
 
 #include "server/server.h"
 
+
+
+
 /*===========================================================================*/
 /* CAN Bus related.                                                          */
 /*===========================================================================*/
@@ -44,31 +47,6 @@ static const CANConfig cancfg = {
 
 
 /*
- * Transmitter thread.
- */
-static WORKING_AREA(can_tx_wa, 256);
-static msg_t can_tx(void * p) {
-  CANTxFrame txmsg;
-
-  (void)p;
-  chRegSetThreadName("transmitter");
-  txmsg.IDE = CAN_IDE_STD;
-  txmsg.SID = 0x012;
-  txmsg.RTR = CAN_RTR_DATA;
-  txmsg.DLC = 1;
-  txmsg.data8[0] = 0x1;
-
-  while (!chThdShouldTerminate()) {
-    if(palReadPad(GPIOA, GPIOA_BUTTON)){
-      canTransmit(&CAND1, CAN_ANY_MAILBOX, &txmsg, MS2ST(100));
-      chThdSleepMilliseconds(1000);
-    }
-  }
-  return 0;
-}
-
-
-/*
  * Application entry point.
  */
 int main(void) {
@@ -87,6 +65,9 @@ int main(void) {
   //palSetPadMode(GPIOB, GPIOB_CANTX, PAL_MODE_ALTERNATE(9));
 
   canStart(&CAND1, &cancfg);
+
+  adcStart(&ADCD1, NULL);
+  adcSTM32EnableTSVREFE();
 
   /*
    * Creates the LWIP threads (it changes priority internally).

@@ -1,4 +1,4 @@
-ARM GAS  /tmp/cc1HTVbQ.s 			page 1
+ARM GAS  /tmp/cclN9G6H.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  /tmp/cc1HTVbQ.s 			page 1
   55 0020 00000000 		.word	.LANCHOR0
   56 0024 00000000 		.word	.LANCHOR1
   57              		.cfi_endproc
-ARM GAS  /tmp/cc1HTVbQ.s 			page 2
+ARM GAS  /tmp/cclN9G6H.s 			page 2
 
 
   58              	.LFE7:
@@ -118,7 +118,7 @@ ARM GAS  /tmp/cc1HTVbQ.s 			page 1
  111 0022 0020     		movhi	r0, #0
  112              	.LBE8:
  113              	.LBE7:
-ARM GAS  /tmp/cc1HTVbQ.s 			page 3
+ARM GAS  /tmp/cclN9G6H.s 			page 3
 
 
  114              	.LBB9:
@@ -178,7 +178,7 @@ ARM GAS  /tmp/cc1HTVbQ.s 			page 1
  167              		.loc 1 121 0
  168 0014 9DBF     		ittte	ls
  169 0016 9B18     		addls	r3, r3, r2
-ARM GAS  /tmp/cc1HTVbQ.s 			page 4
+ARM GAS  /tmp/cclN9G6H.s 			page 4
 
 
  170              	.LVL10:
@@ -238,7 +238,7 @@ ARM GAS  /tmp/cc1HTVbQ.s 			page 1
  222              		.set	.LANCHOR1,. + 0
  223              		.type	endmem, %object
  224              		.size	endmem, 4
-ARM GAS  /tmp/cc1HTVbQ.s 			page 5
+ARM GAS  /tmp/cclN9G6H.s 			page 5
 
 
  225              	endmem:
@@ -298,7 +298,7 @@ ARM GAS  /tmp/cc1HTVbQ.s 			page 1
  279 0057 04       		.uleb128 0x4
  280 0058 02       		.byte	0x2
  281 0059 05       		.byte	0x5
-ARM GAS  /tmp/cc1HTVbQ.s 			page 6
+ARM GAS  /tmp/cclN9G6H.s 			page 6
 
 
  282 005a F9010000 		.4byte	.LASF5
@@ -358,7 +358,7 @@ ARM GAS  /tmp/cc1HTVbQ.s 			page 1
  336 00c0 D3000000 		.4byte	.LASF24
  337 00c4 01       		.byte	0x1
  338 00c5 70       		.byte	0x70
-ARM GAS  /tmp/cc1HTVbQ.s 			page 7
+ARM GAS  /tmp/cclN9G6H.s 			page 7
 
 
  339 00c6 A9000000 		.4byte	0xa9
@@ -418,7 +418,7 @@ ARM GAS  /tmp/cc1HTVbQ.s 			page 1
  393 013f 00000000 		.4byte	.LLST0
  394 0143 09       		.uleb128 0x9
  395 0144 7000     		.ascii	"p\000"
-ARM GAS  /tmp/cc1HTVbQ.s 			page 8
+ARM GAS  /tmp/cclN9G6H.s 			page 8
 
 
  396 0146 01       		.byte	0x1
@@ -478,7 +478,7 @@ ARM GAS  /tmp/cc1HTVbQ.s 			page 1
  450 01c1 CF000000 		.4byte	0xcf
  451 01c5 62000000 		.4byte	.LLST2
  452 01c9 15       		.uleb128 0x15
-ARM GAS  /tmp/cc1HTVbQ.s 			page 9
+ARM GAS  /tmp/cclN9G6H.s 			page 9
 
 
  453 01ca DA000000 		.4byte	0xda
@@ -538,7 +538,7 @@ ARM GAS  /tmp/cc1HTVbQ.s 			page 1
  507 000c 17       		.uleb128 0x17
  508 000d 11       		.uleb128 0x11
  509 000e 01       		.uleb128 0x1
-ARM GAS  /tmp/cc1HTVbQ.s 			page 10
+ARM GAS  /tmp/cclN9G6H.s 			page 10
 
 
  510 000f 10       		.uleb128 0x10
@@ -598,7 +598,7 @@ ARM GAS  /tmp/cc1HTVbQ.s 			page 1
  564 0045 00       		.byte	0
  565 0046 07       		.uleb128 0x7
  566 0047 2E       		.uleb128 0x2e
-ARM GAS  /tmp/cc1HTVbQ.s 			page 11
+ARM GAS  /tmp/cclN9G6H.s 			page 11
 
 
  567 0048 01       		.byte	0x1
@@ -658,7 +658,7 @@ ARM GAS  /tmp/cc1HTVbQ.s 			page 1
  621 007e 3B       		.uleb128 0x3b
  622 007f 0B       		.uleb128 0xb
  623 0080 27       		.uleb128 0x27
-ARM GAS  /tmp/cc1HTVbQ.s 			page 12
+ARM GAS  /tmp/cclN9G6H.s 			page 12
 
 
  624 0081 19       		.uleb128 0x19
@@ -718,7 +718,7 @@ ARM GAS  /tmp/cc1HTVbQ.s 			page 1
  678 00b8 0B       		.uleb128 0xb
  679 00b9 27       		.uleb128 0x27
  680 00ba 19       		.uleb128 0x19
-ARM GAS  /tmp/cc1HTVbQ.s 			page 13
+ARM GAS  /tmp/cclN9G6H.s 			page 13
 
 
  681 00bb 49       		.uleb128 0x49
@@ -778,7 +778,7 @@ ARM GAS  /tmp/cc1HTVbQ.s 			page 1
  735 00f2 00       		.byte	0
  736 00f3 12       		.uleb128 0x12
  737 00f4 1D       		.uleb128 0x1d
-ARM GAS  /tmp/cc1HTVbQ.s 			page 14
+ARM GAS  /tmp/cclN9G6H.s 			page 14
 
 
  738 00f5 01       		.byte	0x1
@@ -838,7 +838,7 @@ ARM GAS  /tmp/cc1HTVbQ.s 			page 1
  792 012c 19       		.uleb128 0x19
  793 012d 01       		.uleb128 0x1
  794 012e 13       		.uleb128 0x13
-ARM GAS  /tmp/cc1HTVbQ.s 			page 15
+ARM GAS  /tmp/cclN9G6H.s 			page 15
 
 
  795 012f 00       		.byte	0
@@ -898,7 +898,7 @@ ARM GAS  /tmp/cc1HTVbQ.s 			page 1
  849 0016 01       		.uleb128 0x1
  850 0017 50       		.byte	0x50
  851 0018 9F       		.byte	0x9f
-ARM GAS  /tmp/cc1HTVbQ.s 			page 16
+ARM GAS  /tmp/cclN9G6H.s 			page 16
 
 
  852 0019 00000000 		.4byte	0
@@ -958,7 +958,7 @@ ARM GAS  /tmp/cc1HTVbQ.s 			page 1
  906 0091 09       		.byte	0x9
  907 0092 F8       		.byte	0xf8
  908 0093 1A       		.byte	0x1a
-ARM GAS  /tmp/cc1HTVbQ.s 			page 17
+ARM GAS  /tmp/cclN9G6H.s 			page 17
 
 
  909 0094 9F       		.byte	0x9f
@@ -1018,7 +1018,7 @@ ARM GAS  /tmp/cc1HTVbQ.s 			page 1
  958      656D00
  959              	.LASF21:
  960 0007 474E5520 		.ascii	"GNU C 4.9.2 20150128 (prerelease) -mcpu=cortex-m4 -"
-ARM GAS  /tmp/cc1HTVbQ.s 			page 18
+ARM GAS  /tmp/cclN9G6H.s 			page 18
 
 
  960      4320342E 
@@ -1078,7 +1078,7 @@ ARM GAS  /tmp/cc1HTVbQ.s 			page 1
  980              	.LASF6:
  981 0128 73686F72 		.ascii	"short unsigned int\000"
  981      7420756E 
-ARM GAS  /tmp/cc1HTVbQ.s 			page 19
+ARM GAS  /tmp/cclN9G6H.s 			page 19
 
 
  981      7369676E 
@@ -1138,7 +1138,7 @@ ARM GAS  /tmp/cc1HTVbQ.s 			page 1
  1004              	.LASF16:
  1005 01e7 63686172 		.ascii	"char\000"
  1005      00
-ARM GAS  /tmp/cc1HTVbQ.s 			page 20
+ARM GAS  /tmp/cclN9G6H.s 			page 20
 
 
  1006              	.LASF18:
@@ -1166,32 +1166,32 @@ ARM GAS  /tmp/cc1HTVbQ.s 			page 1
  1017 0224 5F426F6F 		.ascii	"_Bool\000"
  1017      6C00
  1018              		.ident	"GCC: (Arch Repository) 4.9.2 20150128 (prerelease)"
-ARM GAS  /tmp/cc1HTVbQ.s 			page 21
+ARM GAS  /tmp/cclN9G6H.s 			page 21
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 chmemcore.c
-     /tmp/cc1HTVbQ.s:19     .text._core_init:0000000000000000 $t
-     /tmp/cc1HTVbQ.s:25     .text._core_init:0000000000000000 _core_init
-     /tmp/cc1HTVbQ.s:53     .text._core_init:0000000000000018 $d
-     /tmp/cc1HTVbQ.s:61     .text.chCoreAlloc:0000000000000000 $t
-     /tmp/cc1HTVbQ.s:67     .text.chCoreAlloc:0000000000000000 chCoreAlloc
-     /tmp/cc1HTVbQ.s:130    .text.chCoreAlloc:0000000000000030 $d
-     /tmp/cc1HTVbQ.s:136    .text.chCoreAllocI:0000000000000000 $t
-     /tmp/cc1HTVbQ.s:142    .text.chCoreAllocI:0000000000000000 chCoreAllocI
-     /tmp/cc1HTVbQ.s:185    .text.chCoreAllocI:0000000000000024 $d
-     /tmp/cc1HTVbQ.s:191    .text.chCoreStatus:0000000000000000 $t
-     /tmp/cc1HTVbQ.s:197    .text.chCoreStatus:0000000000000000 chCoreStatus
-     /tmp/cc1HTVbQ.s:215    .text.chCoreStatus:000000000000000c $d
-     /tmp/cc1HTVbQ.s:221    .bss.endmem:0000000000000000 $d
-     /tmp/cc1HTVbQ.s:225    .bss.endmem:0000000000000000 endmem
-     /tmp/cc1HTVbQ.s:228    .bss.nextmem:0000000000000000 $d
-     /tmp/cc1HTVbQ.s:232    .bss.nextmem:0000000000000000 nextmem
+     /tmp/cclN9G6H.s:19     .text._core_init:0000000000000000 $t
+     /tmp/cclN9G6H.s:25     .text._core_init:0000000000000000 _core_init
+     /tmp/cclN9G6H.s:53     .text._core_init:0000000000000018 $d
+     /tmp/cclN9G6H.s:61     .text.chCoreAlloc:0000000000000000 $t
+     /tmp/cclN9G6H.s:67     .text.chCoreAlloc:0000000000000000 chCoreAlloc
+     /tmp/cclN9G6H.s:130    .text.chCoreAlloc:0000000000000030 $d
+     /tmp/cclN9G6H.s:136    .text.chCoreAllocI:0000000000000000 $t
+     /tmp/cclN9G6H.s:142    .text.chCoreAllocI:0000000000000000 chCoreAllocI
+     /tmp/cclN9G6H.s:185    .text.chCoreAllocI:0000000000000024 $d
+     /tmp/cclN9G6H.s:191    .text.chCoreStatus:0000000000000000 $t
+     /tmp/cclN9G6H.s:197    .text.chCoreStatus:0000000000000000 chCoreStatus
+     /tmp/cclN9G6H.s:215    .text.chCoreStatus:000000000000000c $d
+     /tmp/cclN9G6H.s:221    .bss.endmem:0000000000000000 $d
+     /tmp/cclN9G6H.s:225    .bss.endmem:0000000000000000 endmem
+     /tmp/cclN9G6H.s:228    .bss.nextmem:0000000000000000 $d
+     /tmp/cclN9G6H.s:232    .bss.nextmem:0000000000000000 nextmem
                      .debug_frame:0000000000000010 $d
-     /tmp/cc1HTVbQ.s:60     .text._core_init:0000000000000028 $t
-     /tmp/cc1HTVbQ.s:135    .text.chCoreAlloc:0000000000000038 $t
-     /tmp/cc1HTVbQ.s:190    .text.chCoreAllocI:000000000000002c $t
-     /tmp/cc1HTVbQ.s:220    .text.chCoreStatus:0000000000000014 $t
+     /tmp/cclN9G6H.s:60     .text._core_init:0000000000000028 $t
+     /tmp/cclN9G6H.s:135    .text.chCoreAlloc:0000000000000038 $t
+     /tmp/cclN9G6H.s:190    .text.chCoreAllocI:000000000000002c $t
+     /tmp/cclN9G6H.s:220    .text.chCoreStatus:0000000000000014 $t
 
 UNDEFINED SYMBOLS
 __heap_base__

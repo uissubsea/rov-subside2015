@@ -1,25 +1,23 @@
 build/obj/mac_lld.o: chibios/os/hal/platforms/STM32/mac_lld.c \
- /Users/Daniel/Documents/Bachelor/Kode/rov-subside2015/arm/arm-none-eabi/include/string.h \
- /Users/Daniel/Documents/Bachelor/Kode/rov-subside2015/arm/arm-none-eabi/include/_ansi.h \
- /Users/Daniel/Documents/Bachelor/Kode/rov-subside2015/arm/arm-none-eabi/include/newlib.h \
- /Users/Daniel/Documents/Bachelor/Kode/rov-subside2015/arm/arm-none-eabi/include/sys/config.h \
- /Users/Daniel/Documents/Bachelor/Kode/rov-subside2015/arm/arm-none-eabi/include/machine/ieeefp.h \
- /Users/Daniel/Documents/Bachelor/Kode/rov-subside2015/arm/arm-none-eabi/include/sys/features.h \
- /Users/Daniel/Documents/Bachelor/Kode/rov-subside2015/arm/arm-none-eabi/include/sys/reent.h \
- /Users/Daniel/Documents/Bachelor/Kode/rov-subside2015/arm/arm-none-eabi/include/_ansi.h \
- /Users/Daniel/Documents/Bachelor/Kode/rov-subside2015/arm/lib/gcc/arm-none-eabi/4.9.3/include/stddef.h \
- /Users/Daniel/Documents/Bachelor/Kode/rov-subside2015/arm/arm-none-eabi/include/sys/_types.h \
- /Users/Daniel/Documents/Bachelor/Kode/rov-subside2015/arm/arm-none-eabi/include/machine/_types.h \
- /Users/Daniel/Documents/Bachelor/Kode/rov-subside2015/arm/arm-none-eabi/include/machine/_default_types.h \
- /Users/Daniel/Documents/Bachelor/Kode/rov-subside2015/arm/arm-none-eabi/include/sys/lock.h \
- /Users/Daniel/Documents/Bachelor/Kode/rov-subside2015/arm/arm-none-eabi/include/sys/cdefs.h \
- /Users/Daniel/Documents/Bachelor/Kode/rov-subside2015/arm/arm-none-eabi/include/sys/string.h \
- chibios/os/kernel/include/ch.h chconf.h \
- chibios/os/ports/GCC/ARMCMx/chtypes.h \
- /Users/Daniel/Documents/Bachelor/Kode/rov-subside2015/arm/lib/gcc/arm-none-eabi/4.9.3/include/stdint.h \
- /Users/Daniel/Documents/Bachelor/Kode/rov-subside2015/arm/arm-none-eabi/include/stdint.h \
- /Users/Daniel/Documents/Bachelor/Kode/rov-subside2015/arm/arm-none-eabi/include/sys/_intsup.h \
- /Users/Daniel/Documents/Bachelor/Kode/rov-subside2015/arm/lib/gcc/arm-none-eabi/4.9.3/include/stdbool.h \
+ /usr/arm-none-eabi/include/string.h /usr/arm-none-eabi/include/_ansi.h \
+ /usr/arm-none-eabi/include/newlib.h \
+ /usr/arm-none-eabi/include/sys/config.h \
+ /usr/arm-none-eabi/include/machine/ieeefp.h \
+ /usr/arm-none-eabi/include/sys/features.h \
+ /usr/arm-none-eabi/include/sys/reent.h \
+ /usr/arm-none-eabi/include/_ansi.h \
+ /usr/lib/gcc/arm-none-eabi/4.9.2/include/stddef.h \
+ /usr/arm-none-eabi/include/sys/_types.h \
+ /usr/arm-none-eabi/include/machine/_types.h \
+ /usr/arm-none-eabi/include/machine/_default_types.h \
+ /usr/arm-none-eabi/include/sys/lock.h \
+ /usr/arm-none-eabi/include/sys/cdefs.h \
+ /usr/arm-none-eabi/include/sys/string.h chibios/os/kernel/include/ch.h \
+ chconf.h chibios/os/ports/GCC/ARMCMx/chtypes.h \
+ /usr/lib/gcc/arm-none-eabi/4.9.2/include/stdint.h \
+ /usr/arm-none-eabi/include/stdint.h \
+ /usr/arm-none-eabi/include/sys/_intsup.h \
+ /usr/lib/gcc/arm-none-eabi/4.9.2/include/stdbool.h \
  chibios/os/kernel/include/chlists.h chibios/os/ports/GCC/ARMCMx/chcore.h \
  chibios/os/ports/GCC/ARMCMx/STM32F4xx/cmparams.h \
  chibios/os/ports/GCC/ARMCMx/chcore_v7m.h \
@@ -69,35 +67,35 @@ build/obj/mac_lld.o: chibios/os/hal/platforms/STM32/mac_lld.c \
  chibios/os/hal/include/mmc_spi.h chibios/os/hal/include/serial_usb.h \
  chibios/os/hal/include/mii.h
 
-/Users/Daniel/Documents/Bachelor/Kode/rov-subside2015/arm/arm-none-eabi/include/string.h:
+/usr/arm-none-eabi/include/string.h:
 
-/Users/Daniel/Documents/Bachelor/Kode/rov-subside2015/arm/arm-none-eabi/include/_ansi.h:
+/usr/arm-none-eabi/include/_ansi.h:
 
-/Users/Daniel/Documents/Bachelor/Kode/rov-subside2015/arm/arm-none-eabi/include/newlib.h:
+/usr/arm-none-eabi/include/newlib.h:
 
-/Users/Daniel/Documents/Bachelor/Kode/rov-subside2015/arm/arm-none-eabi/include/sys/config.h:
+/usr/arm-none-eabi/include/sys/config.h:
 
-/Users/Daniel/Documents/Bachelor/Kode/rov-subside2015/arm/arm-none-eabi/include/machine/ieeefp.h:
+/usr/arm-none-eabi/include/machine/ieeefp.h:
 
-/Users/Daniel/Documents/Bachelor/Kode/rov-subside2015/arm/arm-none-eabi/include/sys/features.h:
+/usr/arm-none-eabi/include/sys/features.h:
 
-/Users/Daniel/Documents/Bachelor/Kode/rov-subside2015/arm/arm-none-eabi/include/sys/reent.h:
+/usr/arm-none-eabi/include/sys/reent.h:
 
-/Users/Daniel/Documents/Bachelor/Kode/rov-subside2015/arm/arm-none-eabi/include/_ansi.h:
+/usr/arm-none-eabi/include/_ansi.h:
 
-/Users/Daniel/Documents/Bachelor/Kode/rov-subside2015/arm/lib/gcc/arm-none-eabi/4.9.3/include/stddef.h:
+/usr/lib/gcc/arm-none-eabi/4.9.2/include/stddef.h:
 
-/Users/Daniel/Documents/Bachelor/Kode/rov-subside2015/arm/arm-none-eabi/include/sys/_types.h:
+/usr/arm-none-eabi/include/sys/_types.h:
 
-/Users/Daniel/Documents/Bachelor/Kode/rov-subside2015/arm/arm-none-eabi/include/machine/_types.h:
+/usr/arm-none-eabi/include/machine/_types.h:
 
-/Users/Daniel/Documents/Bachelor/Kode/rov-subside2015/arm/arm-none-eabi/include/machine/_default_types.h:
+/usr/arm-none-eabi/include/machine/_default_types.h:
 
-/Users/Daniel/Documents/Bachelor/Kode/rov-subside2015/arm/arm-none-eabi/include/sys/lock.h:
+/usr/arm-none-eabi/include/sys/lock.h:
 
-/Users/Daniel/Documents/Bachelor/Kode/rov-subside2015/arm/arm-none-eabi/include/sys/cdefs.h:
+/usr/arm-none-eabi/include/sys/cdefs.h:
 
-/Users/Daniel/Documents/Bachelor/Kode/rov-subside2015/arm/arm-none-eabi/include/sys/string.h:
+/usr/arm-none-eabi/include/sys/string.h:
 
 chibios/os/kernel/include/ch.h:
 
@@ -105,13 +103,13 @@ chconf.h:
 
 chibios/os/ports/GCC/ARMCMx/chtypes.h:
 
-/Users/Daniel/Documents/Bachelor/Kode/rov-subside2015/arm/lib/gcc/arm-none-eabi/4.9.3/include/stdint.h:
+/usr/lib/gcc/arm-none-eabi/4.9.2/include/stdint.h:
 
-/Users/Daniel/Documents/Bachelor/Kode/rov-subside2015/arm/arm-none-eabi/include/stdint.h:
+/usr/arm-none-eabi/include/stdint.h:
 
-/Users/Daniel/Documents/Bachelor/Kode/rov-subside2015/arm/arm-none-eabi/include/sys/_intsup.h:
+/usr/arm-none-eabi/include/sys/_intsup.h:
 
-/Users/Daniel/Documents/Bachelor/Kode/rov-subside2015/arm/lib/gcc/arm-none-eabi/4.9.3/include/stdbool.h:
+/usr/lib/gcc/arm-none-eabi/4.9.2/include/stdbool.h:
 
 chibios/os/kernel/include/chlists.h:
 

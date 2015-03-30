@@ -1,12 +1,12 @@
 build/obj/mac.o: chibios/os/hal/src/mac.c chibios/os/kernel/include/ch.h \
  chconf.h chibios/os/ports/GCC/ARMCMx/chtypes.h \
- /Users/Daniel/Documents/Bachelor/Kode/rov-subside2015/arm/lib/gcc/arm-none-eabi/4.9.3/include/stddef.h \
- /Users/Daniel/Documents/Bachelor/Kode/rov-subside2015/arm/lib/gcc/arm-none-eabi/4.9.3/include/stdint.h \
- /Users/Daniel/Documents/Bachelor/Kode/rov-subside2015/arm/arm-none-eabi/include/stdint.h \
- /Users/Daniel/Documents/Bachelor/Kode/rov-subside2015/arm/arm-none-eabi/include/machine/_default_types.h \
- /Users/Daniel/Documents/Bachelor/Kode/rov-subside2015/arm/arm-none-eabi/include/sys/features.h \
- /Users/Daniel/Documents/Bachelor/Kode/rov-subside2015/arm/arm-none-eabi/include/sys/_intsup.h \
- /Users/Daniel/Documents/Bachelor/Kode/rov-subside2015/arm/lib/gcc/arm-none-eabi/4.9.3/include/stdbool.h \
+ /usr/lib/gcc/arm-none-eabi/4.9.2/include/stddef.h \
+ /usr/lib/gcc/arm-none-eabi/4.9.2/include/stdint.h \
+ /usr/arm-none-eabi/include/stdint.h \
+ /usr/arm-none-eabi/include/machine/_default_types.h \
+ /usr/arm-none-eabi/include/sys/features.h \
+ /usr/arm-none-eabi/include/sys/_intsup.h \
+ /usr/lib/gcc/arm-none-eabi/4.9.2/include/stdbool.h \
  chibios/os/kernel/include/chlists.h chibios/os/ports/GCC/ARMCMx/chcore.h \
  chibios/os/ports/GCC/ARMCMx/STM32F4xx/cmparams.h \
  chibios/os/ports/GCC/ARMCMx/chcore_v7m.h \
@@ -61,19 +61,19 @@ chconf.h:
 
 chibios/os/ports/GCC/ARMCMx/chtypes.h:
 
-/Users/Daniel/Documents/Bachelor/Kode/rov-subside2015/arm/lib/gcc/arm-none-eabi/4.9.3/include/stddef.h:
+/usr/lib/gcc/arm-none-eabi/4.9.2/include/stddef.h:
 
-/Users/Daniel/Documents/Bachelor/Kode/rov-subside2015/arm/lib/gcc/arm-none-eabi/4.9.3/include/stdint.h:
+/usr/lib/gcc/arm-none-eabi/4.9.2/include/stdint.h:
 
-/Users/Daniel/Documents/Bachelor/Kode/rov-subside2015/arm/arm-none-eabi/include/stdint.h:
+/usr/arm-none-eabi/include/stdint.h:
 
-/Users/Daniel/Documents/Bachelor/Kode/rov-subside2015/arm/arm-none-eabi/include/machine/_default_types.h:
+/usr/arm-none-eabi/include/machine/_default_types.h:
 
-/Users/Daniel/Documents/Bachelor/Kode/rov-subside2015/arm/arm-none-eabi/include/sys/features.h:
+/usr/arm-none-eabi/include/sys/features.h:
 
-/Users/Daniel/Documents/Bachelor/Kode/rov-subside2015/arm/arm-none-eabi/include/sys/_intsup.h:
+/usr/arm-none-eabi/include/sys/_intsup.h:
 
-/Users/Daniel/Documents/Bachelor/Kode/rov-subside2015/arm/lib/gcc/arm-none-eabi/4.9.3/include/stdbool.h:
+/usr/lib/gcc/arm-none-eabi/4.9.2/include/stdbool.h:
 
 chibios/os/kernel/include/chlists.h:
 
