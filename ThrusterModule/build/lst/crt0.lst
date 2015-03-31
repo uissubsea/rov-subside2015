@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccdboIwg.s 			page 1
+ARM GAS  /tmp/cchQHW7O.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccdboIwg.s 			page 1
   52              		.cfi_endproc
   53              	.LFE1:
   54              		.size	__late_init, .-__late_init
-ARM GAS  /tmp/ccdboIwg.s 			page 2
+ARM GAS  /tmp/cchQHW7O.s 			page 2
 
 
   55 0002 00BFAFF3 		.section	.text._default_exit,"ax",%progbits
@@ -118,7 +118,7 @@ ARM GAS  /tmp/ccdboIwg.s 			page 1
  103              		.thumb
  104 0008 0223     		movs	r3, #2
  105              	@ 296 "./chibios/os/ports/GCC/ARMCMx/crt0.c" 1
-ARM GAS  /tmp/ccdboIwg.s 			page 3
+ARM GAS  /tmp/cchQHW7O.s 			page 3
 
 
  106 000a 83F31488 		msr     CONTROL, r3
@@ -178,7 +178,7 @@ ARM GAS  /tmp/ccdboIwg.s 			page 1
  160              	.LVL9:
  161              	.LBB4:
  162              		.loc 1 319 0
-ARM GAS  /tmp/ccdboIwg.s 			page 4
+ARM GAS  /tmp/cchQHW7O.s 			page 4
 
 
  163 0056 214A     		ldr	r2, .L32+20
@@ -238,7 +238,7 @@ ARM GAS  /tmp/ccdboIwg.s 			page 1
  217              		.loc 1 336 0
  218 009e AC42     		cmp	r4, r5
  219 00a0 04D2     		bcs	.L18
-ARM GAS  /tmp/ccdboIwg.s 			page 5
+ARM GAS  /tmp/cchQHW7O.s 			page 5
 
 
  220              	.LVL18:
@@ -298,7 +298,7 @@ ARM GAS  /tmp/ccdboIwg.s 			page 1
  274 00ec 00000000 		.word	_bss_end
  275 00f0 00000000 		.word	__init_array_end
  276 00f4 00000000 		.word	__init_array_start
-ARM GAS  /tmp/ccdboIwg.s 			page 6
+ARM GAS  /tmp/cchQHW7O.s 			page 6
 
 
  277 00f8 00000000 		.word	__fini_array_end
@@ -358,7 +358,7 @@ ARM GAS  /tmp/ccdboIwg.s 			page 1
  331 005f 04       		.byte	0x4
  332 0060 07       		.byte	0x7
  333 0061 21010000 		.4byte	.LASF7
-ARM GAS  /tmp/ccdboIwg.s 			page 7
+ARM GAS  /tmp/cchQHW7O.s 			page 7
 
 
  334 0065 02       		.uleb128 0x2
@@ -418,7 +418,7 @@ ARM GAS  /tmp/ccdboIwg.s 			page 1
  388 00d1 F6       		.byte	0xf6
  389 00d2 00000000 		.4byte	.LFB1
  390 00d6 02000000 		.4byte	.LFE1-.LFB1
-ARM GAS  /tmp/ccdboIwg.s 			page 8
+ARM GAS  /tmp/cchQHW7O.s 			page 8
 
 
  391 00da 01       		.uleb128 0x1
@@ -478,7 +478,7 @@ ARM GAS  /tmp/ccdboIwg.s 			page 1
  445 0159 16020000 		.4byte	0x216
  446 015d 13000000 		.4byte	.LLST1
  447 0161 0A       		.uleb128 0xa
-ARM GAS  /tmp/ccdboIwg.s 			page 9
+ARM GAS  /tmp/cchQHW7O.s 			page 9
 
 
  448 0162 703200   		.ascii	"p2\000"
@@ -538,7 +538,7 @@ ARM GAS  /tmp/ccdboIwg.s 			page 1
  502 01e8 A9000000 		.4byte	0xa9
  503 01ec 8F000000 		.4byte	.LLST5
  504 01f0 00       		.byte	0
-ARM GAS  /tmp/ccdboIwg.s 			page 10
+ARM GAS  /tmp/cchQHW7O.s 			page 10
 
 
  505 01f1 0F       		.uleb128 0xf
@@ -598,7 +598,7 @@ ARM GAS  /tmp/ccdboIwg.s 			page 1
  559 026f B9       		.byte	0xb9
  560 0270 8C000000 		.4byte	0x8c
  561 0274 10       		.uleb128 0x10
-ARM GAS  /tmp/ccdboIwg.s 			page 11
+ARM GAS  /tmp/cchQHW7O.s 			page 11
 
 
  562 0275 94010000 		.4byte	.LASF26
@@ -658,7 +658,7 @@ ARM GAS  /tmp/ccdboIwg.s 			page 1
  616 0017 0B       		.uleb128 0xb
  617 0018 3E       		.uleb128 0x3e
  618 0019 0B       		.uleb128 0xb
-ARM GAS  /tmp/ccdboIwg.s 			page 12
+ARM GAS  /tmp/cchQHW7O.s 			page 12
 
 
  619 001a 03       		.uleb128 0x3
@@ -718,7 +718,7 @@ ARM GAS  /tmp/ccdboIwg.s 			page 1
  673 0050 0B       		.uleb128 0xb
  674 0051 27       		.uleb128 0x27
  675 0052 19       		.uleb128 0x19
-ARM GAS  /tmp/ccdboIwg.s 			page 13
+ARM GAS  /tmp/cchQHW7O.s 			page 13
 
 
  676 0053 11       		.uleb128 0x11
@@ -778,7 +778,7 @@ ARM GAS  /tmp/ccdboIwg.s 			page 1
  730 008c 01       		.uleb128 0x1
  731 008d 13       		.uleb128 0x13
  732 008e 00       		.byte	0
-ARM GAS  /tmp/ccdboIwg.s 			page 14
+ARM GAS  /tmp/cchQHW7O.s 			page 14
 
 
  733 008f 00       		.byte	0
@@ -838,7 +838,7 @@ ARM GAS  /tmp/ccdboIwg.s 			page 1
  787 00c5 00       		.byte	0
  788 00c6 0E       		.uleb128 0xe
  789 00c7 0B       		.uleb128 0xb
-ARM GAS  /tmp/ccdboIwg.s 			page 15
+ARM GAS  /tmp/cchQHW7O.s 			page 15
 
 
  790 00c8 01       		.byte	0x1
@@ -898,7 +898,7 @@ ARM GAS  /tmp/ccdboIwg.s 			page 1
  844 0000 2A000000 		.4byte	.LVL3
  845 0004 32000000 		.4byte	.LVL5
  846 0008 0100     		.2byte	0x1
-ARM GAS  /tmp/ccdboIwg.s 			page 16
+ARM GAS  /tmp/cchQHW7O.s 			page 16
 
 
  847 000a 53       		.byte	0x53
@@ -958,7 +958,7 @@ ARM GAS  /tmp/ccdboIwg.s 			page 1
  901 0097 0100     		.2byte	0x1
  902 0099 54       		.byte	0x54
  903 009a BC000000 		.4byte	.LVL24
-ARM GAS  /tmp/ccdboIwg.s 			page 17
+ARM GAS  /tmp/cchQHW7O.s 			page 17
 
 
  904 009e BE000000 		.4byte	.LVL25
@@ -1018,7 +1018,7 @@ ARM GAS  /tmp/ccdboIwg.s 			page 1
  958              	.Ldebug_line0:
  959 0000 1C010000 		.section	.debug_str,"MS",%progbits,1
  959      02009900 
-ARM GAS  /tmp/ccdboIwg.s 			page 18
+ARM GAS  /tmp/cchQHW7O.s 			page 18
 
 
  959      00000201 
@@ -1078,7 +1078,7 @@ ARM GAS  /tmp/ccdboIwg.s 			page 1
  978 0107 756E7369 		.ascii	"unsigned char\000"
  978      676E6564 
  978      20636861 
-ARM GAS  /tmp/ccdboIwg.s 			page 19
+ARM GAS  /tmp/cchQHW7O.s 			page 19
 
 
  978      7200
@@ -1138,7 +1138,7 @@ ARM GAS  /tmp/ccdboIwg.s 			page 1
  1000      20696E74 
  1000      00
  1001              	.LASF9:
-ARM GAS  /tmp/ccdboIwg.s 			page 20
+ARM GAS  /tmp/cchQHW7O.s 			page 20
 
 
  1002 01cb 6C6F6E67 		.ascii	"long long unsigned int\000"
@@ -1198,7 +1198,7 @@ ARM GAS  /tmp/ccdboIwg.s 			page 1
  1026      6100
  1027              	.LASF0:
  1028 0279 7369676E 		.ascii	"signed char\000"
-ARM GAS  /tmp/ccdboIwg.s 			page 21
+ARM GAS  /tmp/cchQHW7O.s 			page 21
 
 
  1028      65642063 
@@ -1222,20 +1222,20 @@ ARM GAS  /tmp/ccdboIwg.s 			page 1
  1034      5F656E64 
  1034      5F5F00
  1035              		.ident	"GCC: (Arch Repository) 4.9.2 20150128 (prerelease)"
-ARM GAS  /tmp/ccdboIwg.s 			page 22
+ARM GAS  /tmp/cchQHW7O.s 			page 22
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 crt0.c
-     /tmp/ccdboIwg.s:19     .text.__early_init:0000000000000000 $t
-     /tmp/ccdboIwg.s:25     .text.__early_init:0000000000000000 __early_init
-     /tmp/ccdboIwg.s:38     .text.__late_init:0000000000000000 $t
-     /tmp/ccdboIwg.s:44     .text.__late_init:0000000000000000 __late_init
-     /tmp/ccdboIwg.s:56     .text._default_exit:0000000000000000 $t
-     /tmp/ccdboIwg.s:62     .text._default_exit:0000000000000000 _default_exit
-     /tmp/ccdboIwg.s:76     .text.ResetHandler:0000000000000000 $t
-     /tmp/ccdboIwg.s:82     .text.ResetHandler:0000000000000000 ResetHandler
-     /tmp/ccdboIwg.s:265    .text.ResetHandler:00000000000000c8 $d
+     /tmp/cchQHW7O.s:19     .text.__early_init:0000000000000000 $t
+     /tmp/cchQHW7O.s:25     .text.__early_init:0000000000000000 __early_init
+     /tmp/cchQHW7O.s:38     .text.__late_init:0000000000000000 $t
+     /tmp/cchQHW7O.s:44     .text.__late_init:0000000000000000 __late_init
+     /tmp/cchQHW7O.s:56     .text._default_exit:0000000000000000 $t
+     /tmp/cchQHW7O.s:62     .text._default_exit:0000000000000000 _default_exit
+     /tmp/cchQHW7O.s:76     .text.ResetHandler:0000000000000000 $t
+     /tmp/cchQHW7O.s:82     .text.ResetHandler:0000000000000000 ResetHandler
+     /tmp/cchQHW7O.s:265    .text.ResetHandler:00000000000000c8 $d
                      .debug_frame:0000000000000010 $d
 
 UNDEFINED SYMBOLS

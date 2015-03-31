@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccARH6QM.s 			page 1
+ARM GAS  /tmp/ccoBl3qN.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccARH6QM.s 			page 1
   53 000c F7000000 		.4byte	.LASF12
   54 0010 01       		.byte	0x1
   55 0011 B3000000 		.4byte	.LASF13
-ARM GAS  /tmp/ccARH6QM.s 			page 2
+ARM GAS  /tmp/ccoBl3qN.s 			page 2
 
 
   56 0015 1B000000 		.4byte	.LASF14
@@ -118,7 +118,7 @@ ARM GAS  /tmp/ccARH6QM.s 			page 1
  110 007b 08       		.byte	0x8
  111 007c 80000000 		.4byte	.LASF11
  112 0080 04       		.uleb128 0x4
-ARM GAS  /tmp/ccARH6QM.s 			page 3
+ARM GAS  /tmp/ccoBl3qN.s 			page 3
 
 
  113 0081 E3000000 		.4byte	.LASF15
@@ -178,7 +178,7 @@ ARM GAS  /tmp/ccARH6QM.s 			page 1
  167 002c 3F       		.uleb128 0x3f
  168 002d 19       		.uleb128 0x19
  169 002e 03       		.uleb128 0x3
-ARM GAS  /tmp/ccARH6QM.s 			page 4
+ARM GAS  /tmp/ccoBl3qN.s 			page 4
 
 
  170 002f 0E       		.uleb128 0xe
@@ -238,7 +238,7 @@ ARM GAS  /tmp/ccARH6QM.s 			page 1
  214 001b 2F686F6D 		.ascii	"/home/arch/git/rov-subside2015/ThrusterModule\000"
  214      652F6172 
  214      63682F67 
-ARM GAS  /tmp/ccARH6QM.s 			page 5
+ARM GAS  /tmp/ccoBl3qN.s 			page 5
 
 
  214      69742F72 
@@ -298,7 +298,7 @@ ARM GAS  /tmp/ccARH6QM.s 			page 1
  238 00ed 73686F72 		.ascii	"short int\000"
  238      7420696E 
  238      7400
-ARM GAS  /tmp/ccARH6QM.s 			page 6
+ARM GAS  /tmp/ccoBl3qN.s 			page 6
 
 
  239              	.LASF12:
@@ -323,13 +323,13 @@ ARM GAS  /tmp/ccARH6QM.s 			page 1
  243      73202D66 
  243      6E6F2D63 
  244              		.ident	"GCC: (Arch Repository) 4.9.2 20150128 (prerelease)"
-ARM GAS  /tmp/ccARH6QM.s 			page 7
+ARM GAS  /tmp/ccoBl3qN.s 			page 7
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 chcore.c
-     /tmp/ccARH6QM.s:19     .text.port_halt:0000000000000000 $t
-     /tmp/ccARH6QM.s:25     .text.port_halt:0000000000000000 port_halt
+     /tmp/ccoBl3qN.s:19     .text.port_halt:0000000000000000 $t
+     /tmp/ccoBl3qN.s:25     .text.port_halt:0000000000000000 port_halt
                      .debug_frame:0000000000000010 $d
 
 NO UNDEFINED SYMBOLS

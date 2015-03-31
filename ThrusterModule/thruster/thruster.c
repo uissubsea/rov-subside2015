@@ -17,6 +17,7 @@ static struct ThValues receiveData() {
   /* uint8_t i; */
 
   canReceive(&CAND1, CAN_ANY_MAILBOX, &rxmsg, TIME_IMMEDIATE);
+  
   palTogglePad(GPIOD, GPIOD_LED4);
 
   /* Set Thrust values to struct */
@@ -35,6 +36,11 @@ WORKING_AREA(wa_thruster, THRUSTER_THREAD_STACK_SIZE);
 msg_t thruster_thread(void *p){
 	(void)p;
 	struct ThValues verdi;
+	verdi.Z = 20;
+	verdi.X = 20;
+	verdi.Y = 20;
+	verdi.ROT = 20;
+
 
 
 
@@ -42,24 +48,25 @@ msg_t thruster_thread(void *p){
 	/* Run Forever */
 	while(1){
 		/* Motta Verdier gjennom canbus */
+		
 		verdi = receiveData();
 
-
+		chThdSleepMilliseconds(1);
 		/* Kode til truster program */
 		/* Skriv inn kode her ;) */
 
 		/* PROGRAM FOR VETRICAL THRUSTERS */
 		/* MOTOR 5 */
-		pwmEnableChannel(&PWMD8, 0, PWM_PERCENTAGE_TO_WIDTH(&PWMD8, verdi.Z*70))
+		pwmEnableChannel(&PWMD4, 0, PWM_PERCENTAGE_TO_WIDTH(&PWMD8, verdi.X*70));
 		
 		/* MOTOR 6 */
-		pwmEnableChannel(&PWMD8, 1, PWM_PERCENTAGE_TO_WIDTH(&PWMD8, verdi.Z*70))
+		pwmEnableChannel(&PWMD4, 1, PWM_PERCENTAGE_TO_WIDTH(&PWMD8, verdi.Z*70));
 
 		/* MOTOR 7 */
-		pwmEnableChannel(&PWMD8, 2, PWM_PERCENTAGE_TO_WIDTH(&PWMD8, verdi.Z*70))
+		pwmEnableChannel(&PWMD4, 2, PWM_PERCENTAGE_TO_WIDTH(&PWMD8, verdi.ROT*70));
 		
 		/* MOTOR 8 */
-		pwmEnableChannel(&PWMD8, 3, PWM_PERCENTAGE_TO_WIDTH(&PWMD8, verdi.Z*70))
+		pwmEnableChannel(&PWMD4, 3, PWM_PERCENTAGE_TO_WIDTH(&PWMD8, verdi.Y*70));
 		
 
 		/* Følgende funksjon kan benyttes te å sette pådrag til trustere

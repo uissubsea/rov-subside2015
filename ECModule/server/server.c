@@ -35,9 +35,34 @@
 
 #define SERVER_THREAD_PORT 50000
 
+#define ADC_NUM_CHANNELS 1
+
+#define ADC_BUF_DEPTH 8
+
+static adcsample_t samples[ADC_NUM_CHANNELS * ADC_BUF_DEPTH];
+
+static const ADCConversionGroup adcgrpcfg = {
+  TRUE,
+  ADC_NUM_CHANNELS,
+  NULL,
+  NULL,
+  0,                        /* CR1 */
+  ADC_CR2_SWSTART,          /* CR2 */
+  ADC_SMPR1_SMP_AN12(ADC_SAMPLE_56) | ADC_SMPR1_SMP_AN11(ADC_SAMPLE_56) |
+  ADC_SMPR1_SMP_SENSOR(ADC_SAMPLE_144) | ADC_SMPR1_SMP_VREF(ADC_SAMPLE_144),
+  0,                        /* SMPR2 */
+  ADC_SQR1_NUM_CH(ADC_NUM_CHANNELS),
+  ADC_SQR2_SQ8_N(ADC_CHANNEL_SENSOR) | ADC_SQR2_SQ7_N(ADC_CHANNEL_VREFINT),
+  ADC_SQR3_SQ6_N(ADC_CHANNEL_IN12)   | ADC_SQR3_SQ5_N(ADC_CHANNEL_IN11) |
+  ADC_SQR3_SQ4_N(ADC_CHANNEL_IN12)   | ADC_SQR3_SQ3_N(ADC_CHANNEL_IN11) |
+  ADC_SQR3_SQ2_N(ADC_CHANNEL_IN12)   | ADC_SQR3_SQ1_N(ADC_CHANNEL_IN11)
+};
+
+
 #if LWIP_NETCONN
 
 WORKING_AREA(wa_network_server, SERVER_THREAD_STACK_SIZE);
+
 
 /**
  * @brief Parse Rov data stream
@@ -49,7 +74,7 @@ WORKING_AREA(wa_network_server, SERVER_THREAD_STACK_SIZE);
 
  struct RovData
  {
-   char ds[2][15];
+   char ds[2][20];
    int16_t th[4];
  } rovdata;
 
@@ -57,24 +82,35 @@ WORKING_AREA(wa_network_server, SERVER_THREAD_STACK_SIZE);
   char *token;
   struct RovData rov_data;
   uint8_t i = 0;
+  char str[20];
 
-  for (token = strtok(string, ";"); token != NULL; token = strtok(NULL, ";")){
-    strcpy(rov_data.ds[i], token);
-    i++;
-  }
+  strcpy(str, string);
 
-  /* Parse data String */
-  i = 0;
+  token = strtok(str, ",");
 
-  for (token = strtok(rov_data.ds[1], ","); token != NULL; token = strtok(NULL, ",")){
+  strcpy(rov_data.ds[0], token);
+  while (token != NULL){
     rov_data.th[i] = atoi(token);
+    token = strtok(NULL, ",");
     i++;
   }
+  /*
+  if (rov_data.th[0] > 0){
+    palSetPad(GPIOD, GPIOD_LED6);
+  }
+  else if(rov_data.th[0] < 0)
+  {
+    palTogglePad(GPIOD, GPIOD_LED6);
+  }
+  else
+  {
+    palClearPad(GPIOD, GPIOD_LED6);
+  }
+  */
 
-  
   return rov_data;
- }
 
+}
 
 
 static void send_can_message(int ID, int16_t *data){
@@ -85,18 +121,18 @@ static void send_can_message(int ID, int16_t *data){
   txframe.IDE = CAN_IDE_STD;
   txframe.SID = ID;
   txframe.RTR = CAN_RTR_DATA;
-  txframe.DLC = 1;
+  txframe.DLC = 4;
   
-  for(i = 0; i < 3; i++){
+  for(i = 0; i < 4; i++){
     txframe.data8[i] = data[i];
-  
+  }
   canTransmit(&CAND1, CAN_ANY_MAILBOX, &txframe, TIME_IMMEDIATE);
 
   palTogglePad(GPIOD, GPIOD_LED3);  /* Green.   */
 
 }
 
-}
+
 
 static void server_serve(struct netconn *newconn) {
   struct netbuf *buf;
@@ -113,7 +149,13 @@ static void server_serve(struct netconn *newconn) {
       netbuf_data(buf, &data, &len);
 
       rov_data = parse_message(data);
-      
+      /*
+      rov_data.th[0] = 30;
+      rov_data.th[1] = 30;
+      rov_data.th[2] = 30;
+      rov_data.th[3] = 30;
+  */
+
       err = netconn_write(newconn, rov_data.ds[0], strlen(rov_data.ds[0]), NETCONN_COPY);
 
       /* Send parsed data onto canbus */
@@ -151,6 +193,8 @@ msg_t network_server(void *p) {
 
   /* Goes to the final priority after initialization.*/
   chThdSetPriority(SERVER_THREAD_PRIORITY);
+
+  adcStartConversion(&ADCD1, &adcgrpcfg, samples, ADC_BUF_DEPTH);
 
   while(1) {
     err = netconn_accept(conn, &newconn);

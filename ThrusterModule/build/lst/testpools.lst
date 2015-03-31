@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccHAbREN.s 			page 1
+ARM GAS  /tmp/cc6mDlYF.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccHAbREN.s 			page 1
   53              		.loc 1 68 0
   54 0000 0248     		ldr	r0, .L3
   55 0002 4FF4A871 		mov	r1, #336
-ARM GAS  /tmp/ccHAbREN.s 			page 2
+ARM GAS  /tmp/cc6mDlYF.s 			page 2
 
 
   56 0006 0022     		movs	r2, #0
@@ -118,7 +118,7 @@ ARM GAS  /tmp/ccHAbREN.s 			page 1
  110              		.loc 1 82 0
  111 002a 2248     		ldr	r0, .L19+4
  112 002c FFF7FEFF 		bl	chPoolAlloc
-ARM GAS  /tmp/ccHAbREN.s 			page 3
+ARM GAS  /tmp/cc6mDlYF.s 			page 3
 
 
  113              	.LVL8:
@@ -178,7 +178,7 @@ ARM GAS  /tmp/ccHAbREN.s 			page 1
  167              		.loc 1 93 0
  168 0078 0E48     		ldr	r0, .L19+4
  169 007a FFF7FEFF 		bl	chPoolAlloc
-ARM GAS  /tmp/ccHAbREN.s 			page 4
+ARM GAS  /tmp/cc6mDlYF.s 			page 4
 
 
  170              	.LVL17:
@@ -238,7 +238,7 @@ ARM GAS  /tmp/ccHAbREN.s 			page 1
  224              		.align	2
  225              	.LC0:
  226 0000 4D656D6F 		.ascii	"Memory Pools, queue/dequeue\000"
-ARM GAS  /tmp/ccHAbREN.s 			page 5
+ARM GAS  /tmp/cc6mDlYF.s 			page 5
 
 
  226      72792050 
@@ -298,7 +298,7 @@ ARM GAS  /tmp/ccHAbREN.s 			page 1
  277 002c 03       		.uleb128 0x3
  278 002d B3000000 		.4byte	.LASF9
  279 0031 02       		.byte	0x2
-ARM GAS  /tmp/ccHAbREN.s 			page 6
+ARM GAS  /tmp/cc6mDlYF.s 			page 6
 
 
  280 0032 D4       		.byte	0xd4
@@ -358,7 +358,7 @@ ARM GAS  /tmp/ccHAbREN.s 			page 1
  334 0092 2D020000 		.4byte	.LASF13
  335 0096 04       		.byte	0x4
  336 0097 2C       		.byte	0x2c
-ARM GAS  /tmp/ccHAbREN.s 			page 7
+ARM GAS  /tmp/cc6mDlYF.s 			page 7
 
 
  337 0098 9C000000 		.4byte	0x9c
@@ -418,7 +418,7 @@ ARM GAS  /tmp/ccHAbREN.s 			page 1
  391 0104 D0000000 		.4byte	0xd0
  392 0108 06       		.uleb128 0x6
  393 0109 04       		.byte	0x4
-ARM GAS  /tmp/ccHAbREN.s 			page 8
+ARM GAS  /tmp/cc6mDlYF.s 			page 8
 
 
  394 010a 0E010000 		.4byte	0x10e
@@ -478,7 +478,7 @@ ARM GAS  /tmp/ccHAbREN.s 			page 1
  448 0174 10       		.uleb128 0x10
  449 0175 52010000 		.4byte	.LASF36
  450 0179 01       		.byte	0x1
-ARM GAS  /tmp/ccHAbREN.s 			page 9
+ARM GAS  /tmp/cc6mDlYF.s 			page 9
 
 
  451 017a 3C       		.byte	0x3c
@@ -538,7 +538,7 @@ ARM GAS  /tmp/ccHAbREN.s 			page 1
  505 01ea 21000000 		.4byte	.LLST1
  506 01ee 17       		.uleb128 0x17
  507 01ef 00000000 		.4byte	.Ldebug_ranges0+0
-ARM GAS  /tmp/ccHAbREN.s 			page 10
+ARM GAS  /tmp/cc6mDlYF.s 			page 10
 
 
  508 01f3 D5020000 		.4byte	0x2d5
@@ -598,7 +598,7 @@ ARM GAS  /tmp/ccHAbREN.s 			page 1
  562 025f 18       		.uleb128 0x18
  563 0260 7E000000 		.4byte	.LVL17
  564 0264 EC030000 		.4byte	0x3ec
-ARM GAS  /tmp/ccHAbREN.s 			page 11
+ARM GAS  /tmp/cc6mDlYF.s 			page 11
 
 
  565 0268 76020000 		.4byte	0x276
@@ -658,7 +658,7 @@ ARM GAS  /tmp/ccHAbREN.s 			page 1
  619 02ce 14       		.uleb128 0x14
  620 02cf 01       		.uleb128 0x1
  621 02d0 50       		.byte	0x50
-ARM GAS  /tmp/ccHAbREN.s 			page 12
+ARM GAS  /tmp/cc6mDlYF.s 			page 12
 
 
  622 02d1 01       		.uleb128 0x1
@@ -718,7 +718,7 @@ ARM GAS  /tmp/ccHAbREN.s 			page 1
  676 0331 05       		.uleb128 0x5
  677 0332 03       		.byte	0x3
  678 0333 00000000 		.4byte	.LANCHOR0
-ARM GAS  /tmp/ccHAbREN.s 			page 13
+ARM GAS  /tmp/cc6mDlYF.s 			page 13
 
 
  679 0337 00       		.byte	0
@@ -778,7 +778,7 @@ ARM GAS  /tmp/ccHAbREN.s 			page 1
  733 03a5 70       		.byte	0x70
  734 03a6 B0030000 		.4byte	0x3b0
  735 03aa 05       		.uleb128 0x5
-ARM GAS  /tmp/ccHAbREN.s 			page 14
+ARM GAS  /tmp/cc6mDlYF.s 			page 14
 
 
  736 03ab 03       		.byte	0x3
@@ -838,7 +838,7 @@ ARM GAS  /tmp/ccHAbREN.s 			page 1
  790 0423 D0030000 		.4byte	0x3d0
  791 0427 08       		.uleb128 0x8
  792 0428 88000000 		.4byte	0x88
-ARM GAS  /tmp/ccHAbREN.s 			page 15
+ARM GAS  /tmp/cc6mDlYF.s 			page 15
 
 
  793 042c 08       		.uleb128 0x8
@@ -898,7 +898,7 @@ ARM GAS  /tmp/ccHAbREN.s 			page 1
  847 0030 3E       		.uleb128 0x3e
  848 0031 0B       		.uleb128 0xb
  849 0032 03       		.uleb128 0x3
-ARM GAS  /tmp/ccHAbREN.s 			page 16
+ARM GAS  /tmp/cc6mDlYF.s 			page 16
 
 
  850 0033 0E       		.uleb128 0xe
@@ -958,7 +958,7 @@ ARM GAS  /tmp/ccHAbREN.s 			page 1
  904 0069 00       		.byte	0
  905 006a 03       		.uleb128 0x3
  906 006b 0E       		.uleb128 0xe
-ARM GAS  /tmp/ccHAbREN.s 			page 17
+ARM GAS  /tmp/cc6mDlYF.s 			page 17
 
 
  907 006c 3A       		.uleb128 0x3a
@@ -1018,7 +1018,7 @@ ARM GAS  /tmp/ccHAbREN.s 			page 1
  961 00a2 0F       		.uleb128 0xf
  962 00a3 34       		.uleb128 0x34
  963 00a4 00       		.byte	0
-ARM GAS  /tmp/ccHAbREN.s 			page 18
+ARM GAS  /tmp/cc6mDlYF.s 			page 18
 
 
  964 00a5 03       		.uleb128 0x3
@@ -1078,7 +1078,7 @@ ARM GAS  /tmp/ccHAbREN.s 			page 1
  1018 00dc 0E       		.uleb128 0xe
  1019 00dd 3A       		.uleb128 0x3a
  1020 00de 0B       		.uleb128 0xb
-ARM GAS  /tmp/ccHAbREN.s 			page 19
+ARM GAS  /tmp/cc6mDlYF.s 			page 19
 
 
  1021 00df 3B       		.uleb128 0x3b
@@ -1138,7 +1138,7 @@ ARM GAS  /tmp/ccHAbREN.s 			page 1
  1075 011d 34       		.uleb128 0x34
  1076 011e 00       		.byte	0
  1077 011f 31       		.uleb128 0x31
-ARM GAS  /tmp/ccHAbREN.s 			page 20
+ARM GAS  /tmp/cc6mDlYF.s 			page 20
 
 
  1078 0120 13       		.uleb128 0x13
@@ -1198,7 +1198,7 @@ ARM GAS  /tmp/ccHAbREN.s 			page 1
  1132 015a 01       		.uleb128 0x1
  1133 015b 13       		.uleb128 0x13
  1134 015c 00       		.byte	0
-ARM GAS  /tmp/ccHAbREN.s 			page 21
+ARM GAS  /tmp/cc6mDlYF.s 			page 21
 
 
  1135 015d 00       		.byte	0
@@ -1258,7 +1258,7 @@ ARM GAS  /tmp/ccHAbREN.s 			page 1
  1189 0193 03       		.uleb128 0x3
  1190 0194 0E       		.uleb128 0xe
  1191 0195 3A       		.uleb128 0x3a
-ARM GAS  /tmp/ccHAbREN.s 			page 22
+ARM GAS  /tmp/cc6mDlYF.s 			page 22
 
 
  1192 0196 0B       		.uleb128 0xb
@@ -1318,7 +1318,7 @@ ARM GAS  /tmp/ccHAbREN.s 			page 1
  1246 0004 02000000 		.4byte	.LVL1
  1247 0008 0100     		.2byte	0x1
  1248 000a 50       		.byte	0x50
-ARM GAS  /tmp/ccHAbREN.s 			page 23
+ARM GAS  /tmp/cc6mDlYF.s 			page 23
 
 
  1249 000b 02000000 		.4byte	.LVL1
@@ -1378,7 +1378,7 @@ ARM GAS  /tmp/ccHAbREN.s 			page 1
  1303 007c 74       		.byte	0x74
  1304 007d 00       		.sleb128 0
  1305 007e 1C       		.byte	0x1c
-ARM GAS  /tmp/ccHAbREN.s 			page 24
+ARM GAS  /tmp/cc6mDlYF.s 			page 24
 
 
  1306 007f 9F       		.byte	0x9f
@@ -1438,7 +1438,7 @@ ARM GAS  /tmp/ccHAbREN.s 			page 1
  1360              	.Ldebug_line0:
  1361 0000 22010000 		.section	.debug_str,"MS",%progbits,1
  1361      0200D600 
-ARM GAS  /tmp/ccHAbREN.s 			page 25
+ARM GAS  /tmp/cc6mDlYF.s 			page 25
 
 
  1361      00000201 
@@ -1498,7 +1498,7 @@ ARM GAS  /tmp/ccHAbREN.s 			page 1
  1383              	.LASF35:
  1384 0100 706F6F6C 		.ascii	"pools1_execute\000"
  1384      73315F65 
-ARM GAS  /tmp/ccHAbREN.s 			page 26
+ARM GAS  /tmp/cc6mDlYF.s 			page 26
 
 
  1384      78656375 
@@ -1558,7 +1558,7 @@ ARM GAS  /tmp/ccHAbREN.s 			page 1
  1406      7279506F 
  1406      6F6C00
  1407              	.LASF26:
-ARM GAS  /tmp/ccHAbREN.s 			page 27
+ARM GAS  /tmp/cc6mDlYF.s 			page 27
 
 
  1408 01cd 74657374 		.ascii	"testpools1\000"
@@ -1618,7 +1618,7 @@ ARM GAS  /tmp/ccHAbREN.s 			page 1
  1432      00
  1433              	.LASF19:
  1434 0265 63686172 		.ascii	"char\000"
-ARM GAS  /tmp/ccHAbREN.s 			page 28
+ARM GAS  /tmp/cc6mDlYF.s 			page 28
 
 
  1434      00
@@ -1642,28 +1642,28 @@ ARM GAS  /tmp/ccHAbREN.s 			page 1
  1444      6F6C496E 
  1444      697400
  1445              		.ident	"GCC: (Arch Repository) 4.9.2 20150128 (prerelease)"
-ARM GAS  /tmp/ccHAbREN.s 			page 29
+ARM GAS  /tmp/cc6mDlYF.s 			page 29
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 testpools.c
-     /tmp/ccHAbREN.s:19     .text.null_provider:0000000000000000 $t
-     /tmp/ccHAbREN.s:24     .text.null_provider:0000000000000000 null_provider
-     /tmp/ccHAbREN.s:41     .text.pools1_setup:0000000000000000 $t
-     /tmp/ccHAbREN.s:46     .text.pools1_setup:0000000000000000 pools1_setup
-     /tmp/ccHAbREN.s:62     .text.pools1_setup:000000000000000c $d
-     /tmp/ccHAbREN.s:67     .text.pools1_execute:0000000000000000 $t
-     /tmp/ccHAbREN.s:72     .text.pools1_execute:0000000000000000 pools1_execute
-     /tmp/ccHAbREN.s:213    .text.pools1_execute:00000000000000b0 $d
-     /tmp/ccHAbREN.s:231    .rodata.patternpools:0000000000000000 patternpools
-     /tmp/ccHAbREN.s:247    .rodata.testpools1:0000000000000000 testpools1
-     /tmp/ccHAbREN.s:224    .rodata.str1.4:0000000000000000 $d
-     /tmp/ccHAbREN.s:228    .rodata.patternpools:0000000000000000 $d
-     /tmp/ccHAbREN.s:235    .data.mp1:0000000000000000 $d
-     /tmp/ccHAbREN.s:239    .data.mp1:0000000000000000 mp1
-     /tmp/ccHAbREN.s:244    .rodata.testpools1:0000000000000000 $d
+     /tmp/cc6mDlYF.s:19     .text.null_provider:0000000000000000 $t
+     /tmp/cc6mDlYF.s:24     .text.null_provider:0000000000000000 null_provider
+     /tmp/cc6mDlYF.s:41     .text.pools1_setup:0000000000000000 $t
+     /tmp/cc6mDlYF.s:46     .text.pools1_setup:0000000000000000 pools1_setup
+     /tmp/cc6mDlYF.s:62     .text.pools1_setup:000000000000000c $d
+     /tmp/cc6mDlYF.s:67     .text.pools1_execute:0000000000000000 $t
+     /tmp/cc6mDlYF.s:72     .text.pools1_execute:0000000000000000 pools1_execute
+     /tmp/cc6mDlYF.s:213    .text.pools1_execute:00000000000000b0 $d
+     /tmp/cc6mDlYF.s:231    .rodata.patternpools:0000000000000000 patternpools
+     /tmp/cc6mDlYF.s:247    .rodata.testpools1:0000000000000000 testpools1
+     /tmp/cc6mDlYF.s:224    .rodata.str1.4:0000000000000000 $d
+     /tmp/cc6mDlYF.s:228    .rodata.patternpools:0000000000000000 $d
+     /tmp/cc6mDlYF.s:235    .data.mp1:0000000000000000 $d
+     /tmp/cc6mDlYF.s:239    .data.mp1:0000000000000000 mp1
+     /tmp/cc6mDlYF.s:244    .rodata.testpools1:0000000000000000 $d
                      .debug_frame:0000000000000010 $d
-     /tmp/ccHAbREN.s:223    .text.pools1_execute:00000000000000bc $t
+     /tmp/cc6mDlYF.s:223    .text.pools1_execute:00000000000000bc $t
 
 UNDEFINED SYMBOLS
 chPoolInit
