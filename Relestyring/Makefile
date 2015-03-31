@@ -68,7 +68,7 @@ endif
 PROJECT = ch
 
 # Imported source files and paths
-CHIBIOS = ./chibios
+CHIBIOS = ../..
 include $(CHIBIOS)/boards/ST_STM32F4_DISCOVERY/board.mk
 include $(CHIBIOS)/os/hal/platforms/STM32F4xx/platform.mk
 include $(CHIBIOS)/os/hal/hal.mk
@@ -82,13 +82,13 @@ LDSCRIPT= $(PORTLD)/STM32F407xG.ld
 # C sources that can be compiled in ARM or THUMB mode depending on the global
 # setting.
 CSRC = $(PORTSRC) \
-       $(KERNSRC) \
+       $(KERNSRC) \\
        $(HALSRC) \
        $(PLATFORMSRC) \
        $(BOARDSRC) \
        $(CHIBIOS)/os/various/devices_lib/accel/lis302dl.c \
        $(CHIBIOS)/os/various/chprintf.c \
-       main.c thruster/thruster.c
+       main.c
 
 # C++ sources that can be compiled in ARM or THUMB mode depending on the global
 # setting.
