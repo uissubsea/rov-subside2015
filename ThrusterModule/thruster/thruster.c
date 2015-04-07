@@ -36,7 +36,11 @@ msg_t thruster_thread(void *p){
 	(void)p;
 	struct ThValues verdi;
 
-
+/* Definerer korrigerings variabler */
+uint16_t verdiB_X;
+uint16_t verdiB_Y;
+uint16_t verdiB_Z;
+uint16_t korrigert;
 
 
 	/* Run Forever */
@@ -61,14 +65,14 @@ msg_t thruster_thread(void *p){
 		verdiB_Z = verdiB_Z * korrigert/128;
 		
 		/* SKRIV COMMENT */
-		if(verdiB_Z < 0)
+		if(verdiB_Z < 0){
 			verdiB_Z = 5000 - abs(verdiB_Z) * 5000/100;
-		end
+		}
 
 		/* SKRIV COMMENT */
-		if(verdiB_Z => 0)
+		else(verdiB_Z => 0){
 			verdiB_Z = 5000 + abs(verdiB_Z) * 5000/100;
-		end		
+		}
 
 		/* PROGRAM FOR VETRICAL THRUSTERS */
 		/* MOTOR 5 */
