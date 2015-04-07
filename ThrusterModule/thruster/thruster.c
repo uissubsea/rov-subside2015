@@ -44,23 +44,47 @@ msg_t thruster_thread(void *p){
 		/* Motta Verdier gjennom canbus */
 		verdi = receiveData();
 
-
 		/* Kode til truster program */
 		/* Skriv inn kode her ;) */
 
+		korrigert = 70;
+		/* Innverdi for X */
+		verdiB_X = verdi.X - 128;
+		verdiB_X = verdiB_X * korrigert/128;
+
+		/* Innverdi for Y */
+		verdiB_Y = verdi.Y - 128;
+		verdiB_Y = verdiB_Y * korrigert/128;
+
+		/* Innverdi for Z */
+		verdiB_Z = verdi.Z - 128;
+		verdiB_Z = verdiB_Z * korrigert/128;
+		
+		/* SKRIV COMMENT */
+		if(verdiB_Z < 0)
+			verdiB_Z = 5000 - abs(verdiB_Z) * 5000/100;
+		end
+
+		/* SKRIV COMMENT */
+		if(verdiB_Z => 0)
+			verdiB_Z = 5000 + abs(verdiB_Z) * 5000/100;
+		end		
+
 		/* PROGRAM FOR VETRICAL THRUSTERS */
 		/* MOTOR 5 */
-		pwmEnableChannel(&PWMD8, 0, PWM_PERCENTAGE_TO_WIDTH(&PWMD8, verdi.Z*70))
+		pwmEnableChannel(&PWMD8, 0, PWM_PERCENTAGE_TO_WIDTH(&PWMD8, verdiB_Z))
 		
 		/* MOTOR 6 */
-		pwmEnableChannel(&PWMD8, 1, PWM_PERCENTAGE_TO_WIDTH(&PWMD8, verdi.Z*70))
+		pwmEnableChannel(&PWMD8, 1, PWM_PERCENTAGE_TO_WIDTH(&PWMD8, verdiB_Z))
 
 		/* MOTOR 7 */
-		pwmEnableChannel(&PWMD8, 2, PWM_PERCENTAGE_TO_WIDTH(&PWMD8, verdi.Z*70))
+		pwmEnableChannel(&PWMD8, 2, PWM_PERCENTAGE_TO_WIDTH(&PWMD8, verdiB_Z))
 		
 		/* MOTOR 8 */
-		pwmEnableChannel(&PWMD8, 3, PWM_PERCENTAGE_TO_WIDTH(&PWMD8, verdi.Z*70))
+		pwmEnableChannel(&PWMD8, 3, PWM_PERCENTAGE_TO_WIDTH(&PWMD8, verdiB_Z))
 		
+
+		/* PROGRAM FOR HORISONTAL THRUSTERS */ 
 
 		/* Følgende funksjon kan benyttes te å sette pådrag til trustere
 	 	* 
