@@ -51,45 +51,49 @@ uint16_t korrigert;
 		/* Kode til truster program */
 		/* Skriv inn kode her ;) */
 
-		korrigert = 70;
+		/* Definerer variabler */
+		korrigert = 100;
+		
 		/* Innverdi for X */
-		verdiB_X = verdi.X - 128;
-		verdiB_X = verdiB_X * korrigert/128;
+		verdiB_X = verdi.X * korrigert/1000;
 
 		/* Innverdi for Y */
-		verdiB_Y = verdi.Y - 128;
-		verdiB_Y = verdiB_Y * korrigert/128;
+		verdiB_Y = verdi.Y * korrigert/1000;
 
 		/* Innverdi for Z */
-		verdiB_Z = verdi.Z - 128;
-		verdiB_Z = verdiB_Z * korrigert/128;
+		verdiB_Z = verdi.Z * korrigert/1000;
 		
-		/* SKRIV COMMENT */
+		/* Gjør bergenet verdier om til PWM verdi for negativt paadrag */
 		if(verdiB_Z < 0){
-			verdiB_Z = 5000 - abs(verdiB_Z) * 5000/100;
+			verdiB_Z = 750 - abs(verdiB_Z) * 2.5;
 		}
 
-		/* SKRIV COMMENT */
+		/* Gjør bergenet verdier om til PWM verdi for de resterende paadragene */
 		else(verdiB_Z => 0){
-			verdiB_Z = 5000 + abs(verdiB_Z) * 5000/100;
+			verdiB_Z = 750 + abs(verdiB_Z) * 2.5;
 		}
 
 		/* PROGRAM FOR VETRICAL THRUSTERS */
 		/* MOTOR 5 */
-		pwmEnableChannel(&PWMD8, 0, PWM_PERCENTAGE_TO_WIDTH(&PWMD8, verdiB_Z))
+		pwmEnableChannel(&PWMD8, 0, PWM_PERCENTAGE_TO_WIDTH(&PWMD8, verdiB_Z));
 		
 		/* MOTOR 6 */
-		pwmEnableChannel(&PWMD8, 1, PWM_PERCENTAGE_TO_WIDTH(&PWMD8, verdiB_Z))
+		pwmEnableChannel(&PWMD8, 1, PWM_PERCENTAGE_TO_WIDTH(&PWMD8, verdiB_Z));
 
 		/* MOTOR 7 */
-		pwmEnableChannel(&PWMD8, 2, PWM_PERCENTAGE_TO_WIDTH(&PWMD8, verdiB_Z))
+		pwmEnableChannel(&PWMD8, 2, PWM_PERCENTAGE_TO_WIDTH(&PWMD8, verdiB_Z));
 		
 		/* MOTOR 8 */
-		pwmEnableChannel(&PWMD8, 3, PWM_PERCENTAGE_TO_WIDTH(&PWMD8, verdiB_Z))
+		pwmEnableChannel(&PWMD8, 3, PWM_PERCENTAGE_TO_WIDTH(&PWMD8, verdiB_Z));
 		
 
 		/* PROGRAM FOR HORISONTAL THRUSTERS */ 
 
+		
+
+
+
+		
 		/* Følgende funksjon kan benyttes te å sette pådrag til trustere
 	 	* 
 	 	* pwmEnableChannel(&PWMDx, kanal, PWM_PERCENTAGE_TO_WIDTH(&PWMDx, duty cycle))
