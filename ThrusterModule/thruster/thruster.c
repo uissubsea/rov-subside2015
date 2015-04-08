@@ -41,6 +41,10 @@ uint16_t verdiB_X;
 uint16_t verdiB_Y;
 uint16_t verdiB_Z;
 uint16_t korrigert;
+uint16_t r;
+uint16_t theta;
+uint16_t thetaInn;
+
 
 
 	/* Run Forever */
@@ -89,11 +93,26 @@ uint16_t korrigert;
 
 		/* PROGRAM FOR HORISONTAL THRUSTERS */ 
 
+		r = sqrt(verdi.X^2*verdi.Y^2)/2;
+		if 100/2 < r{
+			r = 100/2;
+		}
+
+		theta = 0;
+		thetaInn = atand(verdi.Y/verdi.X);
+
+		if verdi.X>0 && verdi.Y>0{ /* I kvadrant */
+			theta = thetaInn;
+		}else verdi.X<0 && verdi.Y>0{ /* II kvadrant */
+			theta = thetaInn + 180; 
+		}else verdi.X<0 && verdi.Y<0{ /* III kvadrant */
+			theta = thetaInn - 180;
+		}else verdi.X>0 && verdi.Y<0{ /* IV kvadrant */
+			theta = thetaInn;
+		}
+		
 		
 
-
-
-		
 		/* Følgende funksjon kan benyttes te å sette pådrag til trustere
 	 	* 
 	 	* pwmEnableChannel(&PWMDx, kanal, PWM_PERCENTAGE_TO_WIDTH(&PWMDx, duty cycle))
