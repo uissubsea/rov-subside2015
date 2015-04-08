@@ -42,10 +42,10 @@ uint16_t verdiB_Y;
 uint16_t verdiB_Z;
 uint16_t korrigert;
 uint16_t r;
-uint16_t theta;
-uint16_t thetaInn;
-
-
+int16_t theta;
+int16_t thetaInn;
+int16_t M1, M2, M3, M4;
+int16_t skalering;
 
 	/* Run Forever */
 	while(1){
@@ -113,7 +113,17 @@ uint16_t thetaInn;
 		}
 		
 		
+		/* Horisontal bevegelse 2015 */
+		M1 = r*cos(45 -theta)
+		M2 = r*cos(-45 -theta)
+		M3 = -M2 
+		M4 = -M1 
 
+
+		/* Psaudo, korrigering av pådrag med invers thruster kar.  
+		M1= M1* lesDataFraGraf(M1);
+		Lag for M2-M3;
+		
 		/* Følgende funksjon kan benyttes te å sette pådrag til trustere
 	 	* 
 	 	* pwmEnableChannel(&PWMDx, kanal, PWM_PERCENTAGE_TO_WIDTH(&PWMDx, duty cycle))
