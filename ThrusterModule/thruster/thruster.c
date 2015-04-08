@@ -77,6 +77,7 @@ uint16_t thetaInn;
 			verdiB_Z = 750 + abs(verdiB_Z) * 2.5;
 		}
 
+
 		/* PROGRAM FOR VETRICAL THRUSTERS */
 		/* MOTOR 5 */
 		pwmEnableChannel(&PWMD8, 0, PWM_PERCENTAGE_TO_WIDTH(&PWMD8, verdiB_Z));
@@ -129,4 +130,6 @@ uint16_t thetaInn;
 	}	 
 	
 }
+
+/* Test */
 
