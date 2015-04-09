@@ -124,6 +124,7 @@ int16_t skalering;
 		M1= M1* lesDataFraGraf(M1);
 		Lag for M2-M3;
 		
+		
 		/* Følgende funksjon kan benyttes te å sette pådrag til trustere
 	 	* 
 	 	* pwmEnableChannel(&PWMDx, kanal, PWM_PERCENTAGE_TO_WIDTH(&PWMDx, duty cycle))
