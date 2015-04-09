@@ -41,11 +41,18 @@ uint16_t verdiB_X;
 uint16_t verdiB_Y;
 uint16_t verdiB_Z;
 uint16_t korrigert;
-uint16_t r;
-int16_t theta;
-int16_t thetaInn;
-int16_t M1, M2, M3, M4;
-int16_t skalering;
+uint16_t M1, M2, M3, M4;
+double r;
+double theta;
+double thetaInn;
+double M1Foer_kor, M2Foer_kor, M3Foer_kor, M4Foer_kor;
+
+double skalering =1 ;
+int inversPropellKar[2] [10] =
+ {1, 2,3,4,5,6,7,8,9,10}, // Fremover Thrust retning (pluss)
+ {1, 2,3,4,5,6,7,8,9,10}  // bakover   Thrust retning (negativ)
+
+
 
 	/* Run Forever */
 	while(1){
@@ -93,14 +100,14 @@ int16_t skalering;
 		
 
 		/* PROGRAM FOR HORISONTAL THRUSTERS */ 
-
-		r = sqrt(verdi.X^2*verdi.Y^2)/2;
+8
+		r = (double) sqrt(verdi.X^2*verdi.Y^2)/2;
 		if 100/2 < r{
 			r = 100/2;
 		}
 
 		theta = 0;
-		thetaInn = atand(verdi.Y/verdi.X);
+		thetaInn = (double) atand(verdi.Y/verdi.X);
 
 		if verdi.X>0 && verdi.Y>0{ /* I kvadrant */
 			theta = thetaInn;
@@ -112,19 +119,59 @@ int16_t skalering;
 			theta = thetaInn;
 		}
 		
+		/*______linearisering av propell karraktestikk_______*/
+
+
+
+
+
 		
 		/* Horisontal bevegelse 2015 */
-		M1 = r*cos(45 -theta)
-		M2 = r*cos(-45 -theta)
-		M3 = -M2 
-		M4 = -M1 
+		M1Foer_kor =  r*cos( 45 -theta) * skalering;
+		M2Foer_kor =  r*cos(-45 -theta) * skalering;
+		M3Foer_kor = -M2Foer_kor ;
+		M4Foer_kor = -M1Foer_kor ;
+
+
+		/* Konverterer fra double til uint */
+		M1 = (uint16_t) M1Foer_kor;
+		M2 = (uint16_t) M2Foer_kor;
+		M3 = (uint16_t) M3Foer_kor;
+		M4 = (uint16_t) M4Foer_kor;
+
+		/* korrigerer for  ulinært forhol mellom thrust og pådrag denne vil ikke fungere ved negativt pådrag
+		, dersom karraktestikk ikke er lik for frem/revers må det legges til to matriser, en for hver retning  */
+		if (M1>= 0)
+			{ M1 = M1 * inversPropellKar[1][M1] } ;
+		else { M1 = M1 * inversPropellKar[2][M1] };
+
+		
+		if (M2>= 0)
+			{ M2 = M2 * inversPropellKar[2][M1] } ;
+		else { M2 = M2 * inversPropellKar[2][M2] };
+
+
+		if (M3>= 0)
+			{ M3 = M3 * inversPropellKar[1][M3] } ;
+		else { M3 = M3 * inversPropellKar[2][M3] };
+
+		
+		if (M4>= 0)
+			{ M4 = M4 * inversPropellKar[1][M4] } ;
+		else { M4 = M4 * inversPropellKar[2][M4] };
+
+
+
+
+
+
 
 
 		/* Psaudo, korrigering av pådrag med invers thruster kar.  
 		M1= M1* lesDataFraGraf(M1);
 		Lag for M2-M3;
 		
-		
+
 		/* Følgende funksjon kan benyttes te å sette pådrag til trustere
 	 	* 
 	 	* pwmEnableChannel(&PWMDx, kanal, PWM_PERCENTAGE_TO_WIDTH(&PWMDx, duty cycle))
