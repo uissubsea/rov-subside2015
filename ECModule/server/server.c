@@ -48,16 +48,12 @@ static const ADCConversionGroup adcgrpcfg = {
   NULL,
   0,                        /* CR1 */
   ADC_CR2_SWSTART,          /* CR2 */
-  ADC_SMPR1_SMP_AN12(ADC_SAMPLE_56) | ADC_SMPR1_SMP_AN11(ADC_SAMPLE_56) |
-  ADC_SMPR1_SMP_SENSOR(ADC_SAMPLE_144) | ADC_SMPR1_SMP_VREF(ADC_SAMPLE_144),
+  ADC_SMPR1_SMP_SENSOR(ADC_SAMPLE_144),
   0,                        /* SMPR2 */
   ADC_SQR1_NUM_CH(ADC_NUM_CHANNELS),
-  ADC_SQR2_SQ8_N(ADC_CHANNEL_SENSOR) | ADC_SQR2_SQ7_N(ADC_CHANNEL_VREFINT),
-  ADC_SQR3_SQ6_N(ADC_CHANNEL_IN12)   | ADC_SQR3_SQ5_N(ADC_CHANNEL_IN11) |
-  ADC_SQR3_SQ4_N(ADC_CHANNEL_IN12)   | ADC_SQR3_SQ3_N(ADC_CHANNEL_IN11) |
-  ADC_SQR3_SQ2_N(ADC_CHANNEL_IN12)   | ADC_SQR3_SQ1_N(ADC_CHANNEL_IN11)
+  0,
+  ADC_SQR3_SQ1_N(ADC_CHANNEL_SENSOR)
 };
-
 
 #if LWIP_NETCONN
 
@@ -141,6 +137,9 @@ static void server_serve(struct netconn *newconn) {
   u16_t len;
   err_t err;
   //uint8_t dataArray[8];
+  char tempstr[10];
+  int Vsense;
+  int TCelsius;
 
   while((err = netconn_recv(newconn, &buf)) == ERR_OK) {
     
@@ -154,9 +153,15 @@ static void server_serve(struct netconn *newconn) {
       rov_data.th[1] = 30;
       rov_data.th[2] = 30;
       rov_data.th[3] = 30;
-  */
 
-      err = netconn_write(newconn, rov_data.ds[0], strlen(rov_data.ds[0]), NETCONN_COPY);
+      */
+
+      Vsense = (float)(samples[0] * 3300 / 0xfff) / 1000;
+      TCelsius = ((Vsense - 0.76) / 2.5) + 25.0;
+
+      sprintf(tempstr, "%d", TCelsius);
+
+      err = netconn_write(newconn, tempstr, strlen(tempstr), NETCONN_COPY);
 
       /* Send parsed data onto canbus */
       send_can_message(0x1, rov_data.th);
@@ -181,6 +186,7 @@ msg_t network_server(void *p) {
 
   (void)p;
 
+
   /* Create a new TCP connection handle */
   conn = netconn_new(NETCONN_TCP);
   LWIP_ERROR("http_server: invalid conn", (conn != NULL), return RDY_RESET;);
@@ -194,6 +200,9 @@ msg_t network_server(void *p) {
   /* Goes to the final priority after initialization.*/
   chThdSetPriority(SERVER_THREAD_PRIORITY);
 
+  /*
+   * Starts an ADC continuous conversion.
+   */
   adcStartConversion(&ADCD1, &adcgrpcfg, samples, ADC_BUF_DEPTH);
 
   while(1) {

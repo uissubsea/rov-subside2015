@@ -21,7 +21,8 @@
 
 #include "server/server.h"
 
-
+#define ADC_GRP_NUM_CHANNELS   1
+#define ADC_GRP_BUF_DEPTH      8
 
 
 /*===========================================================================*/
@@ -40,10 +41,6 @@ static const CANConfig cancfg = {
   CAN_BTR_TS1(8) | CAN_BTR_BRP(6)
 };
 
-/*
- * ADC Sample buffer
- */
-//static adcsample_t samples[ADC_GRP1_NUM_CHANNELS * ADC_GRP1_BUF_DEPTH];
 
 
 /*
@@ -68,6 +65,8 @@ int main(void) {
 
   adcStart(&ADCD1, NULL);
   adcSTM32EnableTSVREFE();
+
+  
 
   /*
    * Creates the LWIP threads (it changes priority internally).
