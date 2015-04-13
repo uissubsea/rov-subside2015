@@ -108,8 +108,8 @@
 #define GPIOB_PIN5                  5
 #define GPIOB_SCL                   6
 #define GPIOB_PIN7                  7
-#define GPIOB_PIN8                  8
-#define GPIOB_SDA                   9
+#define GPIOB_CANRX                 8 // CAN RX
+#define GPIOB_CANTX                 9 // CAN TX
 #define GPIOB_CLK_IN                10
 #define GPIOB_PIN11_ETH_TX_EN       11 // ETH TX EN
 #define GPIOB_PIN12_ETH_TX0         12 // ETH TX0
@@ -388,8 +388,8 @@
                                      PIN_MODE_ALTERNATE(GPIOB_PIN5) |           \
                                      PIN_MODE_ALTERNATE(GPIOB_SCL) |        \
                                      PIN_MODE_INPUT(GPIOB_PIN7) |           \
-                                     PIN_MODE_INPUT(GPIOB_PIN8) |           \
-                                     PIN_MODE_ALTERNATE(GPIOB_SDA) |        \
+                                     PIN_MODE_ALTERNATE(GPIOB_CANRX) |           \
+                                     PIN_MODE_ALTERNATE(GPIOB_CANTX) |        \
                                      PIN_MODE_INPUT(GPIOB_CLK_IN) |         \
                                      PIN_MODE_ALTERNATE(GPIOB_PIN11_ETH_TX_EN) |          \
                                      PIN_MODE_ALTERNATE(GPIOB_PIN12_ETH_TX0) |          \
@@ -404,8 +404,8 @@
                                      PIN_OTYPE_PUSHPULL(GPIOB_PIN5) |       \
                                      PIN_OTYPE_OPENDRAIN(GPIOB_SCL) |       \
                                      PIN_OTYPE_PUSHPULL(GPIOB_PIN7) |       \
-                                     PIN_OTYPE_PUSHPULL(GPIOB_PIN8) |       \
-                                     PIN_OTYPE_OPENDRAIN(GPIOB_SDA) |       \
+                                     PIN_OTYPE_PUSHPULL(GPIOB_CANRX) |       \
+                                     PIN_OTYPE_PUSHPULL(GPIOB_CANTX) |       \
                                      PIN_OTYPE_PUSHPULL(GPIOB_CLK_IN) |     \
                                      PIN_OTYPE_PUSHPULL(GPIOB_PIN11_ETH_TX_EN) |      \
                                      PIN_OTYPE_PUSHPULL(GPIOB_PIN12_ETH_TX0) |      \
@@ -420,8 +420,8 @@
                                      PIN_OSPEED_100M(GPIOB_PIN5) |          \
                                      PIN_OSPEED_100M(GPIOB_SCL) |           \
                                      PIN_OSPEED_100M(GPIOB_PIN7) |          \
-                                     PIN_OSPEED_100M(GPIOB_PIN8) |          \
-                                     PIN_OSPEED_100M(GPIOB_SDA) |           \
+                                     PIN_OSPEED_50M(GPIOB_CANRX) |          \
+                                     PIN_OSPEED_50M(GPIOB_CANTX) |           \
                                      PIN_OSPEED_100M(GPIOB_CLK_IN) |        \
                                      PIN_OSPEED_100M(GPIOB_PIN11_ETH_TX_EN) |         \
                                      PIN_OSPEED_100M(GPIOB_PIN12_ETH_TX0) |         \
@@ -436,8 +436,8 @@
                                      PIN_PUPDR_PULLUP(GPIOB_PIN5) |         \
                                      PIN_PUPDR_FLOATING(GPIOB_SCL) |        \
                                      PIN_PUPDR_PULLUP(GPIOB_PIN7) |         \
-                                     PIN_PUPDR_PULLUP(GPIOB_PIN8) |         \
-                                     PIN_PUPDR_FLOATING(GPIOB_SDA) |        \
+                                     PIN_PUPDR_PULLUP(GPIOB_CANRX) |         \
+                                     PIN_PUPDR_PULLUP(GPIOB_CANTX) |        \
                                      PIN_PUPDR_PULLUP(GPIOB_CLK_IN) |       \
                                      PIN_PUPDR_PULLUP(GPIOB_PIN11_ETH_TX_EN) |        \
                                      PIN_PUPDR_PULLUP(GPIOB_PIN12_ETH_TX0) |        \
@@ -452,8 +452,8 @@
                                      PIN_ODR_HIGH(GPIOB_PIN5) |             \
                                      PIN_ODR_HIGH(GPIOB_SCL) |              \
                                      PIN_ODR_HIGH(GPIOB_PIN7) |             \
-                                     PIN_ODR_HIGH(GPIOB_PIN8) |             \
-                                     PIN_ODR_HIGH(GPIOB_SDA) |              \
+                                     PIN_ODR_HIGH(GPIOB_CANRX) |             \
+                                     PIN_ODR_HIGH(GPIOB_CANTX) |              \
                                      PIN_ODR_HIGH(GPIOB_CLK_IN) |           \
                                      PIN_ODR_HIGH(GPIOB_PIN11_ETH_TX_EN) |            \
                                      PIN_ODR_HIGH(GPIOB_PIN12_ETH_TX0) |            \
@@ -468,8 +468,8 @@
                                      PIN_AFIO_AF(GPIOB_PIN5, 0) |           \
                                      PIN_AFIO_AF(GPIOB_SCL, 4) |            \
                                      PIN_AFIO_AF(GPIOB_PIN7, 0))
-#define VAL_GPIOB_AFRH              (PIN_AFIO_AF(GPIOB_PIN8, 0) |           \
-                                     PIN_AFIO_AF(GPIOB_SDA, 4) |            \
+#define VAL_GPIOB_AFRH              (PIN_AFIO_AF(GPIOB_CANRX, 9) |           \
+                                     PIN_AFIO_AF(GPIOB_CANTX, 9) |            \
                                      PIN_AFIO_AF(GPIOB_CLK_IN, 0) |         \
                                      PIN_AFIO_AF(GPIOB_PIN11_ETH_TX_EN, 11) |          \
                                      PIN_AFIO_AF(GPIOB_PIN12_ETH_TX0, 11) |          \

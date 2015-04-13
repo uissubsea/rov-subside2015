@@ -75,7 +75,6 @@ include $(CHIBIOS)/os/hal/hal.mk
 include $(CHIBIOS)/os/ports/GCC/ARMCMx/STM32F4xx/port.mk
 include $(CHIBIOS)/os/kernel/kernel.mk
 include $(CHIBIOS)/os/various/lwip_bindings/lwip.mk
-include $(CHIBIOS)/test/test.mk
 
 # Define linker script file here
 LDSCRIPT= $(PORTLD)/STM32F407xG.ld
@@ -85,13 +84,13 @@ LDSCRIPT= $(PORTLD)/STM32F407xG.ld
 # setting.
 CSRC = $(PORTSRC) \
        $(KERNSRC) \
-       $(TESTSRC) \
        $(HALSRC) \
        $(PLATFORMSRC) \
        $(BOARDSRC) \
        $(LWSRC) \
+       $(CHIBIOS)/os/various/devices_lib/accel/lis302dl.c \
        $(CHIBIOS)/os/various/evtimer.c \
-       web/web.c main.c
+       server/server.c main.c
 
 # C++ sources that can be compiled in ARM or THUMB mode depending on the global
 # setting.
@@ -120,8 +119,9 @@ TCPPSRC =
 # List ASM source files here
 ASMSRC = $(PORTASM)
 
-INCDIR = $(PORTINC) $(KERNINC) $(TESTINC) \
+INCDIR = $(PORTINC) $(KERNINC) \
          $(HALINC) $(PLATFORMINC) $(BOARDINC) $(LWINC) \
+         $(CHIBIOS)/os/various/devices_lib/accel \
          $(CHIBIOS)/os/various
 
 #

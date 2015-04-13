@@ -178,7 +178,7 @@
  */
 #define STM32_MAC_TRANSMIT_BUFFERS          2
 #define STM32_MAC_RECEIVE_BUFFERS           4
-#define STM32_MAC_BUFFERS_SIZE              1522
+#define STM32_MAC_BUFFERS_SIZE              4096
 #define STM32_MAC_PHY_TIMEOUT               100
 #define STM32_MAC_ETH1_CHANGE_PHY_STATE     TRUE
 #define STM32_MAC_ETH1_IRQ_PRIORITY         13
@@ -222,7 +222,7 @@
 /*
  * SPI driver system settings.
  */
-#define STM32_SPI_USE_SPI1                  FALSE
+#define STM32_SPI_USE_SPI1                  TRUE
 #define STM32_SPI_USE_SPI2                  FALSE
 #define STM32_SPI_USE_SPI3                  FALSE
 #define STM32_SPI_SPI1_RX_DMA_STREAM        STM32_DMA_STREAM_ID(2, 0)
