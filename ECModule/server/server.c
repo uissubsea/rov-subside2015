@@ -35,11 +35,17 @@
 
 #define SERVER_THREAD_PORT 50000
 
-#define ADC_NUM_CHANNELS 1
+#define ADC_NUM_CHANNELS 2
 
 #define ADC_BUF_DEPTH 8
 
+/* Global Variables */
+
 static adcsample_t samples[ADC_NUM_CHANNELS * ADC_BUF_DEPTH];
+struct netconn *conn, *newconn;
+err_t err;
+
+/* Configuration Structs */
 
 static const ADCConversionGroup adcgrpcfg = {
   TRUE,
@@ -48,12 +54,14 @@ static const ADCConversionGroup adcgrpcfg = {
   NULL,
   0,                        /* CR1 */
   ADC_CR2_SWSTART,          /* CR2 */
-  ADC_SMPR1_SMP_SENSOR(ADC_SAMPLE_144),
+  ADC_SMPR1_SMP_SENSOR(ADC_SAMPLE_144) | ADC_SMPR2_SMP_AN5(ADC_SAMPLE_56),
   0,                        /* SMPR2 */
   ADC_SQR1_NUM_CH(ADC_NUM_CHANNELS),
   0,
-  ADC_SQR3_SQ1_N(ADC_CHANNEL_SENSOR)
+  ADC_SQR3_SQ1_N(ADC_CHANNEL_SENSOR) | ADC_SQR3_SQ2_N(ADC_CHANNEL_IN5)
 };
+
+/* Main Program */
 
 #if LWIP_NETCONN
 
@@ -90,19 +98,6 @@ WORKING_AREA(wa_network_server, SERVER_THREAD_STACK_SIZE);
     token = strtok(NULL, ",");
     i++;
   }
-  /*
-  if (rov_data.th[0] > 0){
-    palSetPad(GPIOD, GPIOD_LED6);
-  }
-  else if(rov_data.th[0] < 0)
-  {
-    palTogglePad(GPIOD, GPIOD_LED6);
-  }
-  else
-  {
-    palClearPad(GPIOD, GPIOD_LED6);
-  }
-  */
 
   return rov_data;
 
@@ -128,18 +123,37 @@ static void send_can_message(int ID, int16_t *data){
 
 }
 
+/**
+ * @brief Send info to Client
+ * @details This function will
+ * send data back to client for implementation
+ * in RovControl
+ */
+static void send_info(void){
+  char tempstr[10];
+  int Vsense;
+  int TCelsius;
+
+  Vsense = (float)(samples[0] * 3300 / 0xfff) / 1000;
+  TCelsius = ((Vsense - 0.76) / 2.5) + 25.0;
+
+  //sprintf(tempstr, "%d", TCelsius);
+
+  sprintf(tempstr, "%d", samples[9]);
 
 
-static void server_serve(struct netconn *newconn) {
+  err = netconn_write(newconn, tempstr, strlen(tempstr), NETCONN_COPY);
+
+}
+
+
+static void server_serve(void) {
   struct netbuf *buf;
   struct RovData rov_data;
   void *data;
   u16_t len;
   err_t err;
-  //uint8_t dataArray[8];
-  char tempstr[10];
-  int Vsense;
-  int TCelsius;
+  
 
   while((err = netconn_recv(newconn, &buf)) == ERR_OK) {
     
@@ -148,20 +162,8 @@ static void server_serve(struct netconn *newconn) {
       netbuf_data(buf, &data, &len);
 
       rov_data = parse_message(data);
-      /*
-      rov_data.th[0] = 30;
-      rov_data.th[1] = 30;
-      rov_data.th[2] = 30;
-      rov_data.th[3] = 30;
-
-      */
-
-      Vsense = (float)(samples[0] * 3300 / 0xfff) / 1000;
-      TCelsius = ((Vsense - 0.76) / 2.5) + 25.0;
-
-      sprintf(tempstr, "%d", TCelsius);
-
-      err = netconn_write(newconn, tempstr, strlen(tempstr), NETCONN_COPY);
+    
+      send_info();
 
       /* Send parsed data onto canbus */
       send_can_message(0x1, rov_data.th);
@@ -169,7 +171,6 @@ static void server_serve(struct netconn *newconn) {
       if (err != ERR_OK) {
         palSetPad(GPIOD, GPIOD_LED5);
       }
-      //pwmEnableChannel(&PWMD4, 3, PWM_PERCENTAGE_TO_WIDTH(&PWMD4, value));
       
     } while (netbuf_next(buf) >= 0);
     netbuf_delete(buf);
@@ -181,9 +182,7 @@ static void server_serve(struct netconn *newconn) {
  * Echo server Thread
  */
 msg_t network_server(void *p) {
-  struct netconn *conn, *newconn;
-  err_t err;
-
+  
   (void)p;
 
 
@@ -211,7 +210,7 @@ msg_t network_server(void *p) {
       continue;
     char message[] = "Status OK";
     netconn_write(conn, message, sizeof(message)-1, NETCONN_COPY);
-    server_serve(newconn);
+    server_serve();
     netconn_delete(newconn);
   }
   return RDY_OK;
