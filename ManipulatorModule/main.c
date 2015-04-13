@@ -18,6 +18,24 @@
 #include "hal.h"
 #include "manip/manip.h"
 
+
+/*===========================================================================*/
+/* CAN Bus related.                                                          */
+/*===========================================================================*/
+
+/*
+ * Internal loopback mode, 500KBaud, automatic wakeup, automatic recover
+ * from abort mode.
+ * See section 22.7.7 on the STM32 reference manual.
+ */
+
+static const CANConfig cancfg = {
+  CAN_MCR_ABOM | CAN_MCR_AWUM | CAN_MCR_TXFP,
+  CAN_BTR_SJW(0) | CAN_BTR_TS2(1) |
+  CAN_BTR_TS1(8) | CAN_BTR_BRP(6)
+};
+
+
 /*
  * PWM configuration structure.
  * Cyclic callback enabled, channels 1 and 4 enabled without callbacks,
@@ -55,6 +73,10 @@ int main(void) {
   halInit();
   chSysInit();
 
+  palSetPadMode(GPIOB, GPIOB_PIN8, PAL_MODE_ALTERNATE(9));
+  palSetPadMode(GPIOB, GPIOB_SDA, PAL_MODE_ALTERNATE(9));
+
+  canStart(&CAND1, &cancfg);
   /*
    * Starter Timerene på de navngitte utgangene
    */
@@ -65,14 +87,15 @@ int main(void) {
   pwmStart(&PWMD4, &pwmcfg);    // Starter Timer 4
   pwmStart(&PWMD8, &pwmcfg);    // Starter Timer 8
 
-
+//palTogglePad(GPIOD, GPIOD_LED3);
   
-  chThdCreateStatic(wa_manip_thread, MANIP_THREAD_STACK_SIZE, MANIP_THREAD_PRIORITY,
+  chThdCreateStatic(wa_manip_thread, MANIP_THREAD_STACK_SIZE, NORMALPRIO + 1,
                     manip_thread, NULL);
 
   while(TRUE){
-    
+    chThdSleepMilliseconds(5000);
+    palTogglePad(GPIOD, GPIOD_LED3);
   }
 
-  }
+}
 
