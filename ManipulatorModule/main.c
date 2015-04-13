@@ -16,44 +16,23 @@
 
 #include "ch.h"
 #include "hal.h"
-#include "test.h"
+uint16_t i = 1;         // Lager teller variabel i    
+uint16_t j = 1;         // Lager teller variabel j 
+int VerdiJoy;
+int Joyakse1;
+int Joyakse2;
+int Joyakse3;
+int Joyakse4;
+int Joyakse5;
 
-static void pwmpcb(PWMDriver *pwmp);
-static void adccb(ADCDriver *adcp, adcsample_t *buffer, size_t n);
-static void spicb(SPIDriver *spip);
 
-/* Total number of channels to be sampled by a single ADC operation.*/
-#define ADC_GRP1_NUM_CHANNELS   2
-
-/* Depth of the conversion buffer, channels are sampled four times each.*/
-#define ADC_GRP1_BUF_DEPTH      4
-
-/*
- * ADC samples buffer.
- */
-static adcsample_t samples[ADC_GRP1_NUM_CHANNELS * ADC_GRP1_BUF_DEPTH];
-
-/*
- * ADC conversion group.
- * Mode:        Linear buffer, 4 samples of 2 channels, SW triggered.
- * Channels:    IN11   (48 cycles sample time)
- *              Sensor (192 cycles sample time)
- */
-static const ADCConversionGroup adcgrpcfg = {
-  FALSE,
-  ADC_GRP1_NUM_CHANNELS,
-  adccb,
-  NULL,
-  /* HW dependent part.*/
-  0,
-  ADC_CR2_SWSTART,
-  ADC_SMPR1_SMP_AN11(ADC_SAMPLE_56) | ADC_SMPR1_SMP_SENSOR(ADC_SAMPLE_144),
-  0,
-  ADC_SQR1_NUM_CH(ADC_GRP1_NUM_CHANNELS),
-  0,
-  ADC_SQR3_SQ2_N(ADC_CHANNEL_IN11) | ADC_SQR3_SQ1_N(ADC_CHANNEL_SENSOR)
-};
-
+static void pwmteller(PWMDriver *pwmp){
+ (void)pwmp;
+ if (palReadPad(GPIOA,GPIOA_BUTTON))
+ {
+ 
+ }
+}
 /*
  * PWM configuration structure.
  * Cyclic callback enabled, channels 1 and 4 enabled without callbacks,
@@ -61,107 +40,20 @@ static const ADCConversionGroup adcgrpcfg = {
  */
 static PWMConfig pwmcfg = {
   10000,                                    /* 10kHz PWM clock frequency.   */
-  10000,                                    /* PWM period 1S (in ticks).    */
-  pwmpcb,
+  100000,                                    /* PWM period 1S (in ticks).    */
+  pwmteller,
   {
-    {PWM_OUTPUT_ACTIVE_HIGH, NULL},
-    {PWM_OUTPUT_DISABLED, NULL},
-    {PWM_OUTPUT_DISABLED, NULL},
-    {PWM_OUTPUT_ACTIVE_HIGH, NULL}
+    {PWM_OUTPUT_ACTIVE_HIGH, NULL}, /* Kanal 1 */
+    {PWM_OUTPUT_ACTIVE_HIGH, NULL}, /* Kanal 2 */
+    {PWM_OUTPUT_ACTIVE_HIGH, NULL}, /* Kanal 3 */
+    {PWM_OUTPUT_ACTIVE_HIGH, NULL}  /* Kanal 4 */
   },
   /* HW dependent part.*/
   0,
   0
 };
 
-/*
- * SPI2 configuration structure.
- * Speed 21MHz, CPHA=0, CPOL=0, 16bits frames, MSb transmitted first.
- * The slave select line is the pin 12 on the port GPIOA.
- */
-static const SPIConfig spi2cfg = {
-  spicb,
-  /* HW dependent part.*/
-  GPIOB,
-  12,
-  SPI_CR1_DFF
-};
 
-/*
- * PWM cyclic callback.
- * A new ADC conversion is started.
- */
-static void pwmpcb(PWMDriver *pwmp) {
-
-  (void)pwmp;
-
-  /* Starts an asynchronous ADC conversion operation, the conversion
-     will be executed in parallel to the current PWM cycle and will
-     terminate before the next PWM cycle.*/
-  chSysLockFromIsr();
-  adcStartConversionI(&ADCD1, &adcgrpcfg, samples, ADC_GRP1_BUF_DEPTH);
-  chSysUnlockFromIsr();
-}
-
-/*
- * ADC end conversion callback.
- * The PWM channels are reprogrammed using the latest ADC samples.
- * The latest samples are transmitted into a single SPI transaction.
- */
-void adccb(ADCDriver *adcp, adcsample_t *buffer, size_t n) {
-
-  (void) buffer; (void) n;
-  /* Note, only in the ADC_COMPLETE state because the ADC driver fires an
-     intermediate callback when the buffer is half full.*/
-  if (adcp->state == ADC_COMPLETE) {
-    adcsample_t avg_ch1, avg_ch2;
-
-    /* Calculates the average values from the ADC samples.*/
-    avg_ch1 = (samples[0] + samples[2] + samples[4] + samples[6]) / 4;
-    avg_ch2 = (samples[1] + samples[3] + samples[5] + samples[7]) / 4;
-
-    chSysLockFromIsr();
-
-    /* Changes the channels pulse width, the change will be effective
-       starting from the next cycle.*/
-    pwmEnableChannelI(&PWMD4, 0, PWM_FRACTION_TO_WIDTH(&PWMD4, 4096, avg_ch1));
-    pwmEnableChannelI(&PWMD4, 3, PWM_FRACTION_TO_WIDTH(&PWMD4, 4096, avg_ch2));
-
-    /* SPI slave selection and transmission start.*/
-    spiSelectI(&SPID2);
-    spiStartSendI(&SPID2, ADC_GRP1_NUM_CHANNELS * ADC_GRP1_BUF_DEPTH, samples);
-
-    chSysUnlockFromIsr();
-  }
-}
-
-/*
- * SPI end transfer callback.
- */
-static void spicb(SPIDriver *spip) {
-
-  /* On transfer end just releases the slave select line.*/
-  chSysLockFromIsr();
-  spiUnselectI(spip);
-  chSysUnlockFromIsr();
-}
-
-/*
- * This is a periodic thread that does absolutely nothing except flashing
- * a LED.
- */
-static WORKING_AREA(waThread1, 128);
-static msg_t Thread1(void *arg) {
-
-  (void)arg;
-  chRegSetThreadName("blinker");
-  while (TRUE) {
-    palSetPad(GPIOD, GPIOD_LED3);       /* Orange.  */
-    chThdSleepMilliseconds(500);
-    palClearPad(GPIOD, GPIOD_LED3);     /* Orange.  */
-    chThdSleepMilliseconds(500);
-  }
-}
 
 /*
  * Application entry point.
@@ -179,67 +71,86 @@ int main(void) {
   chSysInit();
 
   /*
-   * Activates the serial driver 2 using the driver default configuration.
-   * PA2(TX) and PA3(RX) are routed to USART2.
+   * Starter Timerene på de navngitte utgangene
    */
-  sdStart(&SD2, NULL);
-  palSetPadMode(GPIOA, 2, PAL_MODE_ALTERNATE(7));
-  palSetPadMode(GPIOA, 3, PAL_MODE_ALTERNATE(7));
 
-  /*
-   * If the user button is pressed after the reset then the test suite is
-   * executed immediately before activating the various device drivers in
-   * order to not alter the benchmark scores.
-   */
-  if (palReadPad(GPIOA, GPIOA_BUTTON))
-    TestThread(&SD2);
+  pwmStart(&PWMD1, &pwmcfg);    // Starter Timer 1
+  pwmStart(&PWMD2, &pwmcfg);    // Starter Timer 2
+  pwmStart(&PWMD3, &pwmcfg);    // Starter Timer 3
+  pwmStart(&PWMD4, &pwmcfg);    // Starter Timer 4
+  pwmStart(&PWMD8, &pwmcfg);    // Starter Timer 8
 
-  /*
-   * Initializes the SPI driver 2. The SPI2 signals are routed as follow:
-   * PB12 - NSS.
-   * PB13 - SCK.
-   * PB14 - MISO.
-   * PB15 - MOSI.
-   */
-  spiStart(&SPID2, &spi2cfg);
-  palSetPad(GPIOB, 12);
-  palSetPadMode(GPIOB, 12, PAL_MODE_OUTPUT_PUSHPULL |
-                           PAL_STM32_OSPEED_HIGHEST);           /* NSS.     */
-  palSetPadMode(GPIOB, 13, PAL_MODE_ALTERNATE(5) |
-                           PAL_STM32_OSPEED_HIGHEST);           /* SCK.     */
-  palSetPadMode(GPIOB, 14, PAL_MODE_ALTERNATE(5));              /* MISO.    */
-  palSetPadMode(GPIOB, 15, PAL_MODE_ALTERNATE(5) |
-                           PAL_STM32_OSPEED_HIGHEST);           /* MOSI.    */
 
-  /*
-   * Initializes the ADC driver 1 and enable the thermal sensor.
-   * The pin PC1 on the port GPIOC is programmed as analog input.
-   */
-  adcStart(&ADCD1, NULL);
-  adcSTM32EnableTSVREFE();
-  palSetPadMode(GPIOC, 1, PAL_MODE_INPUT_ANALOG);
+  while(TRUE) {     //Sett inn styrespak
+    pwmEnableChannel(&PWMD1, 0, PWM_PERCENTAGE_TO_WIDTH(&PWMD1, 1000)); //PA8
+    if(VerdiJoy>=0)
+    {
+      if(Joyakse1)
+      {
+        pwmEnableChannel(&PWMD1, 0, PWM_PERCENTAGE_TO_WIDTH(&PWMD1, 1000)); //PA8
+      }
+      else if(Joyakse2)
+      {
+        pwmEnableChannel(&PWMD2, 0, PWM_PERCENTAGE_TO_WIDTH(&PWMD2, 1000)); //PA15
+      }
+      else if(Joyakse3)
+      {
+        pwmEnableChannel(&PWMD3, 0, PWM_PERCENTAGE_TO_WIDTH(&PWMD3, 1000)); //PA15
+      }
+      else if(Joyakse4)
+      {
+        pwmEnableChannel(&PWMD4, 1, PWM_PERCENTAGE_TO_WIDTH(&PWMD4, 1000)); //PA15
+      }
+      else if(Joyakse5)
+      {
+        pwmEnableChannel(&PWMD8, 2, PWM_PERCENTAGE_TO_WIDTH(&PWMD8, 1000)); //PA15
+      }
+      
+       
+      // pwmChangePeriod(&PWMD4, 10);
+      // chThdSleepMilliseconds(3000);
+      // pwmDisableChannel(&PWMD4, 1);
+      // pwmEnableChannel(&PWMD3, 2, PWM_PERCENTAGE_TO_WIDTH(&PWMD3, 1000));
+    }
+    else
+    {
+    //  palSetPad(GPIOA, GPIOA_PIN13);     // Snur retning på motorer
+    //  palSetPad(GPIOA, GPIOA_PIN14);
+    //  palSetPad(GPIOC, GPIOC_PIN10);
+    //  palSetPad(GPIOC, GPIOC_PIN11);
+    //  palSetPad(GPIOC, GPIOC_PIN12);
 
-  /*
-   * Initializes the PWM driver 4, routes the TIM4 outputs to the board LEDs.
-   */
-  pwmStart(&PWMD4, &pwmcfg);
-  palSetPadMode(GPIOD, GPIOD_LED4, PAL_MODE_ALTERNATE(2));  /* Green.   */
-  palSetPadMode(GPIOD, GPIOD_LED6, PAL_MODE_ALTERNATE(2));  /* Blue.    */
-
-  /*
-   * Creates the example thread.
-   */
-  chThdCreateStatic(waThread1, sizeof(waThread1), NORMALPRIO, Thread1, NULL);
-
-  /*
-   * Normal main() thread activity, in this demo it does nothing except
-   * sleeping in a loop and check the button state, when the button is
-   * pressed the test procedure is launched with output on the serial
-   * driver 2.
-   */
-  while (TRUE) {
-    if (palReadPad(GPIOA, GPIOA_BUTTON))
-      TestThread(&SD2);
-    chThdSleepMilliseconds(500);
+      if(Joyakse1)
+      {
+        pwmEnableChannel(&PWMD1, 0, PWM_PERCENTAGE_TO_WIDTH(&PWMD1, 1000)); //PA8
+      }
+      else if(Joyakse2)
+      {
+        pwmEnableChannel(&PWMD2, 0, PWM_PERCENTAGE_TO_WIDTH(&PWMD2, 1000)); //PA15
+      }
+      else if(Joyakse3)
+      {
+        pwmEnableChannel(&PWMD3, 0, PWM_PERCENTAGE_TO_WIDTH(&PWMD3, 1000)); //PA15
+      }
+      else if(Joyakse4)
+      {
+        pwmEnableChannel(&PWMD4, 1, PWM_PERCENTAGE_TO_WIDTH(&PWMD4, 1000)); //PA15
+      }
+      else if(Joyakse5)
+      {
+        pwmEnableChannel(&PWMD8, 2, PWM_PERCENTAGE_TO_WIDTH(&PWMD8, 1000)); //PA15
+      }
+      
+       
+      // pwmChangePeriod(&PWMD4, 100);
+      // pwmChangePeriod(&PWMD4, 20);
+      // chThdSleepMilliseconds(3000);
+      // pwmDisableChannel(&PWMD4, 1);
+      // palClearPad(GPIOD, GPIOD_PIN3);
+      // pwmEnableChannel(&PWMD3, 2, PWM_PERCENTAGE_TO_WIDTH(&PWMD3, 1000));
+    }
+    pwmDisableChannel(&PWMD4,1);
   }
-}
+
+  }
+
