@@ -51,13 +51,6 @@ msg_t manip_thread(void *p){
 struct Mvalues verdier;
 
 
-int Joyakse1;
-int Joyakse2;
-int Joyakse3;
-int Joyakse4;
-int Joyakse5;
-int VerdiJoy;
-
 verdier = receiveData();
 
 
@@ -65,66 +58,53 @@ verdier = receiveData();
     
     verdier = receiveData();
 
-    pwmEnableChannel(&PWMD1, 0, PWM_PERCENTAGE_TO_WIDTH(&PWMD1, 1000)); //PA8
-    if(VerdiJoy>=0)
-    {
-      if(Joyakse1)
-      {
-        pwmEnableChannel(&PWMD1, 0, PWM_PERCENTAGE_TO_WIDTH(&PWMD1, 1000)); //PA8
-      }
-      else if(Joyakse2)
-      {
-        pwmEnableChannel(&PWMD2, 0, PWM_PERCENTAGE_TO_WIDTH(&PWMD2, 1000)); //PA15
-      }
-      else if(Joyakse3)
-      {
-        pwmEnableChannel(&PWMD3, 0, PWM_PERCENTAGE_TO_WIDTH(&PWMD3, 1000)); //PA15
-      }
-      else if(Joyakse4)
-      {
-        pwmEnableChannel(&PWMD4, 1, PWM_PERCENTAGE_TO_WIDTH(&PWMD4, 1000)); //PA15
-      }
-      else if(Joyakse5)
-      {
-        pwmEnableChannel(&PWMD8, 2, PWM_PERCENTAGE_TO_WIDTH(&PWMD8, 1000)); //PA15
-      }
+   // pwmEnableChannel(&PWMD1, 0, PWM_PERCENTAGE_TO_WIDTH(&PWMD1, 1000)); //PA8
+  //  if(verdier.M1 >0)
+ //   {
+        palClearPad(GPIOC,GPIOC_PIN11);
+      //  palTogglePad(GPIOD, GPIOD_LED6);
+        pwmEnableChannel(&PWMD1, 0, PWM_PERCENTAGE_TO_WIDTH(&PWMD1, 5000)); //PA8
+
+        pwmEnableChannel(&PWMD2, 0, PWM_PERCENTAGE_TO_WIDTH(&PWMD2, 5000)); //PA15
+
+        pwmEnableChannel(&PWMD3, 0, PWM_PERCENTAGE_TO_WIDTH(&PWMD3, 5000)); //PC6
+
+        pwmEnableChannel(&PWMD4, 1, PWM_PERCENTAGE_TO_WIDTH(&PWMD4, 5000)); //PB6
+
+        pwmEnableChannel(&PWMD8, 2, PWM_PERCENTAGE_TO_WIDTH(&PWMD8, 5000)); //PC7
+
       
        
       // pwmChangePeriod(&PWMD4, 10);
       // chThdSleepMilliseconds(3000);
       // pwmDisableChannel(&PWMD4, 1);
       // pwmEnableChannel(&PWMD3, 2, PWM_PERCENTAGE_TO_WIDTH(&PWMD3, 1000));
-    }
-    else
+  //  }
+    if(verdier.M1 <0)
     {
-    //  palSetPad(GPIOA, GPIOA_PIN13);     // Snur retning på motorer
+      palSetPad(GPIOC, GPIOC_PIN11);     // Snur retning på motorer
+      palTogglePad(GPIOD, GPIOD_LED6);
     //  palSetPad(GPIOA, GPIOA_PIN14);
     //  palSetPad(GPIOC, GPIOC_PIN10);
     //  palSetPad(GPIOC, GPIOC_PIN11);
     //  palSetPad(GPIOC, GPIOC_PIN12);
 
-      if(Joyakse1)
-      {
         pwmEnableChannel(&PWMD1, 0, PWM_PERCENTAGE_TO_WIDTH(&PWMD1, 1000)); //PA8
-      }
-      else if(Joyakse2)
-      {
+
         pwmEnableChannel(&PWMD2, 0, PWM_PERCENTAGE_TO_WIDTH(&PWMD2, 1000)); //PA15
+
+        pwmEnableChannel(&PWMD3, 0, PWM_PERCENTAGE_TO_WIDTH(&PWMD3, 1000)); //PC6
+
+        pwmEnableChannel(&PWMD4, 1, PWM_PERCENTAGE_TO_WIDTH(&PWMD4, 1000)); //PB6
+
+        pwmEnableChannel(&PWMD8, 2, PWM_PERCENTAGE_TO_WIDTH(&PWMD8, 1000)); //PC7
       }
-      else if(Joyakse3)
+      else 
       {
-        pwmEnableChannel(&PWMD3, 0, PWM_PERCENTAGE_TO_WIDTH(&PWMD3, 1000)); //PA15
-      }
-      else if(Joyakse4)
-      {
-        pwmEnableChannel(&PWMD4, 1, PWM_PERCENTAGE_TO_WIDTH(&PWMD4, 1000)); //PA15
-      }
-      else if(Joyakse5)
-      {
-        pwmEnableChannel(&PWMD8, 2, PWM_PERCENTAGE_TO_WIDTH(&PWMD8, 1000)); //PA15
+              pwmDisableChannel(&PWMD1,0);
+
       }
       
-       
       // pwmChangePeriod(&PWMD4, 100);
       // pwmChangePeriod(&PWMD4, 20);
       // chThdSleepMilliseconds(3000);
@@ -132,7 +112,6 @@ verdier = receiveData();
       // palClearPad(GPIOD, GPIOD_PIN3);
       // pwmEnableChannel(&PWMD3, 2, PWM_PERCENTAGE_TO_WIDTH(&PWMD3, 1000));
     }
-    pwmDisableChannel(&PWMD4,1);
-  }
 
-  }
+}
+
