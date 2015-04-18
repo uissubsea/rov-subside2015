@@ -92,6 +92,8 @@ palSetPad(GPIOD, GPIOD_LED5);
    */
   while (TRUE) {
     palTogglePad(GPIOD, GPIOD_LED4);
+    palTogglePad(GPIOA, GPIOA_PIN9);
+    palTogglePad(GPIOA, GPIOA_PIN10);
     chThdSleepMilliseconds(1000);
   }
 }

@@ -112,10 +112,10 @@ static void send_can_message(int ID, int16_t *data){
   txframe.IDE = CAN_IDE_STD;
   txframe.SID = ID;
   txframe.RTR = CAN_RTR_DATA;
-  txframe.DLC = 4;
+  txframe.DLC = 8;
   
   for(i = 0; i < 4; i++){
-    txframe.data8[i] = data[i];
+    txframe.data16[i] = data[i];
   }
   canTransmit(&CAND1, CAN_ANY_MAILBOX, &txframe, TIME_IMMEDIATE);
 
@@ -139,7 +139,11 @@ static void send_info(void){
 
   //sprintf(tempstr, "%d", TCelsius);
 
+<<<<<<< Updated upstream
   sprintf(tempstr, "%d", samples[9]);
+=======
+  sprintf(tempstr, "%d", TCelsius);
+>>>>>>> Stashed changes
 
 
   err = netconn_write(newconn, tempstr, strlen(tempstr), NETCONN_COPY);
