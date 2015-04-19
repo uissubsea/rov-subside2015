@@ -43,7 +43,14 @@
 
 static adcsample_t samples[ADC_NUM_CHANNELS * ADC_BUF_DEPTH];
 struct netconn *conn, *newconn;
+
+struct RovData rov_data
 err_t err;
+
+/* Can transmit messages for manipulator */
+CANTxFrame manip;
+CANTxFrame manip2;
+
 
 /* Configuration Structs */
 
@@ -63,6 +70,7 @@ static const ADCConversionGroup adcgrpcfg = {
 
 /* Main Program */
 
+
 #if LWIP_NETCONN
 
 WORKING_AREA(wa_network_server, SERVER_THREAD_STACK_SIZE);
@@ -80,6 +88,7 @@ WORKING_AREA(wa_network_server, SERVER_THREAD_STACK_SIZE);
  {
    char ds[2][20];
    int16_t th[4];
+   int16_t manip[5];
  } rovdata;
 
  static struct RovData parse_message(char *string){
@@ -106,18 +115,27 @@ WORKING_AREA(wa_network_server, SERVER_THREAD_STACK_SIZE);
 
 static void send_can_message(int ID, int16_t *data){
 
-  CANTxFrame txframe;
   uint8_t i;
 
-  txframe.IDE = CAN_IDE_STD;
-  txframe.SID = ID;
-  txframe.RTR = CAN_RTR_DATA;
-  txframe.DLC = 8;
+  manip.IDE = CAN_IDE_STD;
+  manip.SID = ID;
+  manip.RTR = CAN_RTR_DATA;
+  manip.DLC = 8;
+
+  manip2.IDE = CAN_IDE_STD;
+  manip2.SID = ID;
+  manip2.RTR = CAN_RTR_DATA;
+  manip2.DLC = 2;
   
   for(i = 0; i < 4; i++){
-    txframe.data16[i] = data[i];
+    manip.data16[i] = data[i];
   }
-  canTransmit(&CAND1, CAN_ANY_MAILBOX, &txframe, TIME_IMMEDIATE);
+
+  /* Send last motor value */
+  manip2.data16[0] = data[4];
+
+  canTransmit(&CAND1, 1, &txframe, TIME_IMMEDIATE);
+  canTransmit(&CAND1, 2, &txframe, TIME_IMMEDIATE);
 
   palTogglePad(GPIOD, GPIOD_LED3);  /* Green.   */
 
@@ -137,14 +155,7 @@ static void send_info(void){
   Vsense = (float)(samples[0] * 3300 / 0xfff) / 1000;
   TCelsius = ((Vsense - 0.76) / 2.5) + 25.0;
 
-  //sprintf(tempstr, "%d", TCelsius);
-
-<<<<<<< Updated upstream
-  sprintf(tempstr, "%d", samples[9]);
-=======
-  sprintf(tempstr, "%d", TCelsius);
->>>>>>> Stashed changes
-
+  sprintf(tempstr, "%d, %d", rov_data.th[0], rov_data.th[1]);
 
   err = netconn_write(newconn, tempstr, strlen(tempstr), NETCONN_COPY);
 
@@ -153,7 +164,6 @@ static void send_info(void){
 
 static void server_serve(void) {
   struct netbuf *buf;
-  struct RovData rov_data;
   void *data;
   u16_t len;
   err_t err;
