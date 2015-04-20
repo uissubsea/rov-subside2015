@@ -108,6 +108,7 @@ int main(void) {
   /*
    * Initialize PWM Timers 1, 2 and 8 with same config
    */
+   
   pwmStart(&PWMD1, &pwmcfg1);
   pwmStart(&PWMD2, &pwmcfg2);
   pwmStart(&PWMD8, &pwmcfg8);
@@ -118,7 +119,7 @@ int main(void) {
   palSetPadMode(GPIOD, GPIOD_LED5, PAL_MODE_ALTERNATE(2));      /* Red.     */
   palSetPadMode(GPIOD, GPIOD_LED6, PAL_MODE_ALTERNATE(2));      /* Blue.    *
 
-  
+
   /* Create Thruster thread */
 
   chThdCreateStatic(wa_thruster, sizeof(wa_thruster), NORMALPRIO + 1, thruster_thread, NULL);
