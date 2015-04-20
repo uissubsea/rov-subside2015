@@ -80,10 +80,6 @@ int main(void) {
   pwmStart(&PWMD1, &pwmcfg);
   pwmStart(&PWMD2, &pwmcfg);
   pwmStart(&PWMD8, &pwmcfg);
-
-
-  palSetPadMode(GPIOD, GPIOD_LED4, PAL_MODE_ALTERNATE(2));  /* Green.   */
-  palSetPadMode(GPIOD, GPIOD_LED6, PAL_MODE_ALTERNATE(2));  /* Blue.    */
   
   /* Create Thruster thread */
 
