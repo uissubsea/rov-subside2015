@@ -41,10 +41,10 @@ static const CANConfig cancfg = {
  * Cyclic callback enabled, channels 1 and 4 enabled without callbacks,
  * the active state is a logic one.
  */
-static PWMConfig pwmcfg = {
-  10000,                                    /* 10kHz PWM clock frequency.   */
-  100,                                    /* PWM period 1S (in ticks).    */
-  pwmteller,
+static PWMConfig pwmcfgM1 = {
+  10000,                                  /* 10kHz PWM clock frequency.   */
+  20,                                    /* PWM period 1S (in ticks).    */
+  pwmtellerM1,
   {
     {PWM_OUTPUT_ACTIVE_HIGH, NULL}, /* Kanal 1 */
     {PWM_OUTPUT_ACTIVE_HIGH, NULL}, /* Kanal 2 */
@@ -55,8 +55,62 @@ static PWMConfig pwmcfg = {
   0,
   0
 };
-
-
+static PWMConfig pwmcfgM2 = {
+  10000,                                  /* 10kHz PWM clock frequency.   */
+  20,                                    /* PWM period 1S (in ticks).    */
+  pwmtellerM2,
+  {
+    {PWM_OUTPUT_ACTIVE_HIGH, NULL}, /* Kanal 1 */
+    {PWM_OUTPUT_ACTIVE_HIGH, NULL}, /* Kanal 2 */
+    {PWM_OUTPUT_ACTIVE_HIGH, NULL}, /* Kanal 3 */
+    {PWM_OUTPUT_ACTIVE_HIGH, NULL}  /* Kanal 4 */
+  },
+  /* HW dependent part.*/
+  0,
+  0
+};
+static PWMConfig pwmcfgM3 = {
+  10000,                                  /* 10kHz PWM clock frequency.   */
+  20,                                    /* PWM period 1S (in ticks).    */
+  pwmtellerM3,
+  {
+    {PWM_OUTPUT_ACTIVE_HIGH, NULL}, /* Kanal 1 */
+    {PWM_OUTPUT_ACTIVE_HIGH, NULL}, /* Kanal 2 */
+    {PWM_OUTPUT_ACTIVE_HIGH, NULL}, /* Kanal 3 */
+    {PWM_OUTPUT_ACTIVE_HIGH, NULL}  /* Kanal 4 */
+  },
+  /* HW dependent part.*/
+  0,
+  0
+};
+static PWMConfig pwmcfgM4 = {
+  10000,                                  /* 10kHz PWM clock frequency.   */
+  20,                                    /* PWM period 1S (in ticks).    */
+  pwmtellerM4,
+  {
+    {PWM_OUTPUT_ACTIVE_HIGH, NULL}, /* Kanal 1 */
+    {PWM_OUTPUT_ACTIVE_HIGH, NULL}, /* Kanal 2 */
+    {PWM_OUTPUT_ACTIVE_HIGH, NULL}, /* Kanal 3 */
+    {PWM_OUTPUT_ACTIVE_HIGH, NULL}  /* Kanal 4 */
+  },
+  /* HW dependent part.*/
+  0,
+  0
+};
+static PWMConfig pwmcfgM5 = {
+  10000,                                  /* 10kHz PWM clock frequency.   */
+  20,                                    /* PWM period 1S (in ticks).    */
+  pwmtellerM5,
+  {
+    {PWM_OUTPUT_ACTIVE_HIGH, NULL}, /* Kanal 1 */
+    {PWM_OUTPUT_ACTIVE_HIGH, NULL}, /* Kanal 2 */
+    {PWM_OUTPUT_ACTIVE_HIGH, NULL}, /* Kanal 3 */
+    {PWM_OUTPUT_ACTIVE_HIGH, NULL}  /* Kanal 4 */
+  },
+  /* HW dependent part.*/
+  0,
+  0
+};
 
 /*
  * Application entry point.
@@ -81,11 +135,11 @@ int main(void) {
    * Starter Timerene på de navngitte utgangene
    */
 
-  pwmStart(&PWMD1, &pwmcfg);    // Starter Timer 1
-  pwmStart(&PWMD2, &pwmcfg);    // Starter Timer 2
-  pwmStart(&PWMD3, &pwmcfg);    // Starter Timer 3
-  pwmStart(&PWMD4, &pwmcfg);    // Starter Timer 4
-  pwmStart(&PWMD8, &pwmcfg);    // Starter Timer 8
+  pwmStart(&PWMD1, &pwmcfgM1);    // Starter Timer 1
+  pwmStart(&PWMD2, &pwmcfgM2);    // Starter Timer 2
+  pwmStart(&PWMD3, &pwmcfgM3);    // Starter Timer 3
+  pwmStart(&PWMD4, &pwmcfgM4);    // Starter Timer 4
+  pwmStart(&PWMD8, &pwmcfgM5);    // Starter Timer 8
 
 //palTogglePad(GPIOD, GPIOD_LED3);
   

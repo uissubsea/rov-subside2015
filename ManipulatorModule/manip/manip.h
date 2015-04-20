@@ -33,7 +33,11 @@
 #endif
 
 extern WORKING_AREA(wa_manip_thread, MANIP_THREAD_STACK_SIZE);
-extern void pwmteller(PWMDriver *pwmp);
+extern void pwmtellerM1(PWMDriver *pwmp);
+extern void pwmtellerM2(PWMDriver *pwmp);
+extern void pwmtellerM3(PWMDriver *pwmp);
+extern void pwmtellerM4(PWMDriver *pwmp);
+extern void pwmtellerM5(PWMDriver *pwmp);
 
 #ifdef __cplusplus
 extern "C" {

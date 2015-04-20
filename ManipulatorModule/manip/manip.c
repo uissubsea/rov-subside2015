@@ -4,8 +4,8 @@
 
 WORKING_AREA(wa_manip_thread, MANIP_THREAD_STACK_SIZE);
 
-uint16_t i = 1;         // Lager teller variabel i    
-uint16_t j = 1;         // Lager teller variabel j 
+int16_t Mverdier[4];
+
 
 static struct Mvalues receiveData(void);
 
@@ -38,9 +38,84 @@ static struct Mvalues receiveData() {
 }
 
 
-void pwmteller(PWMDriver *pwmp){
+
+uint16_t k=0;
+uint16_t l=0;
+uint16_t r=0;
+uint16_t n=0;
+uint16_t o=0;
+uint16_t p=0;
+uint16_t m=0;
+uint16_t u=0;
+uint16_t b=0;
+uint16_t v=0;
+
+
+
+void pwmtellerM1(PWMDriver *pwmp){
  (void)pwmp;
- i++;
+ if (Mverdier[0]>0)
+ {
+   k++;
+   l--;
+ }
+ else if (Mverdier[0]<0)
+ {
+   k--;
+   l++;
+ }
+}
+void pwmtellerM2(PWMDriver *pwmp){
+ (void)pwmp;
+ if (Mverdier[1]>0)
+ {
+   r++;
+   n--;
+ }
+ else if (Mverdier[1]<0)
+ {
+   r--;
+   n++;
+ }
+}
+void pwmtellerM3(PWMDriver *pwmp){
+ (void)pwmp;
+ if (Mverdier[2]>0)
+ {
+   o++;
+   p--;
+ }
+ else if (Mverdier[2]<0)
+ {
+   o--;
+   p++;
+ }
+}
+void pwmtellerM4(PWMDriver *pwmp){
+ (void)pwmp;
+ if (Mverdier[3]>0)
+ {
+   m++;
+   u--;
+ }
+ else if (Mverdier[3]<0)
+ {
+   m--;
+   u++;
+ }
+}
+void pwmtellerM5(PWMDriver *pwmp){
+ (void)pwmp;
+ if (Mverdier[4]>0)
+ {
+   b++;
+   v--;
+ }
+ else if (Mverdier[4]<0)
+ {
+   b--;
+   v++;
+ }
 }
 
 
@@ -49,18 +124,15 @@ msg_t manip_thread(void *p){
 (void)p;
 
 struct Mvalues verdier;
-int16_t Mverdier[2];
-
 
 
 
 uint8_t i;
 
 
-// verdier = receiveData();
-
 
   while(TRUE) {     //Sett inn styrespak
+
 
     verdier = receiveData();
     Mverdier[0] = verdier.M1;
@@ -92,7 +164,6 @@ uint8_t i;
           case 3:
             palClearPad(GPIOA, GPIOA_PIN9);
             pwmEnableChannel(&PWMD4, 0, PWM_PERCENTAGE_TO_WIDTH(&PWMD4, 5000)); //PB6
-            pwmChangePeriod(&PWMD4, 20);
             break;
 
           case 4:
@@ -159,68 +230,6 @@ uint8_t i;
      } 
 
     }
-   // verdier.M1 = verdier.M1 - 929;
-   // pwmEnableChannel(&PWMD1, 0, PWM_PERCENTAGE_TO_WIDTH(&PWMD1, 1000)); //PA8
-   /* if(verdier.M1 > 0)
-    {
-        palClearPad(GPIOC, GPIOC_PIN11);
-        
-        palTogglePad(GPIOD, GPIOD_LED5); 
-        
-        pwmEnableChannel(&PWMD1, 0, PWM_PERCENTAGE_TO_WIDTH(&PWMD1, 5000)); //PA8
-
-        pwmEnableChannel(&PWMD2, 0, PWM_PERCENTAGE_TO_WIDTH(&PWMD2, 5000)); //PA15
-
-        pwmEnableChannel(&PWMD3, 0, PWM_PERCENTAGE_TO_WIDTH(&PWMD3, 5000)); //PC6
-
-        pwmEnableChannel(&PWMD4, 1, PWM_PERCENTAGE_TO_WIDTH(&PWMD4, 5000)); //PB6
-
-        pwmEnableChannel(&PWMD8, 2, PWM_PERCENTAGE_TO_WIDTH(&PWMD8, 5000)); //PC7
-*/
-      
-       
-      // pwmChangePeriod(&PWMD4, 10);
-      // chThdSleepMilliseconds(3000);
-      // pwmDisableChannel(&PWMD4, 1);
-      // pwmEnableChannel(&PWMD3, 2, PWM_PERCENTAGE_TO_WIDTH(&PWMD3, 1000));
-/*    else if(verdier.M1 < 0)
-    {
-      palSetPad(GPIOC, GPIOC_PIN11);     // Snur retning på motorer
-      palTogglePad(GPIOD, GPIOD_LED6);*/
-    //  palSetPad(GPIOA, GPIOA_PIN14);
-    //  palSetPad(GPIOC, GPIOC_PIN10);
-    //  palSetPad(GPIOC, GPIOC_PIN11);
-    //  palSetPad(GPIOC, GPIOC_PIN12);
-
-
-    //  pwmEnableChannel(&PWMD1, 0, PWM_PERCENTAGE_TO_WIDTH(&PWMD1, 5000)); //PA8
-
-/*        pwmEnableChannel(&PWMD2, 0, PWM_PERCENTAGE_TO_WIDTH(&PWMD2, 5000)); //PA15
-
-        pwmEnableChannel(&PWMD3, 0, PWM_PERCENTAGE_TO_WIDTH(&PWMD3, 5000)); //PC6
-
-        pwmEnableChannel(&PWMD4, 1, PWM_PERCENTAGE_TO_WIDTH(&PWMD4, 5000)); //PB6
-
-        pwmEnableChannel(&PWMD8, 2, PWM_PERCENTAGE_TO_WIDTH(&PWMD8, 5000)); //PC7*/
-  //  }
-  /*  if(verdier.M2 > 0)
-    {
-      palClearPad(GPIOC, GPIOC_PIN13);
-      pwmEnableChannel(&PWMD2, 0, PWM_PERCENTAGE_TO_WIDTH(&PWMD2, 5000));
-    }
-    if(verdier.M2 < 0)
-    {
-      palSetPad(GPIOC, GPIOC_PIN13);
-      pwmEnableChannel(&PWMD2, 0, PWM_PERCENTAGE_TO_WIDTH(&PWMD2, 5000));
-    }*/
-
-    
-      // pwmChangePeriod(&PWMD4, 100);
-      // pwmChangePeriod(&PWMD4, 20);
-      // chThdSleepMilliseconds(3000);
-      // pwmDisableChannel(&PWMD4, 1);
-      // palClearPad(GPIOD, GPIOD_PIN3);
-      // pwmEnableChannel(&PWMD3, 2, PWM_PERCENTAGE_TO_WIDTH(&PWMD3, 1000));
 
 }
 
