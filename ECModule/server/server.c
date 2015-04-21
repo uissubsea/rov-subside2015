@@ -188,7 +188,7 @@ msg_t network_server(void *p) {
   netconn_listen(conn);
 
   /* Goes to the final priority after initialization.*/
-  chThdSetPriority(SERVER_THREAD_PRIORITY);
+  //chThdSetPriority(SERVER_THREAD_PRIORITY);
 
   /*
    * Starts an ADC continuous conversion.
