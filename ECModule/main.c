@@ -20,6 +20,7 @@
 #include "lwipthread.h"
 
 #include "server/server.h"
+#include "server/receiver.h"
 
 #define ADC_GRP_NUM_CHANNELS   1
 #define ADC_GRP_BUF_DEPTH      8
@@ -80,9 +81,8 @@ int main(void) {
   chThdCreateStatic(wa_network_server, sizeof(wa_network_server), NORMALPRIO + 1,
                     network_server, NULL);
 
-  
- // chThdCreateStatic(can_tx_wa, sizeof(can_tx_wa), NORMALPRIO + 1,
- //                   can_tx, NULL);
+  chThdCreateStatic(wa_receiver, sizeof(wa_receiver), NORMALPRIO + 1,
+                    receiver_thread, NULL);
 
 palSetPad(GPIOD, GPIOD_LED5);
 
