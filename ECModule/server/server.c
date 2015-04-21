@@ -25,6 +25,8 @@ WORKING_AREA(wa_network_server, SERVER_THREAD_STACK_SIZE);
 
 /*--------------------  V a r i a b l e s  ---------------------------------*/
 
+/* Global Variables */
+
 static adcsample_t samples[ADC_NUM_CHANNELS * ADC_BUF_DEPTH];
 struct netconn *conn, *newconn;
 struct RovData rov_data;
