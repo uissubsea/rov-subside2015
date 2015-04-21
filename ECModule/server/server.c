@@ -1,28 +1,11 @@
-/*
-    ChibiOS/RT - Copyright (C) 2006-2013 Giovanni Di Sirio
+/*****************************************************************************
+DESCRIPTION Skeleton of the read-driver
+*****************************************************************************/
 
-    Licensed under the Apache License, Version 2.0 (the "License");
-    you may not use this file except in compliance with the License.
-    You may obtain a copy of the License at
 
-        http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.
-*/
-
-/**
- * @file web.c
- * @brief HTTP server wrapper thread code.
- * @addtogroup WEB_THREAD
- * @{
- */
+/*--------------------  I n c l u d e   F i l e s  -------------------------*/
 
 #include "ch.h"
-
 #include "lwip/opt.h"
 #include "lwip/arch.h"
 #include "lwip/api.h"
@@ -30,26 +13,35 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
-
 #include "server.h"
 
+/*--------------------  C o n s t a n t s  ---------------------------------*/
+
 #define SERVER_THREAD_PORT 50000
-
 #define ADC_NUM_CHANNELS 2
-
 #define ADC_BUF_DEPTH 8
 
-/* Global Variables */
+WORKING_AREA(wa_network_server, SERVER_THREAD_STACK_SIZE);
+
+/*--------------------  V a r i a b l e s  ---------------------------------*/
 
 static adcsample_t samples[ADC_NUM_CHANNELS * ADC_BUF_DEPTH];
 struct netconn *conn, *newconn;
-
 struct RovData rov_data;
 err_t err;
 
-/* Can transmit messages for manipulator */
-CANTxFrame manip;
-CANTxFrame manip2;
+CANTxFrame manip;   // CanBus message frame containing data M1-M4
+CANTxFrame manip2;  // CanBus message frame containing data M5
+CANTxFrame ThFrame;  // CanBus message frame containing Thrusterdata
+
+/*--------------------  T y p e s  -----------------------------------------*/
+
+ struct RovData
+ {
+   char ds[2][20];
+   int16_t th[4];
+   int16_t manip[5];
+ } rovdata;
 
 
 /* Configuration Structs */
@@ -71,25 +63,8 @@ static const ADCConversionGroup adcgrpcfg = {
 /* Main Program */
 
 
-#if LWIP_NETCONN
 
-WORKING_AREA(wa_network_server, SERVER_THREAD_STACK_SIZE);
-
-
-/**
- * @brief Parse Rov data stream
- * @details [long description]
- * 
- * @param string [description]
- * @return [description]
- */
-
- struct RovData
- {
-   char ds[2][20];
-   int16_t th[4];
-   int16_t manip[5];
- } rovdata;
+/*--------------------  F u n c t i o n s  ---------------------------------*/
 
  static struct RovData parse_message(char *string){
   char *token;
@@ -134,7 +109,7 @@ static void send_can_message(int ID, int16_t *data){
   /* Send last motor value */
   manip2.data16[0] = data[4];
 
-  canTransmit(&CAND1, CAN_ANY_MAILBOX, &manip, TIME_IMMEDIATE);
+  canTransmit(&CAND1, 1, &manip, TIME_IMMEDIATE);
   //canTransmit(&CAND1, 2, &manip2, TIME_IMMEDIATE);
 
   palTogglePad(GPIOD, GPIOD_LED3);  /* Green.   */
@@ -229,7 +204,5 @@ msg_t network_server(void *p) {
   }
   return RDY_OK;
 }
-
-#endif /* LWIP_NETCONN */
 
 /** @} */
