@@ -2,6 +2,7 @@
 #include "hal.h"
 #include "thruster.h"
 #include <math.h>
+#include  <stdlib.h>
 static struct ThValues receiveData(void);
 
 static void sendData(void);
@@ -21,7 +22,7 @@ static struct ThValues receiveData() {
   struct ThValues thvalues;
   /* uint8_t i; */
 
-  canReceive(&CAND1, CAN_ANY_MAILBOX, &rxmsg, TIME_INFINITE);
+  canReceive(&CAND1, CAN_ANY_MAILBOX , &rxmsg, TIME_INFINITE);
   
   palTogglePad(GPIOD, GPIOD_LED4);
 
@@ -36,7 +37,7 @@ static struct ThValues receiveData() {
 }
 
 static void sendData(){
-  s
+  
 }
 
 
@@ -71,14 +72,17 @@ absYinn = abs(Yinn);
 
     /* PROGRAM FOR HORISONTAL THRUSTERS */ 
 
-    r = sqrt((absXinn^2)*(absYinn^2));
+    r = sqrt((absXinn*absXinn) + (absYinn*absYinn));
     // if (100/2 < r) {
     //  r = 100/2;
     //}
 
     //theta = 0;
-    thetaInn = atan(Yinn/Xinn);
-    thetaInn = thetaInn *(180/M_PI); //rad => deg
+
+
+
+    theta = atan2(Yinn,Xinn) * 180/M_PI;
+    /*thetaInn = thetaInn *(180/M_PI); //rad => deg
 
     if (Xinn>0 && Yinn>0){ // I kvadrant 
       theta = thetaInn;
@@ -89,23 +93,33 @@ absYinn = abs(Yinn);
     }else if (Xinn>0 && Yinn<0){ // IV kvadrant 
       theta = thetaInn;
     }
-
+*/
 //ok//
 
       /* Horisontal bevegelse 2015 */
-    M1Foer_kor =  r*cos( 45 -theta) * skalering;
-   // M2Foer_kor =  r*cos(-45 -theta) * skalering;
-   // M3Foer_kor = -M2Foer_kor ;
-   // M4Foer_kor = -M1Foer_kor ;
+    M1Foer_kor =  r * cos( 45 - theta) * skalering;
+    M2Foer_kor =  r * cos(-45 - theta) * skalering;
+    M3Foer_kor = -M2Foer_kor ;
+    M4Foer_kor = -M1Foer_kor ;
 
 
 M1 = M1Foer_kor;
-
+M2 = M2Foer_kor;
+M3 = M3Foer_kor;
+M4 = M4Foer_kor;
 
 M1pwm = (int16_t) ((M1*250/1414) + 750);  // M1*250/1000)
+M2pwm = (int16_t) ((M2*250/1414) + 750);  // M1*250/1000)
+M3pwm = (int16_t) ((M3*250/1414) + 750);  // M1*250/1000)
+M4pwm = (int16_t) ((M4*250/1414) + 750);  // M1*250/1000)
+
+
 
 
 pwmEnableChannel(&PWMD1, 0, PWM_PERCENTAGE_TO_WIDTH(&PWMD1, M1pwm));
+pwmEnableChannel(&PWMD1, 1, PWM_PERCENTAGE_TO_WIDTH(&PWMD1, M2pwm));
+pwmEnableChannel(&PWMD1, 2, PWM_PERCENTAGE_TO_WIDTH(&PWMD1, M3pwm));
+pwmEnableChannel(&PWMD1, 3, PWM_PERCENTAGE_TO_WIDTH(&PWMD1, M4pwm));
 }
 
 }

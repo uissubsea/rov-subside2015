@@ -36,8 +36,8 @@ static const CANConfig cancfg = {
  * the active state is a logic one.
  */
 static PWMConfig pwmcfg = {
-  10000,                                    /* 10kHz PWM clock frequency.   */
-  200,                                      /* PWM period (in ticks).    */
+  1000000,                                    /* 10kHz PWM clock frequency.   */
+  20000,                                      /* PWM period (in ticks).    */
   NULL,                                     /* No Callback */
   {
     {PWM_OUTPUT_ACTIVE_HIGH, NULL},         /*TIMx Channel 1 */
