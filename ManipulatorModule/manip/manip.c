@@ -17,12 +17,14 @@ struct Mvalues{
 	int16_t Klo;
 };
 
+CANTxFrame manipFrame;
+
 static struct Mvalues receiveData() {
   CANRxFrame rxmsg;
   struct Mvalues mvalues;
   /* uint8_t i; */
 
-  canReceive(&CAND1, CAN_ANY_MAILBOX, &rxmsg, TIME_INFINITE);
+  canReceive(&CAND1, 1, &rxmsg, TIME_INFINITE);
   
   palTogglePad(GPIOD, GPIOD_LED4);
 
@@ -68,6 +70,15 @@ uint8_t i;
     Mverdier[2] = verdier.M3;
     Mverdier[3] = verdier.Rotasjon;
     Mverdier[4] = verdier.Klo;
+
+    manipFrame.IDE = CAN_IDE_STD;
+    manipFrame.SID = 0x3;
+    manipFrame.RTR = CAN_RTR_DATA;
+    manipFrame.DLC = 2;
+
+    manipFrame.data16[0] = Mverdier[0];
+
+    canTransmit(&CAND1, 3, &manipFrame, TIME_IMMEDIATE);
 
     for (i = 0; i < 5; i++)
      {

@@ -43,7 +43,7 @@ static const CANConfig cancfg = {
  */
 static PWMConfig pwmcfg = {
   10000,                                    /* 10kHz PWM clock frequency.   */
-  100,                                    /* PWM period 1S (in ticks).    */
+  10,                                    /* PWM period 1S (in ticks).    */
   pwmteller,
   {
     {PWM_OUTPUT_ACTIVE_HIGH, NULL}, /* Kanal 1 */

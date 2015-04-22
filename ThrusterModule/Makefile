@@ -133,7 +133,7 @@ INCDIR = $(PORTINC) $(KERNINC) \
 MCU  = cortex-m4
 
 #TRGT = arm-elf-
-TRGT = arm/bin/arm-none-eabi-
+TRGT = arm-none-eabi-
 CC   = $(TRGT)gcc
 CPPC = $(TRGT)g++
 # Enable loading with g++ only if you need C++ runtime support.
@@ -204,7 +204,7 @@ UINCDIR =
 ULIBDIR =
 
 # List all user libraries here
-ULIBS =
+ULIBS = lm
 
 #
 # End of user defines
