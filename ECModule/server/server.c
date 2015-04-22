@@ -95,8 +95,8 @@ static void send_can_message(int ID, int16_t *data){
   /* Send last motor value */
   manip2.data16[0] = data[4];
 
-  canTransmit(&CAND1, 1, &manip, TIME_IMMEDIATE);
-  canTransmit(&CAND1, 2, &manip2, TIME_IMMEDIATE);
+  canTransmit(&CAND1, CAN_ANY_MAILBOX, &manip, TIME_IMMEDIATE);
+  //canTransmit(&CAND1, 2, &manip2, TIME_IMMEDIATE);
 
   palTogglePad(GPIOD, GPIOD_LED3);  /* Green.   */
 
