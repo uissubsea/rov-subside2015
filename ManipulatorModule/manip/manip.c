@@ -133,7 +133,6 @@ uint8_t i;
 
   while(TRUE) {     //Sett inn styrespak
 
-
     verdier = receiveData();
     Mverdier[0] = verdier.M1;
     Mverdier[1] = verdier.M2;
@@ -147,7 +146,7 @@ uint8_t i;
        {
         switch(i){
           case 0:
-            palClearPad(GPIOC, GPIOC_PIN10);
+            palClearPad(GPIOA, GPIOA_PIN9);
             pwmEnableChannel(&PWMD1, 0, PWM_PERCENTAGE_TO_WIDTH(&PWMD1, 5000)); //PA8
             break;
 
@@ -162,13 +161,13 @@ uint8_t i;
             break;
 
           case 3:
-            palClearPad(GPIOA, GPIOA_PIN9);
+            palClearPad(GPIOC, GPIOC_PIN10);
             pwmEnableChannel(&PWMD4, 0, PWM_PERCENTAGE_TO_WIDTH(&PWMD4, 5000)); //PB6
             break;
 
           case 4:
             palClearPad(GPIOA, GPIOC_PIN10);
-            pwmEnableChannel(&PWMD8, 2, PWM_PERCENTAGE_TO_WIDTH(&PWMD8, 5000)); //PC7
+            pwmEnableChannel(&PWMD8, 1, PWM_PERCENTAGE_TO_WIDTH(&PWMD8, 5000)); //PC7
             break;
 
         }
@@ -177,7 +176,7 @@ uint8_t i;
        {
         switch(i){
           case 0:
-            palSetPad(GPIOC, GPIOC_PIN10);
+            palSetPad(GPIOA, GPIOA_PIN9);
             pwmEnableChannel(&PWMD1, 0, PWM_PERCENTAGE_TO_WIDTH(&PWMD1, 5000));
             break;
 
@@ -192,14 +191,14 @@ uint8_t i;
             break;
 
           case 3:
-            palSetPad(GPIOA, GPIOA_PIN9);
+            palSetPad(GPIOC, GPIOC_PIN10);
             pwmEnableChannel(&PWMD4, 0, PWM_PERCENTAGE_TO_WIDTH(&PWMD4, 5000)); //PB6
 
             break;
 
           case 4:
             palSetPad(GPIOA, GPIOA_PIN10);
-            pwmEnableChannel(&PWMD8, 2, PWM_PERCENTAGE_TO_WIDTH(&PWMD8, 5000)); //PC7
+            pwmEnableChannel(&PWMD8, 1, PWM_PERCENTAGE_TO_WIDTH(&PWMD8, 5000)); //PC7
             break;
         }
        }
