@@ -28,7 +28,6 @@ struct RovData rov_data;
 err_t err;
 
 CANTxFrame manip;   // CanBus message frame containing data M1-M4
-CANTxFrame manip2;  // CanBus message frame containing data M5
 CANTxFrame ThFrame;  // CanBus message frame containing Thrusterdata
 
 /*--------------------  T y p e s  -----------------------------------------*/
@@ -37,7 +36,7 @@ CANTxFrame ThFrame;  // CanBus message frame containing Thrusterdata
  {
    char ds[2][20];
    int16_t th[4];
-   int16_t manip[5];
+   int16_t manip[6];
  } rovdata;
 
 
@@ -72,31 +71,30 @@ CANTxFrame ThFrame;  // CanBus message frame containing Thrusterdata
 
 
 
-static void send_can_message(int ID, int16_t *data){
+static void send_can_message(void){
 
   uint8_t i;
 
   manip.IDE = CAN_IDE_STD;
-  manip.SID = ID;
+  manip.SID = 0x01;
   manip.RTR = CAN_RTR_DATA;
-  manip.DLC = 8;
+  manip.DLC = 6;
 
-  manip2.IDE = CAN_IDE_STD;
-  manip2.SID = ID;
-  manip2.RTR = CAN_RTR_DATA;
-  manip2.DLC = 2;
-  
+  ThFrame.IDE = CAN_IDE_STD;
+  ThFrame.SID = 0x1;
+  ThFrame.RTR = CAN_RTR_DATA;
+  ThFrame.DLC = 6;
+
   for(i = 0; i < 4; i++){
-    manip.data16[i] = data[i];
+    ThFrame.data16[i] = rov_data.th[i];
   }
 
-  
+   for(i = 0; i < 6; i++){
+    manip.data8[i] = rov_data.manip[i];
+  }
 
-  /* Send last motor value */
-  manip2.data16[0] = data[4];
-
-  canTransmit(&CAND1, CAN_ANY_MAILBOX, &manip, TIME_IMMEDIATE);
-  //canTransmit(&CAND1, 2, &manip2, TIME_IMMEDIATE);
+  //canTransmit(&CAND1, 1, &ThFrame, TIME_IMMEDIATE);
+  canTransmit(&CAND1, CAN_ANY_MAILBOX, &manip, MS2ST(2));
 
   palTogglePad(GPIOD, GPIOD_LED3);  /* Green.   */
 
@@ -108,6 +106,7 @@ static void server_serve(void) {
   void *data;
   u16_t len;
   err_t err;
+  char message[20];
   
 
   while((err = netconn_recv(newconn, &buf)) == ERR_OK) {
@@ -118,10 +117,11 @@ static void server_serve(void) {
 
       rov_data = parse_message(data);
     
-      err = netconn_write(newconn, "", 1, NETCONN_COPY);
+      sprintf(message, "%s", rov_data.ds[0]);
+      err = netconn_write(newconn, message, strlen(message), NETCONN_COPY);
 
       /* Send parsed data onto canbus */
-      send_can_message(0x1, rov_data.th);
+      send_can_message();
 
       if (err != ERR_OK) {
         palSetPad(GPIOD, GPIOD_LED5);
