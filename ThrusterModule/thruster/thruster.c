@@ -59,7 +59,7 @@ int16_t Xinn , Yinn; // lokalt lagret verdi fra can, -1000-1000
 double M1, M2, M3, M4; // paadraget til motorene I % -1000til1000
 int16_t M1pwm, M2pwm, M3pwm, M4pwm; // verdi 500-1000
 double M1Foer_kor, M2Foer_kor, M3Foer_kor, M4Foer_kor ;
-
+int16_t brukIcos;
 
 while(TRUE){
 verdi = receiveData();
@@ -81,7 +81,9 @@ absYinn = abs(Yinn);
 
 
 
-    theta = atan2(Yinn,Xinn) * 180/M_PI;
+    theta = atan2(Yinn,Xinn);
+
+    //thetarund = theta;
     /*thetaInn = thetaInn *(180/M_PI); //rad => deg
 
     if (Xinn>0 && Yinn>0){ // I kvadrant 
@@ -95,10 +97,10 @@ absYinn = abs(Yinn);
     }
 */
 //ok//
-
+      brukIcos = (int16_t) ((M_PI/4 - theta));
       /* Horisontal bevegelse 2015 */
-    M1Foer_kor =  r * cos( 45 - theta) * skalering;
-    M2Foer_kor =  r * cos(-45 - theta) * skalering;
+    M1Foer_kor =  r * cos(brukIcos) *  skalering;
+    M2Foer_kor =  r * cos(M_PI/4 - theta) * skalering;
     M3Foer_kor = -M2Foer_kor ;
     M4Foer_kor = -M1Foer_kor ;
 
@@ -108,7 +110,7 @@ M2 = M2Foer_kor;
 M3 = M3Foer_kor;
 M4 = M4Foer_kor;
 
-M1pwm = (int16_t) ((M1*250/1414) + 750);  // M1*250/1000)
+M1pwm = (int16_t) ((M1*250/1414) + 750);  // M1*250/1000)1044
 M2pwm = (int16_t) ((M2*250/1414) + 750);  // M1*250/1000)
 M3pwm = (int16_t) ((M3*250/1414) + 750);  // M1*250/1000)
 M4pwm = (int16_t) ((M4*250/1414) + 750);  // M1*250/1000)
