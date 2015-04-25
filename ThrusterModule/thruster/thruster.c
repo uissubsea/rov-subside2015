@@ -55,11 +55,12 @@ msg_t thruster_thread(void *p){
 double skalering = 1 ; //nyttes for å øke pådraget til motorer, basert på styrerspak innput
 double theta, thetaInn, r ; 
 int16_t absXinn ,absYinn; // absoluttverdi av innverdiene X og Y 
-int16_t Xinn , Yinn; // lokalt lagret verdi fra can, -1000-1000
-double M1, M2, M3, M4; // paadraget til motorene I % -1000til1000
-int16_t M1pwm, M2pwm, M3pwm, M4pwm; // verdi 500-1000
+int16_t Xinn , Yinn, Zinn; // lokalt lagret verdi fra can, -1000-1000
+double M1, M2, M3, M4, M5, M6, M7, M8; // paadraget til motorene I % -1000til1000
+int16_t M1pwm, M2pwm, M3pwm, M4pwm, M5pwm, M6pwm, M7pwm, M8pwm; // verdi 500-1000
 double M1Foer_kor, M2Foer_kor, M3Foer_kor, M4Foer_kor ;
 int16_t brukIcos;
+
 
 while(TRUE){
 verdi = receiveData();
@@ -67,6 +68,7 @@ verdi = receiveData();
 
 Xinn = verdi.X * 1000/1000;
 Yinn = verdi.Y * 1000/1000;
+Zinn = verdi.Z * 1000/1000;
 absXinn = abs(Xinn);
 absYinn = abs(Yinn);
 
@@ -110,18 +112,29 @@ M2 = M2Foer_kor;
 M3 = M3Foer_kor;
 M4 = M4Foer_kor;
 
+/* Horisontal */
 M1pwm = (int16_t) ((M1*250/1414) + 750);  // M1*250/1000)1044
 M2pwm = (int16_t) ((M2*250/1414) + 750);  // M1*250/1000)
 M3pwm = (int16_t) ((M3*250/1414) + 750);  // M1*250/1000)
 M4pwm = (int16_t) ((M4*250/1414) + 750);  // M1*250/1000)
 
+/* Vertikal */
+M5pwm = (int16_t) ((Zinn*250/1000) + 750);  // M1*250/1000)
+M6pwm = (int16_t) ((Zinn*250/1000) + 750);  // M1*250/1000)
+M7pwm = (int16_t) ((Zinn*250/1000) + 750);  // M1*250/1000)
+M8pwm = (int16_t) ((Zinn*250/1000) + 750);  // M1*250/1000)
 
-
-
+/* Horisontal */
 pwmEnableChannel(&PWMD1, 0, PWM_PERCENTAGE_TO_WIDTH(&PWMD1, M1pwm));
 pwmEnableChannel(&PWMD1, 1, PWM_PERCENTAGE_TO_WIDTH(&PWMD1, M2pwm));
 pwmEnableChannel(&PWMD1, 2, PWM_PERCENTAGE_TO_WIDTH(&PWMD1, M3pwm));
-pwmEnableChannel(&PWMD1, 3, PWM_PERCENTAGE_TO_WIDTH(&PWMD1, M4pwm));
+pwmEnableChannel(&PWMD2, 0, PWM_PERCENTAGE_TO_WIDTH(&PWMD2, M4pwm));
+
+/* Vertikal */
+pwmEnableChannel(&PWMD8, 0, PWM_PERCENTAGE_TO_WIDTH(&PWMD8, M5pwm));
+pwmEnableChannel(&PWMD8, 1, PWM_PERCENTAGE_TO_WIDTH(&PWMD8, M6pwm));
+pwmEnableChannel(&PWMD8, 2, PWM_PERCENTAGE_TO_WIDTH(&PWMD8, M7pwm));
+pwmEnableChannel(&PWMD8, 3, PWM_PERCENTAGE_TO_WIDTH(&PWMD8, M8pwm));
 }
 
 }
