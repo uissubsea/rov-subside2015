@@ -59,7 +59,7 @@ CANTxFrame ThFrame;  // CanBus message frame containing Thrusterdata
     }
     else
     {
-      rov_data.manip[i] = atoi(token);
+      rov_data.manip[i-5] = atoi(token);
     }
     token = strtok(NULL, ",");
     i++;
@@ -76,12 +76,12 @@ static void send_can_message(void){
   uint8_t i;
 
   manip.IDE = CAN_IDE_STD;
-  manip.SID = 0x01;
+  manip.SID = 0x11;
   manip.RTR = CAN_RTR_DATA;
   manip.DLC = 6;
 
   ThFrame.IDE = CAN_IDE_STD;
-  ThFrame.SID = 0x1;
+  ThFrame.SID = 0x10;
   ThFrame.RTR = CAN_RTR_DATA;
   ThFrame.DLC = 6;
 
@@ -93,8 +93,9 @@ static void send_can_message(void){
     manip.data8[i] = rov_data.manip[i];
   }
 
-  //canTransmit(&CAND1, 1, &ThFrame, TIME_IMMEDIATE);
-  canTransmit(&CAND1, CAN_ANY_MAILBOX, &manip, MS2ST(2));
+  canTransmit(&CAND1, 1, &ThFrame, TIME_IMMEDIATE);
+  chThdSleepMilliseconds(5);
+  canTransmit(&CAND1, 2, &manip, MS2ST(10));
 
   palTogglePad(GPIOD, GPIOD_LED3);  /* Green.   */
 
@@ -117,7 +118,11 @@ static void server_serve(void) {
 
       rov_data = parse_message(data);
     
-      sprintf(message, "%s", rov_data.ds[0]);
+      sprintf(message, "Thruster: %d, %d, %d, %d manip: %d, %d, %d, %d, %d, %d", 
+        rov_data.th[0], rov_data.th[1], rov_data.th[2], rov_data.th[3],
+        rov_data.manip[0],
+        rov_data.manip[1], rov_data.manip[2], rov_data.manip[3], rov_data.manip[4],
+        rov_data.manip[5]);
       err = netconn_write(newconn, message, strlen(message), NETCONN_COPY);
 
       /* Send parsed data onto canbus */
