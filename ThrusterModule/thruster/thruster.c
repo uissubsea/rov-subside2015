@@ -57,16 +57,16 @@ msg_t thruster_thread(void *p){
 
 		/* PROGRAM FOR VETRICAL THRUSTERS */
 		/* MOTOR 5 */
-		pwmEnableChannel(&PWMD4, 0, PWM_PERCENTAGE_TO_WIDTH(&PWMD8, verdi.X*70));
+		//pwmEnableChannel(&PWMD4, 0, PWM_PERCENTAGE_TO_WIDTH(&PWMD8, verdi.X*70));
 		
 		/* MOTOR 6 */
-		pwmEnableChannel(&PWMD4, 1, PWM_PERCENTAGE_TO_WIDTH(&PWMD8, verdi.Z*70));
+		//pwmEnableChannel(&PWMD4, 1, PWM_PERCENTAGE_TO_WIDTH(&PWMD8, verdi.Z*70));
 
-		/* MOTOR 7 */
-		pwmEnableChannel(&PWMD4, 2, PWM_PERCENTAGE_TO_WIDTH(&PWMD8, verdi.ROT*70));
+		// MOTOR 7 
+		//pwmEnableChannel(&PWMD4, 2, PWM_PERCENTAGE_TO_WIDTH(&PWMD8, verdi.ROT*70));
 		
 		/* MOTOR 8 */
-		pwmEnableChannel(&PWMD4, 3, PWM_PERCENTAGE_TO_WIDTH(&PWMD8, verdi.Y*70));
+		//pwmEnableChannel(&PWMD4, 3, PWM_PERCENTAGE_TO_WIDTH(&PWMD8, verdi.Y*70));
 		
 
 		/* Følgende funksjon kan benyttes te å sette pådrag til trustere
@@ -82,6 +82,15 @@ msg_t thruster_thread(void *p){
 
 	 	/* Eksempel: hente ut verdi
 	 	verdi.X */
+	 	pwmEnableChannel(&PWMD8, 0, PWM_PERCENTAGE_TO_WIDTH(&PWMD8, 5000));
+	 	pwmEnableChannel(&PWMD8, 1, PWM_PERCENTAGE_TO_WIDTH(&PWMD8, 5000));
+	 	pwmEnableChannel(&PWMD8, 2, PWM_PERCENTAGE_TO_WIDTH(&PWMD8, 5000));
+	 	pwmEnableChannel(&PWMD8, 3, PWM_PERCENTAGE_TO_WIDTH(&PWMD8, 5000));
+	 	pwmEnableChannel(&PWMD1, 0, PWM_PERCENTAGE_TO_WIDTH(&PWMD1, 5000));
+	 	pwmEnableChannel(&PWMD1, 1, PWM_PERCENTAGE_TO_WIDTH(&PWMD1, 5000));
+	 	pwmEnableChannel(&PWMD1, 2, PWM_PERCENTAGE_TO_WIDTH(&PWMD1, 5000));
+	 	pwmEnableChannel(&PWMD2, 0, PWM_PERCENTAGE_TO_WIDTH(&PWMD2, 5000));
+
 	}	 
 	
 }
