@@ -20,8 +20,10 @@
 #include "lwipthread.h"
 
 #include "server/server.h"
+#include "server/receiver.h"
 
-
+#define ADC_GRP_NUM_CHANNELS   1
+#define ADC_GRP_BUF_DEPTH      8
 
 
 /*===========================================================================*/
@@ -35,15 +37,11 @@
  */
 
 static const CANConfig cancfg = {
-  CAN_MCR_ABOM | CAN_MCR_AWUM | CAN_MCR_TXFP,
+  CAN_MCR_ABOM | CAN_MCR_AWUM | CAN_MCR_TXFP | CAN_FMR_FINIT,
   CAN_BTR_SJW(0) | CAN_BTR_TS2(1) |
-  CAN_BTR_TS1(8) | CAN_BTR_BRP(6)
+  CAN_BTR_TS1(8) | CAN_BTR_BRP(6),
 };
 
-/*
- * ADC Sample buffer
- */
-//static adcsample_t samples[ADC_GRP1_NUM_CHANNELS * ADC_GRP1_BUF_DEPTH];
 
 
 /*
@@ -69,6 +67,8 @@ int main(void) {
   adcStart(&ADCD1, NULL);
   adcSTM32EnableTSVREFE();
 
+  
+
   /*
    * Creates the LWIP threads (it changes priority internally).
    */
@@ -81,9 +81,8 @@ int main(void) {
   chThdCreateStatic(wa_network_server, sizeof(wa_network_server), NORMALPRIO + 1,
                     network_server, NULL);
 
-  
- // chThdCreateStatic(can_tx_wa, sizeof(can_tx_wa), NORMALPRIO + 1,
- //                   can_tx, NULL);
+  chThdCreateStatic(wa_receiver, sizeof(wa_receiver), NORMALPRIO + 1,
+                    receiver_thread, NULL);
 
 palSetPad(GPIOD, GPIOD_LED5);
 
@@ -93,6 +92,8 @@ palSetPad(GPIOD, GPIOD_LED5);
    */
   while (TRUE) {
     palTogglePad(GPIOD, GPIOD_LED4);
+    palTogglePad(GPIOA, GPIOA_PIN9);
+    palTogglePad(GPIOA, GPIOA_PIN10);
     chThdSleepMilliseconds(1000);
   }
 }

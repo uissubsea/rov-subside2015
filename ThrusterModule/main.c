@@ -36,8 +36,8 @@ static const CANConfig cancfg = {
  * the active state is a logic one.
  */
 static PWMConfig pwmcfg1 = {
-  10000,                                    /* 10kHz PWM clock frequency.   */
-  200,                                      /* PWM period (in ticks).    */
+  1000000,                                    /* 10kHz PWM clock frequency.   */
+  2000,                                      /* PWM period (in ticks).    */
   NULL,                                     /* No Callback */
   {
     {PWM_OUTPUT_ACTIVE_HIGH, NULL},         /*TIMx Channel 1 */
@@ -51,8 +51,8 @@ static PWMConfig pwmcfg1 = {
 };
 
 static PWMConfig pwmcfg2 = {
-  10000,                                    /* 10kHz PWM clock frequency.   */
-  200,                                      /* PWM period (in ticks).    */
+  1000000,                                    /* 10kHz PWM clock frequency.   */
+  2000,                                      /* PWM period (in ticks).    */
   NULL,                                     /* No Callback */
   {
     {PWM_OUTPUT_DISABLED, NULL},         /*TIMx Channel 1 */
@@ -66,8 +66,8 @@ static PWMConfig pwmcfg2 = {
 };
 
 static PWMConfig pwmcfg8 = {
-  10000,                                    /* 10kHz PWM clock frequency.   */
-  200,                                      /* PWM period (in ticks).    */
+  1000000,                                    /* 10kHz PWM clock frequency.   */
+  2000,                                      /* PWM period (in ticks).    */
   NULL,                                     /* No Callback */
   {
     {PWM_OUTPUT_ACTIVE_HIGH, NULL},         /*TIMx Channel 1 */
@@ -108,6 +108,7 @@ int main(void) {
   /*
    * Initialize PWM Timers 1, 2 and 8 with same config
    */
+   
   pwmStart(&PWMD1, &pwmcfg1);
   pwmStart(&PWMD2, &pwmcfg2);
   pwmStart(&PWMD8, &pwmcfg8);
@@ -118,7 +119,7 @@ int main(void) {
   palSetPadMode(GPIOD, GPIOD_LED5, PAL_MODE_ALTERNATE(2));      /* Red.     */
   palSetPadMode(GPIOD, GPIOD_LED6, PAL_MODE_ALTERNATE(2));      /* Blue.    *
 
-  
+
   /* Create Thruster thread */
 
   chThdCreateStatic(wa_thruster, sizeof(wa_thruster), NORMALPRIO + 1, thruster_thread, NULL);

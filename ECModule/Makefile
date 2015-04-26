@@ -53,7 +53,7 @@ endif
 
 # Enables the use of FPU on Cortex-M4 (no, softfp, hard).
 ifeq ($(USE_FPU),)
-  USE_FPU = no
+  USE_FPU = softfp
 endif
 
 #
@@ -90,7 +90,8 @@ CSRC = $(PORTSRC) \
        $(LWSRC) \
        $(CHIBIOS)/os/various/devices_lib/accel/lis302dl.c \
        $(CHIBIOS)/os/various/evtimer.c \
-       server/server.c main.c
+       $(CHIBIOS)/os/various/syscalls.c \
+       server/server.c server/receiver.c main.c
 
 # C++ sources that can be compiled in ARM or THUMB mode depending on the global
 # setting.
