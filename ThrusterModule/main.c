@@ -35,39 +35,9 @@ static const CANConfig cancfg = {
  * Cyclic callback enabled, channels 1 and 4 enabled without callbacks,
  * the active state is a logic one.
  */
-static PWMConfig pwmcfg1 = {
+static PWMConfig pwmcfg = {
   1000000,                                    /* 10kHz PWM clock frequency.   */
-  2000,                                      /* PWM period (in ticks).    */
-  NULL,                                     /* No Callback */
-  {
-    {PWM_OUTPUT_ACTIVE_HIGH, NULL},         /*TIMx Channel 1 */
-    {PWM_OUTPUT_ACTIVE_HIGH, NULL},         /*TIMx Channeø 2 */
-    {PWM_OUTPUT_ACTIVE_HIGH, NULL},
-    {PWM_OUTPUT_DISABLED, NULL}
-  },
-  /* HW dependent part.*/
-  0,
-  0
-};
-
-static PWMConfig pwmcfg2 = {
-  1000000,                                    /* 10kHz PWM clock frequency.   */
-  2000,                                      /* PWM period (in ticks).    */
-  NULL,                                     /* No Callback */
-  {
-    {PWM_OUTPUT_DISABLED, NULL},         /*TIMx Channel 1 */
-    {PWM_OUTPUT_ACTIVE_HIGH, NULL},         /*TIMx Channeø 2 */
-    {PWM_OUTPUT_DISABLED, NULL},
-    {PWM_OUTPUT_DISABLED, NULL}
-  },
-  /* HW dependent part.*/
-  0,
-  0
-};
-
-static PWMConfig pwmcfg8 = {
-  1000000,                                    /* 10kHz PWM clock frequency.   */
-  2000,                                      /* PWM period (in ticks).    */
+  20000,                                      /* PWM period (in ticks).    */
   NULL,                                     /* No Callback */
   {
     {PWM_OUTPUT_ACTIVE_HIGH, NULL},         /*TIMx Channel 1 */
@@ -76,6 +46,7 @@ static PWMConfig pwmcfg8 = {
     {PWM_OUTPUT_ACTIVE_HIGH, NULL}
   },
   /* HW dependent part.*/
+  0,
   0,
   0
 };
@@ -101,25 +72,15 @@ int main(void) {
 
   canStart(&CAND1, &cancfg);
 
-  chThdSleepMilliseconds(100);
-
-
+  chThdSleepMilliseconds(1000);
   
   /*
    * Initialize PWM Timers 1, 2 and 8 with same config
    */
-   
-  pwmStart(&PWMD1, &pwmcfg1);
-  pwmStart(&PWMD2, &pwmcfg2);
-  pwmStart(&PWMD8, &pwmcfg8);
-  pwmStart(&PWMD4, &pwmcfg8);
-
-  palSetPadMode(GPIOD, GPIOD_LED4, PAL_MODE_ALTERNATE(2));      /* Green.   */
-  palSetPadMode(GPIOD, GPIOD_LED3, PAL_MODE_ALTERNATE(2));      /* Orange.  */
-  palSetPadMode(GPIOD, GPIOD_LED5, PAL_MODE_ALTERNATE(2));      /* Red.     */
-  palSetPadMode(GPIOD, GPIOD_LED6, PAL_MODE_ALTERNATE(2));      /* Blue.    *
-
-
+  pwmStart(&PWMD1, &pwmcfg);
+  pwmStart(&PWMD2, &pwmcfg);
+  pwmStart(&PWMD8, &pwmcfg);
+  
   /* Create Thruster thread */
 
   chThdCreateStatic(wa_thruster, sizeof(wa_thruster), NORMALPRIO + 1, thruster_thread, NULL);
