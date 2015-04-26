@@ -18,22 +18,28 @@ struct ThValues{
 };
 
 static struct ThValues receiveData() {
-  CANRxFrame rxmsg;
+  
   struct ThValues thvalues;
   /* uint8_t i; */
 
-  canReceive(&CAND1, CAN_ANY_MAILBOX , &rxmsg, TIME_INFINITE);
+  canReceive(&CAND1, 1, &rxmsg, TIME_INFINITE);
   
   palTogglePad(GPIOD, GPIOD_LED4);
+
+  if (rxmsg.SID == 0x10){
 
   /* Set Thrust values to struct */
 
   thvalues.X = rxmsg.data16[0];
   thvalues.Y = rxmsg.data16[1];
-  thvalues.ROT = rxmsg.data16[2];
-  thvalues.Z = rxmsg.data16[3];
+  thvalues.ROT = rxmsg.data16[3];
+  thvalues.Z = rxmsg.data16[2];
   
   return thvalues;
+}
+else{
+	receiveData();
+}
 }
 
 static void sendData(){
@@ -62,9 +68,21 @@ double M1Foer_kor, M2Foer_kor, M3Foer_kor, M4Foer_kor ;
 int16_t brukIcos;
 
 
+/* Horisontal */
+pwmEnableChannel(&PWMD1, 0, PWM_PERCENTAGE_TO_WIDTH(&PWMD1, 750));
+//pwmEnableChannel(&PWMD1, 1, PWM_PERCENTAGE_TO_WIDTH(&PWMD1, 750)); //DENNE E BOGUS
+pwmEnableChannel(&PWMD1, 1, PWM_PERCENTAGE_TO_WIDTH(&PWMD1, 750));
+pwmEnableChannel(&PWMD1, 2, PWM_PERCENTAGE_TO_WIDTH(&PWMD1, 750));
+pwmEnableChannel(&PWMD2, 0, PWM_PERCENTAGE_TO_WIDTH(&PWMD2, 750));
+
+/* Vertikal */
+pwmEnableChannel(&PWMD8, 0, PWM_PERCENTAGE_TO_WIDTH(&PWMD8, 750));
+pwmEnableChannel(&PWMD8, 1, PWM_PERCENTAGE_TO_WIDTH(&PWMD8, 750)); 
+pwmEnableChannel(&PWMD8, 2, PWM_PERCENTAGE_TO_WIDTH(&PWMD8, 750));
+pwmEnableChannel(&PWMD8, 3, PWM_PERCENTAGE_TO_WIDTH(&PWMD8, 750));
+
 while(TRUE){
 verdi = receiveData();
-
 
 Xinn = verdi.X * 1000/1000;
 Yinn = verdi.Y * 1000/1000;
@@ -126,15 +144,17 @@ M8pwm = (int16_t) ((Zinn*250/1000) + 750);  // M1*250/1000)
 
 /* Horisontal */
 pwmEnableChannel(&PWMD1, 0, PWM_PERCENTAGE_TO_WIDTH(&PWMD1, M1pwm));
-pwmEnableChannel(&PWMD1, 1, PWM_PERCENTAGE_TO_WIDTH(&PWMD1, M2pwm));
+//pwmEnableChannel(&PWMD1, 1, PWM_PERCENTAGE_TO_WIDTH(&PWMD1, M2pwm)); // DENNE E BOGUS
+pwmEnableChannel(&PWMD1, 1, PWM_PERCENTAGE_TO_WIDTH(&PWMD1, M2pwm)); 
 pwmEnableChannel(&PWMD1, 2, PWM_PERCENTAGE_TO_WIDTH(&PWMD1, M3pwm));
 pwmEnableChannel(&PWMD2, 0, PWM_PERCENTAGE_TO_WIDTH(&PWMD2, M4pwm));
 
 /* Vertikal */
 pwmEnableChannel(&PWMD8, 0, PWM_PERCENTAGE_TO_WIDTH(&PWMD8, M5pwm));
-pwmEnableChannel(&PWMD8, 1, PWM_PERCENTAGE_TO_WIDTH(&PWMD8, M6pwm));
+pwmEnableChannel(&PWMD8, 1, PWM_PERCENTAGE_TO_WIDTH(&PWMD8, M6pwm)); 
 pwmEnableChannel(&PWMD8, 2, PWM_PERCENTAGE_TO_WIDTH(&PWMD8, M7pwm));
 pwmEnableChannel(&PWMD8, 3, PWM_PERCENTAGE_TO_WIDTH(&PWMD8, M8pwm));
 }
+
 
 }
