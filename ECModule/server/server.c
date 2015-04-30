@@ -59,7 +59,7 @@ CANTxFrame ThFrame;  // CanBus message frame containing Thrusterdata
     }
     else
     {
-      rov_data.manip[i-5] = atoi(token);
+      rov_data.manip[i-4] = atoi(token);
     }
     token = strtok(NULL, ",");
     i++;
@@ -76,14 +76,14 @@ static void send_can_message(void){
   uint8_t i;
 
   manip.IDE = CAN_IDE_STD;
-  manip.SID = 0x11;
+  manip.SID = 1;
   manip.RTR = CAN_RTR_DATA;
   manip.DLC = 6;
 
   ThFrame.IDE = CAN_IDE_STD;
-  ThFrame.SID = 0x10;
+  ThFrame.SID = 2;
   ThFrame.RTR = CAN_RTR_DATA;
-  ThFrame.DLC = 6;
+  ThFrame.DLC = 8;
 
   for(i = 0; i < 4; i++){
     ThFrame.data16[i] = rov_data.th[i];
@@ -93,9 +93,9 @@ static void send_can_message(void){
     manip.data8[i] = rov_data.manip[i];
   }
 
-  canTransmit(&CAND1, 1, &ThFrame, TIME_IMMEDIATE);
-  chThdSleepMilliseconds(5);
-  canTransmit(&CAND1, 2, &manip, MS2ST(10));
+  canTransmit(&CAND1, CAN_ANY_MAILBOX, &ThFrame, TIME_IMMEDIATE);
+  chThdSleepMilliseconds(50);
+  canTransmit(&CAND1, CAN_ANY_MAILBOX, &manip, TIME_IMMEDIATE);
 
   palTogglePad(GPIOD, GPIOD_LED3);  /* Green.   */
 
@@ -163,8 +163,8 @@ msg_t network_server(void *p) {
     err = netconn_accept(conn, &newconn);
     if (err != ERR_OK)
       continue;
-    char message[] = "Status OK";
-    netconn_write(conn, message, sizeof(message)-1, NETCONN_COPY);
+    char message[] = "Hello From server";
+    netconn_write(newconn, message, strlen(message), NETCONN_COPY);
     server_serve();
     netconn_delete(newconn);
   }
