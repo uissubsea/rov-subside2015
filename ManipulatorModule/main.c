@@ -17,6 +17,7 @@
 #include "ch.h"
 #include "hal.h"
 #include "manip/manip.h"
+#include "manip/automanip.h"
 
 
 /*===========================================================================*/
@@ -135,16 +136,18 @@ int main(void) {
    * Starter Timerene på de navngitte utgangene
    */
 
-  pwmStart(&PWMD1, &pwmcfgM1);    // Starter Timer 1
-  pwmStart(&PWMD2, &pwmcfgM2);    // Starter Timer 2
-  pwmStart(&PWMD3, &pwmcfgM3);    // Starter Timer 3
-  pwmStart(&PWMD4, &pwmcfgM4);    // Starter Timer 4
-  pwmStart(&PWMD8, &pwmcfgM5);    // Starter Timer 8
+  pwmStart(&PWMD1, &pwmcfgM1);    // Knytter Timer 1 med metoden pwmcfgM1
+  pwmStart(&PWMD2, &pwmcfgM2);    // Knytter Timer 2 med metoden pwmcfgM2
+  pwmStart(&PWMD3, &pwmcfgM3);    // Knytter Timer 3 med metoden pwmcfgM3
+  pwmStart(&PWMD4, &pwmcfgM4);    // Knytter Timer 4 med metoden pwmcfgM4
+  pwmStart(&PWMD8, &pwmcfgM5);    // Knytter Timer 8 med metoden pwmcfgM5
 
 //palTogglePad(GPIOD, GPIOD_LED3);
   
   chThdCreateStatic(wa_manip_thread, MANIP_THREAD_STACK_SIZE, NORMALPRIO + 1,
-                    manip_thread, NULL);
+                    manip_thread, NULL);    // starter tråden
+  chThdCreateStatic(wa_automanip_thread, AUTOMANIP_THREAD_STACK_SIZE, NORMALPRIO + 1,
+                    automanip_thread, NULL);    // starter tråden
 
   while(TRUE){
     chThdSleepMilliseconds(5000);
