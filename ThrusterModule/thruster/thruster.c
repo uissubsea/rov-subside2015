@@ -50,6 +50,7 @@ static void sendData(){
 WORKING_AREA(wa_thruster, THRUSTER_THREAD_STACK_SIZE);
 
 msg_t thruster_thread(void *p){
+<<<<<<< HEAD
   (void)p;
   struct ThValues verdi;
 
@@ -154,6 +155,67 @@ pwmEnableChannel(&PWMD8, 0, PWM_PERCENTAGE_TO_WIDTH(&PWMD8, M5pwm));
 pwmEnableChannel(&PWMD8, 1, PWM_PERCENTAGE_TO_WIDTH(&PWMD8, M6pwm)); 
 pwmEnableChannel(&PWMD8, 2, PWM_PERCENTAGE_TO_WIDTH(&PWMD8, M7pwm));
 pwmEnableChannel(&PWMD8, 3, PWM_PERCENTAGE_TO_WIDTH(&PWMD8, M8pwm));
+=======
+	(void)p;
+	struct ThValues verdi;
+	verdi.Z = 20;
+	verdi.X = 20;
+	verdi.Y = 20;
+	verdi.ROT = 20;
+
+
+
+
+
+	/* Run Forever */
+	while(1){
+		/* Motta Verdier gjennom canbus */
+		
+		verdi = receiveData();
+
+		chThdSleepMilliseconds(1);
+		/* Kode til truster program */
+		/* Skriv inn kode her ;) */
+
+		/* PROGRAM FOR VETRICAL THRUSTERS */
+		/* MOTOR 5 */
+		//pwmEnableChannel(&PWMD4, 0, PWM_PERCENTAGE_TO_WIDTH(&PWMD8, verdi.X*70));
+		
+		/* MOTOR 6 */
+		//pwmEnableChannel(&PWMD4, 1, PWM_PERCENTAGE_TO_WIDTH(&PWMD8, verdi.Z*70));
+
+		// MOTOR 7 
+		//pwmEnableChannel(&PWMD4, 2, PWM_PERCENTAGE_TO_WIDTH(&PWMD8, verdi.ROT*70));
+		
+		/* MOTOR 8 */
+		//pwmEnableChannel(&PWMD4, 3, PWM_PERCENTAGE_TO_WIDTH(&PWMD8, verdi.Y*70));
+		
+
+		/* Følgende funksjon kan benyttes te å sette pådrag til trustere
+	 	* 
+	 	* pwmEnableChannel(&PWMDx, kanal, PWM_PERCENTAGE_TO_WIDTH(&PWMDx, duty cycle))
+	 	* 
+	 	* kanal går mellom 0-3 hvor 3 er TIMx_CH4
+	 	* 
+	 	* dutyCycle kan ha verdi mellom 0 - 10000 hvor 10000 er 100%
+	 	* Eksempel:
+	 	* 
+	 	* pwmEnableChannel(&PWMD1, 2, PWM_PERCENTAGE_TO_WIDTH(&PWMD1, 2000)); */
+
+	 	/* Eksempel: hente ut verdi
+	 	verdi.X */
+	 	pwmEnableChannel(&PWMD8, 0, PWM_PERCENTAGE_TO_WIDTH(&PWMD8, 5000));
+	 	pwmEnableChannel(&PWMD8, 1, PWM_PERCENTAGE_TO_WIDTH(&PWMD8, 5000));
+	 	pwmEnableChannel(&PWMD8, 2, PWM_PERCENTAGE_TO_WIDTH(&PWMD8, 5000));
+	 	pwmEnableChannel(&PWMD8, 3, PWM_PERCENTAGE_TO_WIDTH(&PWMD8, 5000));
+	 	pwmEnableChannel(&PWMD1, 0, PWM_PERCENTAGE_TO_WIDTH(&PWMD1, 5000));
+	 	pwmEnableChannel(&PWMD1, 1, PWM_PERCENTAGE_TO_WIDTH(&PWMD1, 5000));
+	 	pwmEnableChannel(&PWMD1, 2, PWM_PERCENTAGE_TO_WIDTH(&PWMD1, 5000));
+	 	pwmEnableChannel(&PWMD2, 0, PWM_PERCENTAGE_TO_WIDTH(&PWMD2, 5000));
+
+	}	 
+	
+>>>>>>> mdevel
 }
 
 

@@ -17,6 +17,7 @@
 #include "ch.h"
 #include "hal.h"
 #include "manip/manip.h"
+#include "manip/automanip.h"
 
 
 /*===========================================================================*/
@@ -41,10 +42,16 @@ static const CANConfig cancfg = {
  * Cyclic callback enabled, channels 1 and 4 enabled without callbacks,
  * the active state is a logic one.
  */
+<<<<<<< HEAD
 static PWMConfig pwmcfg = {
   10000,                                    /* 10kHz PWM clock frequency.   */
   10,                                    /* PWM period 1S (in ticks).    */
   pwmteller,
+=======
+static PWMConfig pwmcfgM1 = {
+  10000,                                  /* 10kHz PWM clock frequency.   */
+  20,                                    /* PWM period 1S (in ticks).    */
+  pwmtellerM1,
   {
     {PWM_OUTPUT_ACTIVE_HIGH, NULL}, /* Kanal 1 */
     {PWM_OUTPUT_ACTIVE_HIGH, NULL}, /* Kanal 2 */
@@ -55,8 +62,63 @@ static PWMConfig pwmcfg = {
   0,
   0
 };
-
-
+static PWMConfig pwmcfgM2 = {
+  10000,                                  /* 10kHz PWM clock frequency.   */
+  20,                                    /* PWM period 1S (in ticks).    */
+  pwmtellerM2,
+  {
+    {PWM_OUTPUT_ACTIVE_HIGH, NULL}, /* Kanal 1 */
+    {PWM_OUTPUT_ACTIVE_HIGH, NULL}, /* Kanal 2 */
+    {PWM_OUTPUT_ACTIVE_HIGH, NULL}, /* Kanal 3 */
+    {PWM_OUTPUT_ACTIVE_HIGH, NULL}  /* Kanal 4 */
+  },
+  /* HW dependent part.*/
+  0,
+  0
+};
+static PWMConfig pwmcfgM3 = {
+  10000,                                  /* 10kHz PWM clock frequency.   */
+  20,                                    /* PWM period 1S (in ticks).    */
+  pwmtellerM3,
+  {
+    {PWM_OUTPUT_ACTIVE_HIGH, NULL}, /* Kanal 1 */
+    {PWM_OUTPUT_ACTIVE_HIGH, NULL}, /* Kanal 2 */
+    {PWM_OUTPUT_ACTIVE_HIGH, NULL}, /* Kanal 3 */
+    {PWM_OUTPUT_ACTIVE_HIGH, NULL}  /* Kanal 4 */
+  },
+  /* HW dependent part.*/
+  0,
+  0
+};
+static PWMConfig pwmcfgM4 = {
+  10000,                                  /* 10kHz PWM clock frequency.   */
+  20,                                    /* PWM period 1S (in ticks).    */
+  pwmtellerM4,
+  {
+    {PWM_OUTPUT_ACTIVE_HIGH, NULL}, /* Kanal 1 */
+    {PWM_OUTPUT_ACTIVE_HIGH, NULL}, /* Kanal 2 */
+    {PWM_OUTPUT_ACTIVE_HIGH, NULL}, /* Kanal 3 */
+    {PWM_OUTPUT_ACTIVE_HIGH, NULL}  /* Kanal 4 */
+  },
+  /* HW dependent part.*/
+  0,
+  0
+};
+static PWMConfig pwmcfgM5 = {
+  10000,                                  /* 10kHz PWM clock frequency.   */
+  20,                                    /* PWM period 1S (in ticks).    */
+  pwmtellerM5,
+>>>>>>> mdevel
+  {
+    {PWM_OUTPUT_ACTIVE_HIGH, NULL}, /* Kanal 1 */
+    {PWM_OUTPUT_ACTIVE_HIGH, NULL}, /* Kanal 2 */
+    {PWM_OUTPUT_ACTIVE_HIGH, NULL}, /* Kanal 3 */
+    {PWM_OUTPUT_ACTIVE_HIGH, NULL}  /* Kanal 4 */
+  },
+  /* HW dependent part.*/
+  0,
+  0
+};
 
 /*
  * Application entry point.
@@ -81,16 +143,18 @@ int main(void) {
    * Starter Timerene på de navngitte utgangene
    */
 
-  pwmStart(&PWMD1, &pwmcfg);    // Starter Timer 1
-  pwmStart(&PWMD2, &pwmcfg);    // Starter Timer 2
-  pwmStart(&PWMD3, &pwmcfg);    // Starter Timer 3
-  pwmStart(&PWMD4, &pwmcfg);    // Starter Timer 4
-  pwmStart(&PWMD8, &pwmcfg);    // Starter Timer 8
+  pwmStart(&PWMD1, &pwmcfgM1);    // Knytter Timer 1 med metoden pwmcfgM1
+  pwmStart(&PWMD2, &pwmcfgM2);    // Knytter Timer 2 med metoden pwmcfgM2
+  pwmStart(&PWMD3, &pwmcfgM3);    // Knytter Timer 3 med metoden pwmcfgM3
+  pwmStart(&PWMD4, &pwmcfgM4);    // Knytter Timer 4 med metoden pwmcfgM4
+  pwmStart(&PWMD8, &pwmcfgM5);    // Knytter Timer 8 med metoden pwmcfgM5
 
 //palTogglePad(GPIOD, GPIOD_LED3);
   
   chThdCreateStatic(wa_manip_thread, MANIP_THREAD_STACK_SIZE, NORMALPRIO + 1,
-                    manip_thread, NULL);
+                    manip_thread, NULL);    // starter tråden
+  chThdCreateStatic(wa_automanip_thread, AUTOMANIP_THREAD_STACK_SIZE, NORMALPRIO + 1,
+                    automanip_thread, NULL);    // starter tråden
 
   while(TRUE){
     chThdSleepMilliseconds(5000);
